@@ -1,0 +1,53 @@
+1. Módulo de Autenticación
+    Login: Página para que los usuarios inicien sesión.
+    Registro de Usuarios: Para que nuevos usuarios puedan registrarse.
+    Gestión de Roles: Configuración de permisos y roles (administrador, vendedor, cliente).
+    Recuperación de Contraseña: Página para restablecer contraseñas olvidadas.
+
+2. Dashboard
+    Vista General: Panel principal con indicadores clave como ventas, inventario, pedidos pendientes, y alertas.
+
+3. Módulo de Gestión de Inventarios
+    Registro y edición de productos (nombre, lote, fecha de vencimiento, stock).
+    Alertas automáticas para productos cercanos a vencer o con stock bajo.
+    Consultas avanzadas (por lote, categoría, etc.).
+
+4. Módulo de Gestión de Pedidos
+    Listado de pedidos (en curso, completados, cancelados).
+    Creación y seguimiento de pedidos.
+    Alertas sobre retrasos o actualizaciones de estado.
+
+5. Módulo de Facturación Electrónica
+    Generación de facturas en formato PDF/HTML.
+    Integración con requisitos tributarios locales.
+    Registro de historial de facturas emitidas.
+
+6. Módulo de Gestión de Clientes
+    Registro de nuevos clientes.
+    Consulta y edición de datos de clientes.
+    Historial de compras para análisis.
+
+7. Módulo de Reportes
+    Generación de reportes personalizados:
+    Ventas por periodo.
+    Estado del inventario.
+    Pedidos completados vs. pendientes.
+    Exportación en formatos como PDF o Excel.
+
+8. Tienda Virtual
+    Catálogo de Productos: Lista interactiva con detalles de productos.
+    Carrito de Compras: Permite seleccionar productos y proceder al checkout.
+    Gestión de Pedidos en Línea: Historial y seguimiento.
+
+9. Módulo de Seguridad
+    Configuración de roles y permisos.
+    Logs de actividad.
+    Gestión de usuarios activos.
+
+10. Configuración
+    Personalización de parámetros del sistema (por ejemplo, configuración de alertas, moneda).
+    Gestión de la interfaz (temas, colores).
+
+11. Interfaz de Soporte
+    Página de contacto para soporte técnico.
+    Preguntas frecuentes (FAQs).
