@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SidebarComponent } from "../sidebar/sidebar.component";
 import { MatButtonModule } from '@angular/material/button';
+import { BaseComponent } from '../../pages/base/base.component';
 
 @Component({
   selector: 'app-layout',
@@ -10,6 +11,6 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.css'
 })
-export class LayoutComponent {
+export class LayoutComponent extends BaseComponent {
 
 }

@@ -14,7 +14,7 @@
                         <select formControlName="empresa" class="w-full py-2 px-3 rounded-md border-[1px] border-solid border-gray-400 outline-none">
                             <option value="" selected style="display: none;">Seleccionar</option>
                             @for(item of enterprises; track $index){
-                                <option [value]="item.value">{{item.label}}</option>
+                                <option [value]="item.empId">{{item.empNom}}</option>
                             }
                         </select>
                     </div>
@@ -24,7 +24,7 @@
                         <select formControlName="sucursal" class="w-full py-2 px-3 rounded-md border-[1px] border-solid border-gray-400 outline-none">
                             <option value="" selected style="display: none;">Seleccionar</option>
                             @for(item of sucursales; track $index){
-                                <option [value]="item.value">{{item.label}}</option>
+                                <option [value]="item.sucId">{{item.sucNom}}</option>
                             }
                         </select>
                     </div>

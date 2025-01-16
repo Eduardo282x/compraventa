@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
@@ -9,6 +9,10 @@ import { BaseComponent } from '../base/base.component';
 import { AuthService } from '../../services/auth.service';
 import { ILogin, IResponseLogin } from '../../interfaces/users.interface';
 import { IOptions } from '../../interfaces/form.interface';
+import { EmpresasService } from '../../services/empresas.service';
+import { SucursalesService } from '../../services/sucursales.service';
+import { IEmpresas } from '../../interfaces/empresa.interface';
+import { ISucursales } from '../../interfaces/sucursales.interface';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +28,7 @@ import { IOptions } from '../../interfaces/form.interface';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent extends BaseComponent implements OnInit  {
+export class LoginComponent extends BaseComponent implements OnInit {
 
   loginForm = new FormGroup({
     empresa: new FormControl('', [Validators.required]),
@@ -33,37 +37,25 @@ export class LoginComponent extends BaseComponent implements OnInit  {
     password: new FormControl('', [Validators.required])
   });
 
-  enterprises: IOptions[] = [
-    {
-      label: 'Empresa 1',
-      value: 1
-    },
-    {
-      label: 'Empresa 2',
-      value: 2
-    }
-  ];
-
-  sucursales: IOptions[] = [
-    {
-      label: 'Sucursal 1',
-      value: 1
-    },
-    {
-      label: 'Sucursal 2',
-      value: 2
-    }
-  ]
+  enterprises: IEmpresas[] = [];
+  sucursales: ISucursales[] = []
 
   showPassword: boolean = false;
   authService = inject(AuthService);
+  empresaService = inject(EmpresasService);
+  sucursalService = inject(SucursalesService);
 
   constructor(private _snackBar: MatSnackBar) {
     super()
+    effect(() => {
+      this.enterprises = this.empresaService.getEmpresas();
+      this.sucursales = this.sucursalService.getSucursales();
+    })
   }
 
   ngOnInit(): void {
-
+    this.empresaService.getEmpresasAPI();
+    this.sucursalService.getSucursalesAPI();
   }
 
   onSubmitLogin(): void {

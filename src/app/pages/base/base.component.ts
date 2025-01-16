@@ -18,6 +18,11 @@ export class BaseComponent {
   location = inject(Location);
   dialog = inject(MatDialog);
 
+  logout(): void {
+    localStorage.removeItem('userData');
+    this.router.navigate(['/login'])
+  }
+
   goBack(): void {
     this.location.back();
   }

@@ -1,17 +1,18 @@
 import { computed, Injectable, signal } from '@angular/core';
 import { BaseService } from './base.service';
 import { BaseResponse } from '../interfaces/base.interface';
+import { ISucursales } from '../interfaces/sucursales.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SucursalesService extends BaseService{
 
-  private setSucursales = signal<any[]>([]);
-  public getSucursales = computed<any[]>(() => this.setSucursales());
+  private setSucursales = signal<ISucursales[]>([]);
+  public getSucursales = computed<ISucursales[]>(() => this.setSucursales());
 
   getSucursalesAPI(): void {
-    this.httpClient.get<any[]>(`${this.base_api_url}/sucursal`).subscribe((response: any[]) => {
+    this.httpClient.get<ISucursales[]>(`${this.base_api_url}/sucursal`).subscribe((response: ISucursales[]) => {
       this.setSucursales.set(response);
     })
   }
