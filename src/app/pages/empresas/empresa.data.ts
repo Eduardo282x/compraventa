@@ -1,4 +1,5 @@
 import { IEmpresas } from "../../interfaces/empresa.interface";
+import { IDataForm, IFormulario } from "../../interfaces/form.interface";
 import { IColumns } from "../../interfaces/table.interface";
 
 export const columns: IColumns<IEmpresas>[] = [
@@ -60,4 +61,55 @@ export const columns: IColumns<IEmpresas>[] = [
         icon: 'delete',
         color: 'warn'
     }
-]
+];
+
+export const dataFormEmpresa: IDataForm[] = [
+    {
+        typeInput: 'text',
+        label: 'Nombre',
+        formControl: 'empNom',
+        required: true,
+        value: '',
+    },
+    {
+        typeInput: 'text',
+        label: 'Ruc',
+        formControl: 'empRuc',
+        required: true,
+        value: '',
+    },
+    {
+        typeInput: 'text',
+        label: 'Correo',
+        formControl: 'empCorreo',
+        required: true,
+        value: '',
+    },
+    {
+        typeInput: 'text',
+        label: 'Telefono',
+        formControl: 'empTelf',
+        required: true,
+        value: '',
+    },
+    {
+        typeInput: 'text',
+        label: 'Dirección',
+        formControl: 'empDirecc',
+        required: true,
+        value: '',
+    },
+    {
+        typeInput: 'checkbox',
+        label: 'Estado',
+        formControl: 'status',
+        required: true,
+        value: false,
+    }
+];
+
+export const formDataEmpresa: IFormulario = {
+    title: 'Empresa',
+    dataForm: dataFormEmpresa
+}
+

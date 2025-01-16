@@ -1,3 +1,4 @@
+import { IDataForm, IFormulario } from "../../interfaces/form.interface";
 import { ISucursales } from "../../interfaces/sucursales.interface";
 import { IColumns } from "../../interfaces/table.interface";
 
@@ -39,4 +40,34 @@ export const columns: IColumns<ISucursales>[] = [
         icon: 'delete',
         color: 'warn'
     }
-]
+];
+
+export const dataFormSucursales: IDataForm[] = [
+    {
+        typeInput: 'select',
+        label: 'Empresa',
+        formControl: 'empId',
+        required: true,
+        value: '',
+        option: [],
+    },
+    {
+        typeInput: 'text',
+        label: 'Nombre',
+        formControl: 'sucNom',
+        required: true,
+        value: '',
+    },
+    {
+        typeInput: 'checkbox',
+        label: 'Estado',
+        formControl: 'status',
+        required: true,
+        value: false,
+    }
+];
+
+export const formDataSucursales: IFormulario = {
+    title: 'Sucursales',
+    dataForm: dataFormSucursales
+}

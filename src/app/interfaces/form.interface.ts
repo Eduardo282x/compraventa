@@ -8,7 +8,7 @@ export interface IDataForm {
     label: string;
     formControl: string;
     required: boolean;
-    value: string | number;
+    value: string | number | boolean;
     option?: IOptions[],
 }
 
@@ -18,4 +18,4 @@ export interface IOptions {
 }
 
 
-export type InputsTypes = 'text' | 'number' | 'date' | 'select' | '';
+export type InputsTypes = 'text' | 'number' | 'date' | 'select' | 'checkbox' | '';

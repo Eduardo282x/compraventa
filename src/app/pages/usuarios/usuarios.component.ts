@@ -1,11 +1,13 @@
 import { ChangeDetectorRef, Component, effect, inject, OnInit } from '@angular/core';
 import { BaseComponent } from '../base/base.component';
-import { columns } from './user.data';
+import { columns, dataFormUsuarios, formDataUsuarios } from './user.data';
 import { IColumns, ISendDataTable } from '../../interfaces/table.interface';
-import { IChangeStatusUser } from '../../interfaces/users.interface';
 import { UsersService } from '../../services/users.service';
 import { CommonModule } from '@angular/common';
 import { TableComponent } from '../../components/table/table.component';
+import { FormComponent } from '../../components/form/form.component';
+import { SucursalesService } from '../../services/sucursales.service';
+import { IUser } from '../../interfaces/users.interface';
 
 @Component({
   selector: 'app-usuarios',
@@ -22,6 +24,7 @@ export class UsuariosComponent extends BaseComponent implements OnInit {
   dataTable: any[] = [];
   title: string = 'Usuarios';
 
+  sucursalService = inject(SucursalesService);
   usersService = inject(UsersService);
   ref = inject(ChangeDetectorRef)
 
@@ -29,12 +32,36 @@ export class UsuariosComponent extends BaseComponent implements OnInit {
     super();
     effect(() => {
       this.dataTable = this.usersService.getUsers();
+
+      const copyDataForm = [...dataFormUsuarios];
+      const findFormRoles = copyDataForm.find(form => form.formControl === 'rolId');
+      if (findFormRoles) {
+        findFormRoles.option = this.usersService.getRoles().map(rol => {
+          return {
+            label: rol.rol,
+            value: rol.id
+          }
+        })
+      }
+      const findFormSucursal = copyDataForm.find(form => form.formControl === 'sucId');
+      if (findFormSucursal) {
+        findFormSucursal.option = this.sucursalService.getSucursales().map(suc => {
+          return {
+            label: suc.sucNom,
+            value: suc.sucId
+          }
+        })
+      }
+
+      formDataUsuarios.dataForm = copyDataForm;
       this.ref.detectChanges();
     })
   }
 
   ngOnInit(): void {
     this.usersService.getUsersAPI();
+    this.usersService.getRolesAPI();
+    this.sucursalService.getSucursalesAPI();
   }
 
   defectColumnAction(dataComponent: ISendDataTable): void {
@@ -44,32 +71,51 @@ export class UsuariosComponent extends BaseComponent implements OnInit {
     if (dataComponent.action == 'edit') {
       this.editDataDialog(dataComponent.data);
     }
-    if (dataComponent.action == 'states') {
-      this.activeUser(dataComponent.data);
-    }
     if (dataComponent.action == 'delete') {
       this.deleteData(dataComponent.data);
     }
   }
 
   openDialog(): void {
-    this.router.navigate(['/usuario/agregar'])
-  }
+    const setValues = [...dataFormUsuarios];
+    setValues.map(form => {
+      form.value = form.typeInput === 'text' ? '' : false
+    });
 
-  activeUser(data: any): void {
-    const user: IChangeStatusUser = {
-      idUsers: data.users_ID,
-      active: !data.users_status
-    }
-    this.usersService.updateUsersStatusAPI(user);
+    formDataUsuarios.dataForm = setValues;
+
+    const dialogRef = this.dialog.open(FormComponent, {
+      data: formDataUsuarios,
+      enterAnimationDuration: '500ms',
+      exitAnimationDuration: '500ms',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.usersService.postUsersAPI(result);
+    })
   }
 
   editDataDialog(data: any): void {
-    localStorage.setItem('userEdit', JSON.stringify(data));
-    this.router.navigate(['/usuario/editar'])
+    const setValues = [...dataFormUsuarios];
+    setValues.map(form => {
+      form.value = data[form.formControl]
+    });
+
+    formDataUsuarios.dataForm = setValues;
+    
+    const dialogRef = this.dialog.open(FormComponent, {
+      data: formDataUsuarios,
+      enterAnimationDuration: '500ms',
+      exitAnimationDuration: '500ms',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      result.id = data.id;
+      this.usersService.putUsersAPI(result);
+    })
   }
 
-  deleteData(data: any): void {
-    this.usersService.deleteUsersAPI(data.users_ID.toString());
+  deleteData(data: IUser): void {
+    this.usersService.deleteUsersAPI(data.id.toString());
   }
 }

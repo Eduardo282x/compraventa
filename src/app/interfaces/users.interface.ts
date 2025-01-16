@@ -30,21 +30,16 @@ export interface Rol {
 }
 
 
-
-
-
-export interface IBodyUser {
-    nombre: string;
-    apellido: string;
-    usuario: string;
-    usersRoleId : number;
-    password: string;
-}
-export interface IBodyUserEdit extends IBodyUser {
-    idUsers: number;
+export interface BodyUsuario {
+    sucId: number;
+    rolId: number;
+    usuNombre: string;
+    usuApellido: string;
+    usuCorreo: string;
+    usuPassword: string;
+    status: boolean;
 }
 
-export interface IChangeStatusUser {
-    idUsers: number;
-    active: boolean;
+export interface BodyUpdateUsuario extends BodyUsuario {
+    id: number;
 }

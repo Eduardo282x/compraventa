@@ -3,8 +3,10 @@ import { ChangeDetectorRef, Component, effect, inject, OnInit } from '@angular/c
 import { TableComponent } from '../../components/table/table.component';
 import { BaseComponent } from '../base/base.component';
 import { IColumns, ISendDataTable } from '../../interfaces/table.interface';
-import { columns } from './empresa.data';
+import { columns, dataFormEmpresa, formDataEmpresa } from './empresa.data';
 import { EmpresasService } from '../../services/empresas.service';
+import { IEmpresas } from '../../interfaces/empresa.interface';
+import { FormComponent } from '../../components/form/form.component';
 
 @Component({
   selector: 'app-empresas',
@@ -49,14 +51,45 @@ export class EmpresasComponent extends BaseComponent implements OnInit {
   }
 
   openDialog(): void {
-    
+    const setValues = [...dataFormEmpresa];
+    setValues.map(form => {
+      form.value = form.typeInput === 'text' ? '' : false
+    });
+
+    formDataEmpresa.dataForm = setValues;
+
+    const dialogRef = this.dialog.open(FormComponent, {
+      data: formDataEmpresa,
+      enterAnimationDuration: '500ms',
+      exitAnimationDuration: '500ms',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.empresaService.postEmpresasAPI(result);
+    })
   }
 
   editDataDialog(data: any): void {
-    
+    const setValues = [...dataFormEmpresa];
+    setValues.map(form => {
+      form.value = data[form.formControl]
+    });
+
+    formDataEmpresa.dataForm = setValues;
+
+    const dialogRef = this.dialog.open(FormComponent, {
+      data: formDataEmpresa,
+      enterAnimationDuration: '500ms',
+      exitAnimationDuration: '500ms',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      result.id = data.empId;
+      this.empresaService.putEmpresasAPI(result);
+    })
   }
 
-  deleteData(data: any): void {
-    this.empresaService.deleteEmpresasAPI(data.users_ID.toString());
+  deleteData(data: IEmpresas): void {
+    this.empresaService.deleteEmpresasAPI(data.empId.toString());
   }
 }

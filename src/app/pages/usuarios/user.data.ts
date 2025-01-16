@@ -1,3 +1,4 @@
+import { IDataForm, IFormulario } from "../../interfaces/form.interface";
 import { IColumns } from "../../interfaces/table.interface";
 import { IUser } from "../../interfaces/users.interface";
 
@@ -53,4 +54,63 @@ export const columns: IColumns<IUser>[] = [
         icon: 'delete',
         color: 'warn'
     }
-]
+];
+
+export const dataFormUsuarios: IDataForm[] = [
+    {
+        typeInput: 'select',
+        label: 'Sucursal',
+        formControl: 'sucId',
+        required: true,
+        value: '',
+        option: [],
+    },
+    {
+        typeInput: 'select',
+        label: 'Rol',
+        formControl: 'rolId',
+        required: true,
+        value: '',
+        option: [],
+    },
+    {
+        typeInput: 'text',
+        label: 'Nombre de Usuario',
+        formControl: 'usuNombre',
+        required: true,
+        value: '',
+    },
+    {
+        typeInput: 'text',
+        label: 'Apellido de Usuario',
+        formControl: 'usuApellido',
+        required: true,
+        value: '',
+    },
+    {
+        typeInput: 'text',
+        label: 'Correo Electrónico',
+        formControl: 'usuCorreo',
+        required: true,
+        value: '',
+    },
+    {
+        typeInput: 'text',
+        label: 'Contraseña',
+        formControl: 'usuPassword',
+        required: true,
+        value: '',
+    },
+    {
+        typeInput: 'checkbox',
+        label: 'Estado',
+        formControl: 'status',
+        required: true,
+        value: false,
+    }
+];
+
+export const formDataUsuarios: IFormulario = {
+    title: 'Usuarios',
+    dataForm: dataFormUsuarios
+}

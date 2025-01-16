@@ -1,0 +1,36 @@
+<div
+    class="p-4 w-[40vw] h-[80vh] overflow-y-auto flex flex-col items-center justify-start gap-5">
+    <p class="text-center text-2xl font-semibold">{{formData.title}}</p>
+    <form [formGroup]="globalForm" (submit)="onSubmit()" class=" w-[80%]">
+        @for (item of formData.dataForm; track $index) {
+
+        @if (item.typeInput === 'text') {
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>{{item.label}}</mat-label>
+            <input matInput [formControlName]="item.formControl">
+        </mat-form-field>
+        }
+        @if (item.typeInput === 'select') {
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>{{item.label}}</mat-label>
+            <mat-select [formControlName]="item.formControl">
+                @for (opt of item.option; track $index) {
+                <mat-option [value]="opt.value">{{opt.label}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+        }
+        @if (item.typeInput === 'checkbox') {
+        <div class="flex items-center justify-between w-full border-[1px] border-solid border-gray-500 rounded-md p-4">
+            <span>{{item.label}}</span>
+            <mat-slide-toggle [formControlName]="item.formControl"></mat-slide-toggle>
+        </div>
+        }
+        }
+
+        <button mat-flat-button type="submit" class="my-5 w-full">
+            Enviar
+        </button>
+
+    </form>
+</div>

@@ -1,4 +1,5 @@
 import { ICliente } from "../../interfaces/cliente.interface";
+import { IDataForm, IFormulario } from "../../interfaces/form.interface";
 import { IColumns } from "../../interfaces/table.interface";
 import { formatNumberWithDots } from "../../utils/formaters";
 
@@ -62,3 +63,62 @@ export const columns: IColumns<ICliente>[] = [
         color: 'warn'
     }
 ]
+
+
+export const dataFormClientes: IDataForm[] = [
+    {
+        typeInput: 'select',
+        label: 'Empresa',
+        formControl: 'empId',
+        required: true,
+        value: '',
+        option: [],
+    },
+    {
+        typeInput: 'text',
+        label: 'Nombre',
+        formControl: 'cliNombre',
+        required: true,
+        value: '',
+    },
+    {
+        typeInput: 'text',
+        label: 'Rif',
+        formControl: 'cliRif',
+        required: true,
+        value: '',
+    },
+    {
+        typeInput: 'text',
+        label: 'Telefono',
+        formControl: 'cliTelefono',
+        required: true,
+        value: '',
+    },
+    {
+        typeInput: 'text',
+        label: 'Dirección',
+        formControl: 'cliDireccion',
+        required: true,
+        value: '',
+    },
+    {
+        typeInput: 'text',
+        label: 'Correo',
+        formControl: 'cliCorreo',
+        required: true,
+        value: '',
+    },
+    {
+        typeInput: 'checkbox',
+        label: 'Estado',
+        formControl: 'status',
+        required: true,
+        value: false,
+    }
+];
+
+export const formDataClientes: IFormulario = {
+    title: 'Clientes',
+    dataForm: dataFormClientes
+}
