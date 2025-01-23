@@ -10,6 +10,8 @@ import { ClientesComponent } from './pages/clientes/clientes.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { EmpresasComponent } from './pages/empresas/empresas.component';
 import { SucursalesComponent } from './pages/sucursales/sucursales.component';
+import { ProveedoresComponent } from './pages/proveedores/proveedores.component';
+import { CategoryComponent } from './pages/category/category.component';
 
 export const routes: Routes = [
     {
@@ -33,6 +35,10 @@ export const routes: Routes = [
                 component: ClientesComponent
             },
             {
+                path: 'proveedores',
+                component: ProveedoresComponent
+            },
+            {
                 path: 'pedidos',
                 component: PedidosComponent
             },
@@ -43,6 +49,10 @@ export const routes: Routes = [
             {
                 path: 'inventario',
                 component: InventarioComponent
+            },
+            {
+                path: 'categorias',
+                component: CategoryComponent
             },
             {
                 path: 'empresas',

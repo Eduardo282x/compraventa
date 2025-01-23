@@ -1,11 +1,11 @@
 
 export interface ILogin {
-    usuario: string;
+    email: string;
     password: string;
 }
 
 export interface IResponseLogin {
-    // userAuthenticate: IUser;
+    userData: IUser;
     message:          string;
     statusCode:       number;
     success:          boolean;

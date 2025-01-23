@@ -24,6 +24,11 @@ export class SidebarComponent extends BaseComponent {
       redirectTo: '/inventario'
     },
     {
+      label: 'Categorias',
+      icon: 'category',
+      redirectTo: '/categorias'
+    },
+    {
       label: 'Pedidos',
       icon: 'shopping_cart',
       redirectTo: '/pedidos'
@@ -32,6 +37,11 @@ export class SidebarComponent extends BaseComponent {
       label: 'Clientes',
       icon: 'people',
       redirectTo: '/clientes'
+    },
+    {
+      label: 'Proveedores',
+      icon: 'manage_accounts',
+      redirectTo: '/proveedores'
     },
     {
       label: 'Reportes',

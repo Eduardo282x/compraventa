@@ -7,7 +7,9 @@ import { BaseComponent } from '../../pages/base/base.component';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-form',
@@ -19,7 +21,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
@@ -35,17 +39,12 @@ export class FormComponent extends BaseComponent implements OnInit {
   globalForm = new FormGroup({});
 
   ngOnInit(): void {
-    // this.formData.dataForm.map(form => {
-    //   this.globalForm.addControl(form.formControl, new FormControl(form.value, [Validators.required]));
-    // })
-
     this.formData.dataForm.map((form) => {
       const validators = form.required ? [Validators.required] : [];
       this.globalForm.addControl(form.formControl, new FormControl(form.value, validators));
     });
 
     console.log(this.globalForm.value);
-    
   }
 
   onSubmit(): void {

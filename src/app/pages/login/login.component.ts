@@ -31,8 +31,8 @@ import { ISucursales } from '../../interfaces/sucursales.interface';
 export class LoginComponent extends BaseComponent implements OnInit {
 
   loginForm = new FormGroup({
-    empresa: new FormControl('', [Validators.required]),
-    sucursal: new FormControl('', [Validators.required]),
+    // empresa: new FormControl('', [Validators.required]),
+    // sucursal: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required])
   });
@@ -59,6 +59,20 @@ export class LoginComponent extends BaseComponent implements OnInit {
   }
 
   onSubmitLogin(): void {
+    this.authService.httpClient.post<IResponseLogin>(`${this.authService.base_api_url}/auth`, this.loginForm.value as ILogin).subscribe((response: IResponseLogin) => {
+      if(response.success == true){
+        localStorage.setItem('userToken', JSON.stringify(response.userData));
+        setTimeout(() => {
+          this.router.navigate(['/inventario']);
+        }, 3000);
+      }
+
+      // this._snackBar.openFromComponent(SnackbarComponent, {
+      //   duration: 3000,
+      //   data: response
+      // })
+    })
+
     console.log(this.loginForm.value);
     this.router.navigate(['/home']);
   }

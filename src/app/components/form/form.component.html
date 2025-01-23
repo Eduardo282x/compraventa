@@ -10,6 +10,12 @@
             <input matInput [formControlName]="item.formControl">
         </mat-form-field>
         }
+        @if (item.typeInput === 'number') {
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>{{item.label}}</mat-label>
+            <input matInput type="number" [formControlName]="item.formControl">
+        </mat-form-field>
+        }
         @if (item.typeInput === 'select') {
         <mat-form-field appearance="outline" class="w-full">
             <mat-label>{{item.label}}</mat-label>
@@ -20,10 +26,20 @@
             </mat-select>
         </mat-form-field>
         }
+        @if (item.typeInput === 'date') {
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>{{item.label}}</mat-label>
+            <input matInput [formControlName]="item.formControl" class="!w-full" [matDatepicker]="picker">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        }
         @if (item.typeInput === 'checkbox') {
-        <div class="flex items-center justify-between w-full border-[1px] border-solid border-gray-500 rounded-md p-4">
+        <div
+            class="flex items-center justify-between w-full border-[1px] border-solid border-gray-500 rounded-md p-4">
             <span>{{item.label}}</span>
-            <mat-slide-toggle [formControlName]="item.formControl"></mat-slide-toggle>
+            <mat-slide-toggle
+                [formControlName]="item.formControl"></mat-slide-toggle>
         </div>
         }
         }
