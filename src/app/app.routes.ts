@@ -2,6 +2,7 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
+import { HomeComponentV2 } from './pages/Ecommerce/home/home.component';
 import { LayoutComponent } from './layout/layout/layout.component';
 import { InventarioComponent } from './pages/inventario/inventario.component';
 import { ReportesComponent } from './pages/reportes/reportes.component';
@@ -63,5 +64,9 @@ export const routes: Routes = [
                 component: SucursalesComponent
             },
         ]
+    },
+    {
+        path: 'comercio',
+        component: HomeComponentV2
     }
 ];
