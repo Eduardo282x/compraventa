@@ -10,4 +10,10 @@ import { CardComponent } from "../card/card.component";
 })
 export class HomeComponentV2 {
 
+  categories: string[] =[
+    'Productos Más Vendidos',
+    'Bebidas',
+    'Comestibles',
+    'Medicinas'
+  ]
 }
