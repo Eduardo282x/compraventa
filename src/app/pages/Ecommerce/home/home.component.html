@@ -1,50 +1,38 @@
-<app-ecommerce-header></app-ecommerce-header>
-
-<div class="flex">
-
-    <app-ecommerce-sidebar></app-ecommerce-sidebar>
-
-    <div>
-    
-        <div class="w-full overflow-hidden">
-            <div
-                class="my-5 flex items-center justify-start gap-5 overflow-auto px-4">
-                <img src="paisaje.jpeg" alt="Logo" class=" w-1/2 rounded-xl">
-                <img src="paisaje.jpeg" alt="Logo" class=" w-1/2 rounded-xl">
-                <img src="paisaje.jpeg" alt="Logo" class=" w-1/2 rounded-xl">
-                <img src="paisaje.jpeg" alt="Logo" class=" w-1/2 rounded-xl">
-                <img src="paisaje.jpeg" alt="Logo" class=" w-1/2 rounded-xl">
-            </div>
-        </div>
-        
-        <main class="w-full overflow-hidden bg-gray-100 p-7">
-        
-            @for (item of categories; track $index) {
-            <div class=" my-5 w-full">
-                <h2 class="text-xl font-medium text-gray-800 text-left mx-5">{{item}}</h2>
-                <div class=" flex items-center justify-start w-full overflow-x-auto gap-5 p-4">
-                    <app-card></app-card>
-                    <app-card></app-card>
-                    <app-card></app-card>
-                    <app-card></app-card>
-                    <app-card></app-card>
-                    <app-card></app-card>
-                    <app-card></app-card>
-                    <app-card></app-card>
-                    <app-card></app-card>
-                    <app-card></app-card>
-                    <app-card></app-card>
-                    <app-card></app-card>
-                </div>
-            </div>
-            }
-        </main>
-
+ <div class="w-full overflow-hidden">
+    <div
+        class="my-5 flex items-center justify-start gap-5 overflow-auto px-4">
+        <img src="paisaje.jpeg" alt="Logo" class=" w-1/2 rounded-xl">
+        <img src="paisaje.jpeg" alt="Logo" class=" w-1/2 rounded-xl">
+        <img src="paisaje.jpeg" alt="Logo" class=" w-1/2 rounded-xl">
+        <img src="paisaje.jpeg" alt="Logo" class=" w-1/2 rounded-xl">
+        <img src="paisaje.jpeg" alt="Logo" class=" w-1/2 rounded-xl">
     </div>
-
 </div>
+
+<main class="w-full overflow-hidden bg-gray-100 p-7">
+    @for (item of categories; track $index) {
+    <div class=" my-5 w-full">
+        <h2
+            class="text-xl font-medium text-gray-800 text-left mx-5">{{item}}</h2>
+        <div
+            class=" flex items-center justify-start w-full overflow-x-auto gap-5 p-4">
+            <app-card></app-card>
+            <app-card></app-card>
+            <app-card></app-card>
+            <app-card></app-card>
+            <app-card></app-card>
+            <app-card></app-card>
+            <app-card></app-card>
+            <app-card></app-card>
+            <app-card></app-card>
+            <app-card></app-card>
+            <app-card></app-card>
+            <app-card></app-card>
+        </div>
+    </div>
+    }
+</main>
 
 <footer>
     <div class="bg-blue-900 shadow-md p-4"></div>
 </footer>
-
