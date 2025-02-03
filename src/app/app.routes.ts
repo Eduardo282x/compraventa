@@ -13,6 +13,7 @@ import { EmpresasComponent } from './pages/empresas/empresas.component';
 import { SucursalesComponent } from './pages/sucursales/sucursales.component';
 import { ProveedoresComponent } from './pages/proveedores/proveedores.component';
 import { CategoryComponent } from './pages/category/category.component';
+import { LayoutEcommerceComponent } from './pages/Ecommerce/LayoutEcommerce/LayoutEcommerce.component';
 
 export const routes: Routes = [
     {
@@ -67,6 +68,12 @@ export const routes: Routes = [
     },
     {
         path: 'comercio',
-        component: HomeComponentV2
+        component: LayoutEcommerceComponent,
+        children: [
+            {
+                path: '',
+                component: HomeComponentV2
+            }
+        ]
     }
 ];

@@ -1,28 +1,8 @@
-<aside class="bg-blue-900 h-full p-5 w-20 hover:w-72 space-y-14">
-
-    <div class="flex items-center space-x-8">
-        <span class="material-icons bg-red-800 rounded-full text-white text-3xl p-1">menu</span>
-        <p class="text-white">Menu de Categorias</p>
+<aside class="absolute top-18 left-0 bg-blue-900 h-screen p-2 transition-all duration-[.20s] ease-in w-14 hover:w-72 overflow-hidden group">
+    @for (item of categoriesMenu; track $index) {
+    <div class="flex items-center justify-start gap-5 group-hover:gap-2 my-2 w-full cursor-pointer rounded-full hover:bg-blue-700 transition-all duration-100">
+        <span class="material-icons w-10 h-10 flex items-center justify-center text-white text-xl p-1">{{item.icon}}</span>
+        <p class="text-white whitespace-nowrap block">{{item.label}}</p>
     </div>
-
-    <div class="flex items-center space-x-8 hover:text-red-600">
-        <button class="material-icons bg-red-800 rounded-full text-white text-3xl p-1">trending_up</button>
-        <button class="text-sm text-white">Productos Más Vendidos</button>
-    </div>
-
-    <div class="flex items-center space-x-8 hover:text-red-600">
-        <button class="material-icons bg-red-800 rounded-full text-white text-3xl p-1">local_bar</button>
-        <button class="text-sm text-white">Bebidas</button>
-    </div>
-
-    <div class="flex items-center space-x-8 hover:text-red-600">
-        <button class="material-icons bg-red-800 rounded-full text-white text-3xl p-1">storefront</button>
-        <button class="text-sm text-white">Comestibles</button>
-    </div>
-
-    <div class="flex items-center space-x-8 hover:text-red-600">
-        <button class="material-icons bg-red-800 rounded-full text-white text-3xl p-1">medical_services</button>
-        <button class="text-sm text-white">Medicinas</button>
-    </div>
-
+    }
 </aside>
