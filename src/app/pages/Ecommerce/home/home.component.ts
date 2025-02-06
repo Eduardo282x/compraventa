@@ -1,20 +1,34 @@
-import { Component } from '@angular/core';
-import { EcommerceHeaderComponent } from "../ecommerceHeader/ecommerceHeader.component";
+import { ChangeDetectorRef, Component, effect, inject, OnInit } from '@angular/core';
 import { CardComponent } from "../card/card.component";
-import { EcommerceSidebarComponent } from "../ecommerceSidebar/ecommerceSidebar.component";
+import { ICategory } from '../../../interfaces/category.interface';
+import { CategoryService } from '../../../services/category.service';
+import { InventarioService } from '../../../services/inventario.service';
+import { IInventario } from '../../../interfaces/producto.interface';
 
 @Component({
   selector: 'app-home',
-  imports: [EcommerceHeaderComponent, CardComponent, EcommerceSidebarComponent],
+  imports: [CardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponentV2 {
+export class HomeComponentV2 implements OnInit {
 
-  categories: string[] =[
-    'Productos Más Vendidos',
-    'Bebidas',
-    'Comestibles',
-    'Medicinas'
-  ]
+  productoService = inject(InventarioService);
+  categoryService = inject(CategoryService);
+  ref = inject(ChangeDetectorRef);
+  categoriesMenu: ICategory[] = [];
+  productos: IInventario[] = [];
+
+  constructor() {
+    effect(() => {
+      this.categoriesMenu = this.categoryService.getCategory();
+      this.productos = this.productoService.getInventario();
+      this.ref.detectChanges();
+    })
+  }
+
+  ngOnInit(): void {
+    this.productoService.getInventarioAPI();
+  }
+
 }

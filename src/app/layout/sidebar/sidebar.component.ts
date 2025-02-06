@@ -19,12 +19,12 @@ export class SidebarComponent extends BaseComponent {
       redirectTo: '/home'
     },
     {
-      label: 'Inventario',
+      label: 'Productos',
       icon: 'inventory',
       redirectTo: '/inventario'
     },
     {
-      label: 'Categorias',
+      label: 'Categorías',
       icon: 'category',
       redirectTo: '/categorias'
     },

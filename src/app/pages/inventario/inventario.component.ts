@@ -21,7 +21,7 @@ import { TableComponent } from '../../components/table/table.component';
 export class InventarioComponent extends BaseComponent implements OnInit {
   columns: IColumns<IInventario>[] = columns;
   dataTable: any[] = [];
-  title: string = 'Inventario';
+  title: string = 'Productos';
 
   sucursalService = inject(SucursalesService);
   categoryService = inject(CategoryService);

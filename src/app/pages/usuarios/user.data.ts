@@ -6,21 +6,21 @@ export const columns: IColumns<IUser>[] = [
     {
         title: 'Nombre',
         name: (element) => element.usuNombre,
-        nameColumn: 'nombre',
+        nameColumn: 'usuNombre',
         type: 'string',
         width: 'w-[30%]'
     },
     {
         title: 'Apellido',
         name: (element) => element.usuApellido,
-        nameColumn: 'apellido',
+        nameColumn: 'usuApellido',
         type: 'string',
         width: 'w-[30%]'
     },
     {
         title: 'Usuario',
         name: (element) => element.usuCorreo,
-        nameColumn: 'usuario',
+        nameColumn: 'usuCorreo',
         type: 'string',
         width: 'w-[30%]'
     },
