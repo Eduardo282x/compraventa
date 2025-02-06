@@ -30,9 +30,12 @@ import { ISucursales } from '../../interfaces/sucursales.interface';
 })
 export class LoginComponent extends BaseComponent implements OnInit {
 
+  activeUrl: string = '';
+  isAdmin: boolean = false;
+
   loginForm = new FormGroup({
-    // empresa: new FormControl('', [Validators.required]),
-    // sucursal: new FormControl('', [Validators.required]),
+    empresa: new FormControl('', [Validators.required]),
+    sucursal: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required])
   });
@@ -54,27 +57,29 @@ export class LoginComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.activeUrl = this.router.url;
+    this.isAdmin = this.activeUrl.includes('adm');
+    
+    if(this.isAdmin){
+      this.loginForm.controls.empresa.setValue('0');
+      this.loginForm.controls.sucursal.setValue('0');
+    }
+
     this.empresaService.getEmpresasAPI();
     this.sucursalService.getSucursalesAPI();
   }
 
   onSubmitLogin(): void {
     this.authService.httpClient.post<IResponseLogin>(`${this.authService.base_api_url}/auth`, this.loginForm.value as ILogin).subscribe((response: IResponseLogin) => {
+      console.log(response);
+      
       if(response.success == true){
         localStorage.setItem('userToken', JSON.stringify(response.userData));
         setTimeout(() => {
-          this.router.navigate(['/inventario']);
+          this.router.navigate(['/']);
         }, 3000);
       }
-
-      // this._snackBar.openFromComponent(SnackbarComponent, {
-      //   duration: 3000,
-      //   data: response
-      // })
     })
-
-    console.log(this.loginForm.value);
-    this.router.navigate(['/home']);
   }
 
   show(): void {

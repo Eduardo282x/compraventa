@@ -19,7 +19,7 @@ export class BaseComponent {
   dialog = inject(MatDialog);
 
   logout(): void {
-    localStorage.removeItem('userData');
+    localStorage.removeItem('userToken');
     this.router.navigate(['/login'])
   }
 

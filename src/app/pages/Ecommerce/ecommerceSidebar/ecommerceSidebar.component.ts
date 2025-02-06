@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, effect, inject, OnInit } from '@angular/core';
+import { CategoryService } from '../../../services/category.service';
+import { ICategory } from '../../../interfaces/category.interface';
 
 @Component({
   selector: 'app-ecommerce-sidebar',
@@ -6,28 +8,21 @@ import { Component } from '@angular/core';
   templateUrl: './ecommerceSidebar.component.html',
   styleUrl: './ecommerceSidebar.component.css',
 })
-export class EcommerceSidebarComponent {
+export class EcommerceSidebarComponent implements OnInit {
 
-  categoriesMenu = [
-    {
-      label: 'Menu de Categoria',
-      icon: 'menu'
-    },
-    {
-      label: 'Productos Más Vendidos',
-      icon: 'trending_up'
-    },
-    {
-      label: 'Bebidas',
-      icon: 'local_bar'
-    },
-    {
-      label: 'Comestibles',
-      icon: 'storefront'
-    },
-    {
-      label: 'Medicinas',
-      icon: 'medical_services'
-    },
-  ]
+  categoryService = inject(CategoryService);
+  ref = inject(ChangeDetectorRef)
+
+  categoriesMenu: ICategory[] = [];
+
+  constructor() {
+    effect(() => {
+      this.categoriesMenu = this.categoryService.getCategory();
+      this.ref.detectChanges();
+    })
+  }
+
+  ngOnInit(): void {
+      this.categoryService.getCategoryAPI()
+  }
 }

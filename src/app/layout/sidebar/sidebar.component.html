@@ -1,9 +1,10 @@
-<div class="h-screen w-60 bg-blue-900 p-4 flex flex-col items-start justify-start gap-5">
-    
-    @for (item of menu; track $index) {
-        <button mat-raised-button (click)="navigateTo(item.redirectTo)"  class="flex items-center !justify-start gap-2 w-full">
-            <span class="material-icons">{{item.icon}}</span>
-            <span>{{item.label}}</span>
-        </button>
-    }
+<div class="h-screen  bg-blue-900">
+    <div class="overflow-y-auto w-60 h-[90%] p-4 flex flex-col items-start justify-start gap-5">
+        @for (item of menu; track $index) {
+            <button mat-raised-button (click)="navigateTo(item.redirectTo)"  class="flex items-center !justify-start gap-2 w-full">
+                <span class="material-icons">{{item.icon}}</span>
+                <span>{{item.label}}</span>
+            </button>
+        }
+    </div>
 </div>
