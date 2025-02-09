@@ -1,0 +1,36 @@
+<h2 class="font-bold text-xl text-center p-5 border-b-2">Iniciar Sesión</h2>
+
+<form [formGroup]="clientForm" class="p-5 border-b-2">
+  <div>
+    <label for="">Correo Electrónico</label>
+
+    <input
+      class="w-full outline-none py-2 px-6 rounded-2xl my-2 focus:border-blue-500 focus:border"
+      type="text"
+      placeholder="correo@correo.com"
+      formControlName="email"
+    />
+  </div>
+
+  <div>
+    <label for="">Contraseña</label>
+
+    <input
+      class="w-full outline-none py-2 px-6 rounded-2xl my-2 focus:border-blue-500 focus:border"
+      type="password"
+      placeholder="*********"
+      formControlName="password"
+    />
+
+  </div>
+
+  <button mat-flat-button class="mt-5 w-full !text-base" (click)="onSubmit()">Iniciar Sesión</button>
+
+</form>
+
+<div class="mb-10 flex items-center justify-between gap-4 px-4">
+    <p class="font-bold text-lg text-center mt-5">¿Aún no tienes una cuenta?</p>
+
+    <button mat-raised-button class="mt-5 w-1/3">Regístrate Aquí</button>
+</div>
+
