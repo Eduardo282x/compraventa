@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, effect, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, effect, inject, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -9,8 +9,9 @@ import {
   MatBottomSheetModule,
 } from '@angular/material/bottom-sheet';
 import { ClientLoginComponent } from '../clientLogin/clientLogin.component';
+import { AuthService } from '../../../services/auth.service';
 import { CarritoService } from '../../../services/carrito.service';
-import {MatBadgeModule} from '@angular/material/badge';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @Component({
   selector: 'app-ecommerce-header',
@@ -19,7 +20,10 @@ import {MatBadgeModule} from '@angular/material/badge';
   styleUrl: './ecommerceHeader.component.css',
 })
 
-export class EcommerceHeaderComponent extends BaseComponent {
+export class EcommerceHeaderComponent extends BaseComponent implements OnInit {
+
+  clientInfo = JSON.parse(localStorage.getItem('clientToken') as string);
+  authService = inject(AuthService);
 
   private _bottomSheet = inject(MatBottomSheet);
   carritoService = inject(CarritoService);
@@ -34,17 +38,21 @@ export class EcommerceHeaderComponent extends BaseComponent {
       this.ref.detectChanges();
     })
   }
-  
+
   ecommerceHeaderForm = new FormGroup({
     product: new FormControl('')
   });
+
+  ngOnInit(): void {
+    this.authService.clientInfo.set(this.clientInfo);
+  }
 
   openBottomSheet(): void {
     this._bottomSheet.open(ClientLoginComponent);
   }
 
   onSubmit() {
-    const {product} = this.ecommerceHeaderForm.value;
+    const { product } = this.ecommerceHeaderForm.value;
 
     this.router.navigate(
       ['/comercio'],
