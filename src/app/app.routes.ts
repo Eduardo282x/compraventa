@@ -14,6 +14,7 @@ import { SucursalesComponent } from './pages/sucursales/sucursales.component';
 import { ProveedoresComponent } from './pages/proveedores/proveedores.component';
 import { CategoryComponent } from './pages/category/category.component';
 import { LayoutEcommerceComponent } from './pages/Ecommerce/LayoutEcommerce/LayoutEcommerce.component';
+import { ClientLoginComponent } from './pages/Ecommerce/clientLogin/clientLogin.component';
 
 export const routes: Routes = [
     {
