@@ -40,13 +40,6 @@ export const columns: IColumns<ICliente>[] = [
         width: 'w-[30%]'
     },
     {
-        title: 'Estado',
-        name: (element) => element.status ? 'check' : 'close',
-        nameColumn: 'status',
-        type: 'iconData',
-        width: 'w-[30%]'
-    },
-    {
         title: 'Editar',
         name: () => 'edit',
         nameColumn: 'edit',

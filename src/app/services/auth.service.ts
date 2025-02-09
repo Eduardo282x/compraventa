@@ -7,7 +7,7 @@ import { ICliente } from '../interfaces/cliente.interface';
 })
 export class AuthService extends BaseService {
 
-  public clientInfo = signal<ICliente>({} as ICliente);
-  public setClientInfo = computed(() => this.clientInfo()); 
+  public clientInfo = signal<ICliente | null>(null);
+  public setClientInfo = computed<ICliente | null>(() => this.clientInfo()); 
 
 }

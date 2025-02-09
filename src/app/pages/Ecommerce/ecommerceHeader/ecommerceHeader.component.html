@@ -4,41 +4,45 @@
         <div class="container mx-auto flex items-center justify-between">
 
             <div class="flex items-center justify-center gap-8">
-                <a [routerLink]="['/comercio']" class="text-xl font-bold text-gray-800 flex items-center">
+                <a [routerLink]="['/comercio']"
+                    class="text-xl font-bold text-gray-800 flex items-center">
                     <img src="favicon.ico" alt="Logo" class="w-10 h-10 mr-2">
                     <span class="text-white">Servimar</span>
                 </a>
 
-                <form [formGroup]="ecommerceHeaderForm" class="flex items-center justify-between rounded-full py-1 px-2 overflow-hidden bg-white w-[30rem]">
+                <form [formGroup]="ecommerceHeaderForm"
+                    class="flex items-center justify-between rounded-full py-1 px-2 overflow-hidden bg-white w-[30rem]">
                     <input
                         type="text" placeholder="Buscar productos..."
                         class="w-full border-none outline-none ml-2 "
-                        formControlName="product"
-                    >
+                        formControlName="product">
                     <button
                         class="material-icons rounded-full bg-blue-900 p-1  text-white"
                         type="submit"
-                        (click)="onSubmit()"
-                    >
+                        (click)="onSubmit()">
                         search
                     </button>
                 </form>
             </div>
 
             <div class="flex items-center space-x-8 ml-10">
-                <button mat-icon-button class="p-2" [matBadge]="articlesCarrito">
+                <button mat-icon-button class="p-2"
+                    [matBadge]="articlesCarrito">
                     <span class="material-icons text-white">shopping_cart</span>
                 </button>
 
                 @if (clientInfo) {
-                    <div>Tiene algo</div>
+                <div class="flex text-white items-center gap-2">
+                    <span class="material-icons">account_circle</span>
+                    <span>{{clientInfo.cliNombre}}</span>
+                    <span>{{clientInfo.cliApellido}}</span>
+                </div>
                 } @else {
-                    <button
-                        (click)="openBottomSheet()"
-                        class="px-4 py-2 bg-white font-bold text-blue-600 rounded-lg hover:bg-blue-100"
-                    >
-                        Iniciar Sesión
-                    </button>
+                <button
+                    (click)="openBottomSheet()"
+                    class="px-4 py-2 bg-white font-bold text-blue-600 rounded-lg hover:bg-blue-100">
+                    Iniciar Sesión
+                </button>
                 }
 
             </div>

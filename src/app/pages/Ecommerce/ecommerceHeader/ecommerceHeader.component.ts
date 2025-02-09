@@ -12,6 +12,7 @@ import { ClientLoginComponent } from '../clientLogin/clientLogin.component';
 import { AuthService } from '../../../services/auth.service';
 import { CarritoService } from '../../../services/carrito.service';
 import { MatBadgeModule } from '@angular/material/badge';
+import { ICliente } from '../../../interfaces/cliente.interface';
 
 @Component({
   selector: 'app-ecommerce-header',
@@ -22,7 +23,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 
 export class EcommerceHeaderComponent extends BaseComponent implements OnInit {
 
-  clientInfo = JSON.parse(localStorage.getItem('clientToken') as string);
+  clientInfo: ICliente | null = null;
   authService = inject(AuthService);
 
   private _bottomSheet = inject(MatBottomSheet);
@@ -35,6 +36,7 @@ export class EcommerceHeaderComponent extends BaseComponent implements OnInit {
     super();
     effect(() => {
       this.articlesCarrito = this.carritoService.getCarrito().length;
+      this.clientInfo = this.authService.setClientInfo();
       this.ref.detectChanges();
     })
   }
@@ -44,7 +46,11 @@ export class EcommerceHeaderComponent extends BaseComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.authService.clientInfo.set(this.clientInfo);
+    const clientLocal: ICliente | null = JSON.parse(localStorage.getItem('clientToken') as string);
+    if (clientLocal) {
+      this.authService.clientInfo.set(clientLocal);
+    }
+
   }
 
   openBottomSheet(): void {
