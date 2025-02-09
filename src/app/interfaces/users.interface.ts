@@ -1,45 +1,44 @@
+import { ICliente } from './cliente.interface';
 
 export interface ILogin {
-    email: string;
-    password: string;
+  email: string;
+  password: string;
 }
 
 export interface IResponseLogin {
-    userData: IUser;
-    message:          string;
-    statusCode:       number;
-    success:          boolean;
+  userData: IUser | ICliente;
+  message: string;
+  statusCode: number;
+  success: boolean;
 }
 
-
 export interface IUser {
-    id:          number;
-    sucId:       number;
-    rolId:       number;
-    usuNombre:   string;
-    usuApellido: string;
-    usuCorreo:   string;
-    usuPassword: string;
-    status:      boolean;
-    Rol:         Rol;
+  id: number;
+  sucId: number;
+  rolId: number;
+  usuNombre: string;
+  usuApellido: string;
+  usuCorreo: string;
+  usuPassword: string;
+  status: boolean;
+  Rol: Rol;
 }
 
 export interface Rol {
-    id:  number;
-    rol: string;
+  id: number;
+  rol: string;
 }
 
-
 export interface BodyUsuario {
-    sucId: number;
-    rolId: number;
-    usuNombre: string;
-    usuApellido: string;
-    usuCorreo: string;
-    usuPassword: string;
-    status: boolean;
+  sucId: number;
+  rolId: number;
+  usuNombre: string;
+  usuApellido: string;
+  usuCorreo: string;
+  usuPassword: string;
+  status: boolean;
 }
 
 export interface BodyUpdateUsuario extends BodyUsuario {
-    id: number;
+  id: number;
 }

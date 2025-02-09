@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, effect, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, effect, inject, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -9,8 +9,10 @@ import {
   MatBottomSheetModule,
 } from '@angular/material/bottom-sheet';
 import { ClientLoginComponent } from '../clientLogin/clientLogin.component';
+import { AuthService } from '../../../services/auth.service';
 import { CarritoService } from '../../../services/carrito.service';
-import {MatBadgeModule} from '@angular/material/badge';
+import { MatBadgeModule } from '@angular/material/badge';
+import { ICliente } from '../../../interfaces/cliente.interface';
 
 @Component({
   selector: 'app-ecommerce-header',
@@ -19,7 +21,10 @@ import {MatBadgeModule} from '@angular/material/badge';
   styleUrl: './ecommerceHeader.component.css',
 })
 
-export class EcommerceHeaderComponent extends BaseComponent {
+export class EcommerceHeaderComponent extends BaseComponent implements OnInit {
+
+  clientInfo: ICliente | null = null;
+  authService = inject(AuthService);
 
   private _bottomSheet = inject(MatBottomSheet);
   carritoService = inject(CarritoService);
@@ -31,20 +36,29 @@ export class EcommerceHeaderComponent extends BaseComponent {
     super();
     effect(() => {
       this.articlesCarrito = this.carritoService.getCarrito().length;
+      this.clientInfo = this.authService.setClientInfo();
       this.ref.detectChanges();
     })
   }
-  
+
   ecommerceHeaderForm = new FormGroup({
     product: new FormControl('')
   });
+
+  ngOnInit(): void {
+    const clientLocal: ICliente | null = JSON.parse(localStorage.getItem('clientToken') as string);
+    if (clientLocal) {
+      this.authService.clientInfo.set(clientLocal);
+    }
+
+  }
 
   openBottomSheet(): void {
     this._bottomSheet.open(ClientLoginComponent);
   }
 
   onSubmit() {
-    const {product} = this.ecommerceHeaderForm.value;
+    const { product } = this.ecommerceHeaderForm.value;
 
     this.router.navigate(
       ['/comercio'],
