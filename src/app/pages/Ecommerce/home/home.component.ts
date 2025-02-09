@@ -5,6 +5,7 @@ import { CategoryService } from '../../../services/category.service';
 import { InventarioService } from '../../../services/inventario.service';
 import { IInventario } from '../../../interfaces/producto.interface';
 import { BaseComponent } from '../../base/base.component';
+import { CarritoService } from '../../../services/carrito.service';
 
 @Component({
   selector: 'app-home',
@@ -33,6 +34,11 @@ export class HomeComponentV2 extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.productoService.getInventarioAPI();
+
+    const getCarritoLocal: number[] = JSON.parse(localStorage.getItem('carrito') as string);
+    if (getCarritoLocal) {
+      this.carritoService.setCarrito.set(getCarritoLocal);
+    }
 
     this.routerActive.queryParams 
       .subscribe(params => {
