@@ -15,7 +15,7 @@
                     <div
                         class="flex flex-col items-start justify-start gap-2 w-full text-sm m-auto my-1">
                         <label> Empresa </label>
-                        <select formControlName="empresa"
+                        <select formControlName="empresaId"
                             class="w-full py-2 px-3 rounded-md border-[1px] border-solid border-gray-400 outline-none">
                             <option value selected
                                 style="display: none;">Seleccionar</option>
@@ -29,11 +29,11 @@
                     <div
                         class="flex flex-col items-start justify-start gap-2 w-full text-sm m-auto my-1">
                         <label> Sucursal </label>
-                        <select formControlName="sucursal"
+                        <select formControlName="sucursalId"
                             class="w-full py-2 px-3 rounded-md border-[1px] border-solid border-gray-400 outline-none">
                             <option value selected
                                 style="display: none;">Seleccionar</option>
-                            @for(item of sucursales; track $index){
+                            @for(item of sucursalesFilter; track $index){
                             <option
                                 [value]="item.sucId">{{item.sucNom}}</option>
                             }

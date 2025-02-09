@@ -34,14 +34,15 @@ export class LoginComponent extends BaseComponent implements OnInit {
   isAdmin: boolean = false;
 
   loginForm = new FormGroup({
-    empresa: new FormControl('', [Validators.required]),
-    sucursal: new FormControl('', [Validators.required]),
+    empresaId: new FormControl('', [Validators.required]),
+    sucursalId: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required])
   });
 
   enterprises: IEmpresas[] = [];
-  sucursales: ISucursales[] = []
+  sucursales: ISucursales[] = [];
+  sucursalesFilter: ISucursales[] = [];
 
   showPassword: boolean = false;
   authService = inject(AuthService);
@@ -61,12 +62,16 @@ export class LoginComponent extends BaseComponent implements OnInit {
     this.isAdmin = this.activeUrl.includes('adm');
     
     if(this.isAdmin){
-      this.loginForm.controls.empresa.setValue('0');
-      this.loginForm.controls.sucursal.setValue('0');
+      this.loginForm.controls.empresaId.setValue('0');
+      this.loginForm.controls.sucursalId.setValue('0');
     }
 
     this.empresaService.getEmpresasAPI();
     this.sucursalService.getSucursalesAPI();
+
+    this.loginForm.controls.empresaId.valueChanges.subscribe(emp => {
+      this.sucursalesFilter = this.sucursales.filter(suc => suc.empId === Number(emp))
+    })
   }
 
   onSubmitLogin(): void {

@@ -4,6 +4,7 @@ import { ICategory } from '../../../interfaces/category.interface';
 import { CategoryService } from '../../../services/category.service';
 import { InventarioService } from '../../../services/inventario.service';
 import { IInventario } from '../../../interfaces/producto.interface';
+import { CarritoService } from '../../../services/carrito.service';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +19,8 @@ export class HomeComponentV2 implements OnInit {
   ref = inject(ChangeDetectorRef);
   categoriesMenu: ICategory[] = [];
   productos: IInventario[] = [];
+  carritoService = inject(CarritoService);
+
 
   constructor() {
     effect(() => {
@@ -29,6 +32,10 @@ export class HomeComponentV2 implements OnInit {
 
   ngOnInit(): void {
     this.productoService.getInventarioAPI();
+    const getCarritoLocal: number[] = JSON.parse(localStorage.getItem('carrito') as string);
+    if (getCarritoLocal) {
+      this.carritoService.setCarrito.set(getCarritoLocal);
+    }
   }
 
 }
