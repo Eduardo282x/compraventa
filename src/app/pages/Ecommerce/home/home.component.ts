@@ -4,6 +4,7 @@ import { ICategory } from '../../../interfaces/category.interface';
 import { CategoryService } from '../../../services/category.service';
 import { InventarioService } from '../../../services/inventario.service';
 import { IInventario } from '../../../interfaces/producto.interface';
+import { BaseComponent } from '../../base/base.component';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,7 @@ import { IInventario } from '../../../interfaces/producto.interface';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponentV2 implements OnInit {
+export class HomeComponentV2 extends BaseComponent implements OnInit {
 
   productoService = inject(InventarioService);
   categoryService = inject(CategoryService);
@@ -20,6 +21,7 @@ export class HomeComponentV2 implements OnInit {
   productos: IInventario[] = [];
 
   constructor() {
+    super();
     effect(() => {
       this.categoriesMenu = this.categoryService.getCategory();
       this.productos = this.productoService.getInventario();
@@ -29,6 +31,13 @@ export class HomeComponentV2 implements OnInit {
 
   ngOnInit(): void {
     this.productoService.getInventarioAPI();
-  }
 
+    this.routerActive.queryParams 
+      .subscribe(params => {
+        const category = params['categoria'] ? params['categoria'] : '';
+        const product = params['producto'] ? params['producto'] : '';
+        this.productoService.getInventarioFiltradoAPI(category, product);
+      }
+    )
+  }
 }

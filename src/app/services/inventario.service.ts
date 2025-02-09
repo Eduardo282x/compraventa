@@ -22,6 +22,12 @@ export class InventarioService extends BaseService{
       this.setInventario.set(response);
     })
   }
+  getInventarioFiltradoAPI(category: string, product: string): void {
+    const url = `${this.base_api_url}/producto/filter?categoria=${category}&producto=${product}`
+    this.httpClient.get<IInventario[]>(url).subscribe((response: IInventario[]) => {
+      this.setInventario.set(response);
+    })
+  }
   getMonedaAPI(): void {
     this.httpClient.get<Moneda[]>(`${this.base_api_url}/producto/moneda`).subscribe((response: Moneda[]) => {
       this.setMoneda.set(response);
