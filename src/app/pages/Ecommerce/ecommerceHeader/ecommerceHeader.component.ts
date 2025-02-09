@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -9,6 +9,7 @@ import {
   MatBottomSheetModule,
 } from '@angular/material/bottom-sheet';
 import { ClientLoginComponent } from '../clientLogin/clientLogin.component';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-ecommerce-header',
@@ -17,13 +18,20 @@ import { ClientLoginComponent } from '../clientLogin/clientLogin.component';
   styleUrl: './ecommerceHeader.component.css',
 })
 
-export class EcommerceHeaderComponent extends BaseComponent {
+export class EcommerceHeaderComponent extends BaseComponent implements OnInit {
+
+  clientInfo = JSON.parse(localStorage.getItem('clientToken') as string);
+  authService = inject(AuthService);
 
   private _bottomSheet = inject(MatBottomSheet);
 
   ecommerceHeaderForm = new FormGroup({
     product: new FormControl('')
   });
+
+  ngOnInit(): void {
+    this.authService.clientInfo.set(this.clientInfo);
+  }
 
   openBottomSheet(): void {
     this._bottomSheet.open(ClientLoginComponent);

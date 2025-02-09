@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { IResponseLogin } from '../../../interfaces/users.interface';
+import { ICliente } from '../../../interfaces/cliente.interface';
 
 @Component({
   selector: 'app-client-login',
@@ -13,6 +14,7 @@ import { IResponseLogin } from '../../../interfaces/users.interface';
   styleUrl: './clientLogin.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
+
 export class ClientLoginComponent {
 
   authService = inject(AuthService);
@@ -40,6 +42,8 @@ export class ClientLoginComponent {
       
       if(response.success == true){
         localStorage.setItem('clientToken', JSON.stringify(response.userData));
+
+        this.authService.clientInfo.set(response.userData as ICliente);
 
         this._bottomSheetRef.dismiss();
       }
