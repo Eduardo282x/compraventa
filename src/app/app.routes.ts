@@ -14,7 +14,7 @@ import { SucursalesComponent } from './pages/sucursales/sucursales.component';
 import { ProveedoresComponent } from './pages/proveedores/proveedores.component';
 import { CategoryComponent } from './pages/category/category.component';
 import { LayoutEcommerceComponent } from './pages/Ecommerce/LayoutEcommerce/LayoutEcommerce.component';
-import { ClientLoginComponent } from './pages/Ecommerce/clientLogin/clientLogin.component';
+import { EcommerceStepperComponent } from './pages/Ecommerce/ecommerceStepper/ecommerceStepper.component';
 
 export const routes: Routes = [
     {
@@ -78,6 +78,10 @@ export const routes: Routes = [
             {
                 path: '',
                 component: HomeComponentV2
+            },
+            {
+                path: 'carrito',
+                component: EcommerceStepperComponent
             }
         ]
     }

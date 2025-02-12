@@ -9,7 +9,7 @@ import { RouterOutlet } from '@angular/router';
   imports: [EcommerceHeaderComponent, EcommerceSidebarComponent, RouterOutlet],
   template: `
   <div class="h-screen w-screen overflow-hidden">
-  <app-ecommerce-header></app-ecommerce-header>
+    <app-ecommerce-header></app-ecommerce-header>
     <div class="flex items-start justify-start w-full h-screen overflow-hidden">
     <app-ecommerce-sidebar></app-ecommerce-sidebar>
       <div class="pl-14 h-full overflow-y-auto overflow-x-hidden">

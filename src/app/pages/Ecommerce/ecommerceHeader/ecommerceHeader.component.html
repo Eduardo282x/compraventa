@@ -26,10 +26,14 @@
             </div>
 
             <div class="flex items-center space-x-8 ml-10">
-                <button mat-icon-button class="p-2"
-                    [matBadge]="articlesCarrito">
+                <a
+                    [routerLink]="['/comercio/carrito']" 
+                    mat-icon-button 
+                    class="p-2"
+                    [matBadge]="articlesCarrito"
+                >
                     <span class="material-icons text-white">shopping_cart</span>
-                </button>
+                </a>
 
                 @if (clientInfo) {
                 <div class="flex text-white items-center gap-2">
