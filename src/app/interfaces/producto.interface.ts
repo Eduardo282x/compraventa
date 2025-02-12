@@ -55,3 +55,11 @@ export interface BodyInventario {
 export interface BodyUpdateInventory extends BodyInventario{
     prodId: number;
 }
+
+export interface IProductoTest {
+    id: number;
+    title: string;
+    category: string;
+    price: number;
+    amount: number;
+}
