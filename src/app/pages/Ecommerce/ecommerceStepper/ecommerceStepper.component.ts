@@ -5,7 +5,6 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatStepperModule} from '@angular/material/stepper';
 import { EcommerceCartComponent } from "../ecommerceCart/ecommerceCart.component";
-import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-ecommerce-stepper',
@@ -16,8 +15,7 @@ import { RouterLink } from '@angular/router';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    EcommerceCartComponent,
-    RouterLink
+    EcommerceCartComponent
 ],
   templateUrl: './ecommerceStepper.component.html',
   styleUrl: './ecommerceStepper.component.css',

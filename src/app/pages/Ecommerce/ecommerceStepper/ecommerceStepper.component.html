@@ -1,29 +1,15 @@
-<div class="p-10">
-
+<div class="p-8 w-full">
     <div class="flex justify-between">
         <h2 class="font-bold text-2xl">Carrito de Compra</h2>
-
-        <a 
-            [routerLink]="['/comercio']"
-            class="flex items-center cursor-pointer hover:bg-blue-300 px-10 rounded-xl font-bold bg-gray-400"
-        >
-            <span class="material-icons pr-5">
-                arrow_back
-            </span>
-            
-            Volver
-        </a>
     </div>
 
-    <mat-stepper labelPosition="bottom" #stepper class="mt-10 !bg-white border-2 rounded-xl px-16">
-        // 1st step
+    <mat-stepper labelPosition="bottom" #stepper class="mt-10 !bg-white border-2 rounded-xl px-16 w-full">
         <mat-step>
-
             <div>
-                <ng-template matStepLabel>Verifica tu compra</ng-template>
+                <ng-template matStepLabel>Productos</ng-template>
 
                 <app-ecommerce-cart></app-ecommerce-cart>
-    
+
                 <div class="mt-10 flex justify-end">
                     <button mat-button matStepperNext>Siguiente</button>
                 </div>
@@ -31,34 +17,25 @@
 
         </mat-step>
 
-        // 2nd step
         <mat-step>
-
             <div>
-                <ng-template matStepLabel>Fill out your address</ng-template>
-    
+                <ng-template matStepLabel>Ingresa los datos del pago</ng-template>
+
                 <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button matStepperNext>Next</button>
+                    <button mat-button matStepperPrevious>Volver</button>
+                    <button mat-button matStepperNext>Siguiente</button>
                 </div>
             </div>
-
         </mat-step>
 
-        // 3rd step
         <mat-step>
-
             <div>
-                <ng-template matStepLabel>Done</ng-template>
-    
-                <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button (click)="stepper.reset()">Reset</button>
-                </div>
+                <ng-template matStepLabel>Completado</ng-template>
+
             </div>
 
         </mat-step>
 
     </mat-stepper>
-    
+
 </div>
