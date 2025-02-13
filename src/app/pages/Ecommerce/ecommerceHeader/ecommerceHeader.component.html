@@ -26,14 +26,24 @@
             </div>
 
             <div class="flex items-center space-x-8 ml-10">
-                <a
-                    [routerLink]="['/comercio/carrito']" 
-                    mat-icon-button 
+
+                <div class="flex items-center justify-start gap-2 text-white">
+                    <label>Moneda:</label>
+                    <select
+                        class=" bg-transparent rounded-md border-2 px-4 py-2 outline-none">
+                        @for (item of moneda; track $index) {
+                        <option [value]="item.monId">{{item.monNom}}</option>
+                        }
+                    </select>
+                </div>
+
+                <button
+                    (click)="goToCar()"
+                    mat-icon-button
                     class="p-2"
-                    [matBadge]="articlesCarrito"
-                >
+                    [matBadge]="articlesCarrito">
                     <span class="material-icons text-white">shopping_cart</span>
-                </a>
+                </button>
 
                 @if (clientInfo) {
                 <div class="flex text-white items-center gap-2">

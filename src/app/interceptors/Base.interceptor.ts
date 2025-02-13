@@ -3,6 +3,7 @@ import { inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { tap } from 'rxjs';
 import { SnackbarComponent } from '../components/snackbar/snackbar.component';
+import { BaseResponse } from '../interfaces/base.interface';
 
 export const baseInterceptor: HttpInterceptorFn = (req, next) => {
   const snackbarService = inject(MatSnackBar);
@@ -11,10 +12,14 @@ export const baseInterceptor: HttpInterceptorFn = (req, next) => {
     tap((event) => {
       if (event instanceof HttpResponse) {
         if (req.method === 'POST' || req.method === 'PUT' || req.method === 'DELETE') {
-          snackbarService.openFromComponent(SnackbarComponent, {
-            duration: 3000,
-            data: event.body
-          })
+          const response: BaseResponse = event.body as BaseResponse;
+
+          if(response.message !== ''){
+            snackbarService.openFromComponent(SnackbarComponent, {
+              duration: 3000,
+              data: response
+            })
+          }
         }
       }
     })

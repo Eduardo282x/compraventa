@@ -13,6 +13,9 @@ import { AuthService } from '../../../services/auth.service';
 import { CarritoService } from '../../../services/carrito.service';
 import { MatBadgeModule } from '@angular/material/badge';
 import { ICliente } from '../../../interfaces/cliente.interface';
+import { ClientRegisterComponent } from '../clientRegister/clientRegister.component';
+import { InventarioService } from '../../../services/inventario.service';
+import { Moneda } from '../../../interfaces/producto.interface';
 
 @Component({
   selector: 'app-ecommerce-header',
@@ -24,7 +27,9 @@ import { ICliente } from '../../../interfaces/cliente.interface';
 export class EcommerceHeaderComponent extends BaseComponent implements OnInit {
 
   clientInfo: ICliente | null = null;
+  moneda: Moneda[] = [];
   authService = inject(AuthService);
+  inventarioService = inject(InventarioService);
 
   private _bottomSheet = inject(MatBottomSheet);
   carritoService = inject(CarritoService);
@@ -36,7 +41,11 @@ export class EcommerceHeaderComponent extends BaseComponent implements OnInit {
     super();
     effect(() => {
       this.articlesCarrito = this.carritoService.getCarrito().length;
+      if(this.carritoService.getCarrito().length === 0){
+        this.articlesCarrito = this.carritoService.getCarritoApi().length;
+      }
       this.clientInfo = this.authService.setClientInfo();
+      this.moneda = this.inventarioService.getMoneda();
       this.ref.detectChanges();
     })
   }
@@ -49,12 +58,25 @@ export class EcommerceHeaderComponent extends BaseComponent implements OnInit {
     const clientLocal: ICliente | null = JSON.parse(localStorage.getItem('clientToken') as string);
     if (clientLocal) {
       this.authService.clientInfo.set(clientLocal);
+      this.carritoService.getCarritoAPI(clientLocal.cliId.toString())
     }
+    this.inventarioService.getMonedaAPI();
+  }
 
+  goToCar() {
+    if(this.clientInfo){
+      this.router.navigate(['/comercio/carrito']);
+    } else {
+      this.openBottomSheet()
+    }
   }
 
   openBottomSheet(): void {
-    this._bottomSheet.open(ClientLoginComponent);
+    this._bottomSheet.open(ClientLoginComponent).afterDismissed().subscribe(response => {
+      if(response === 'openClientRegister'){
+        this._bottomSheet.open(ClientRegisterComponent)
+      }
+    })
   }
 
   onSubmit() {
