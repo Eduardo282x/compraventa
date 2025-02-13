@@ -1,10 +1,15 @@
-import {Component, inject} from '@angular/core';
-import {FormBuilder, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatButtonModule} from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatStepperModule} from '@angular/material/stepper';
+import { ChangeDetectorRef, Component, effect, inject, OnInit } from '@angular/core';
+import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatStepperModule } from '@angular/material/stepper';
 import { EcommerceCartComponent } from "../ecommerceCart/ecommerceCart.component";
+import { ICarrito } from '../card/card.component';
+import { CarritoService } from '../../../services/carrito.service';
+import { ClienteService } from '../../../services/clients.service';
+import { AuthService } from '../../../services/auth.service';
+import { ICliente } from '../../../interfaces/cliente.interface';
 
 @Component({
   selector: 'app-ecommerce-stepper',
@@ -16,18 +21,34 @@ import { EcommerceCartComponent } from "../ecommerceCart/ecommerceCart.component
     MatInputModule,
     MatButtonModule,
     EcommerceCartComponent
-],
+  ],
   templateUrl: './ecommerceStepper.component.html',
   styleUrl: './ecommerceStepper.component.css',
 })
 
-export class EcommerceStepperComponent { 
-  private _formBuilder = inject(FormBuilder);
+export class EcommerceStepperComponent implements OnInit {
+  carritoService = inject(CarritoService);
+  ref = inject(ChangeDetectorRef);
 
-  firstFormGroup = this._formBuilder.group({
-    firstCtrl: ['', Validators.required],
-  });
-  secondFormGroup = this._formBuilder.group({
-    secondCtrl: ['', Validators.required],
-  });
+  constructor() {
+
+  }
+
+  ngOnInit(): void {
+    const getCarritoLocal: ICarrito[] = JSON.parse(localStorage.getItem('carrito') as string);
+    const cliente: ICliente = JSON.parse(localStorage.getItem('clientToken') as string);
+
+    if (getCarritoLocal && getCarritoLocal.length > 0 && cliente.cliId !== null) {
+      getCarritoLocal.map(pro => {
+        const bodyCarrito = {
+          cliId: cliente.cliId,
+          prodId: pro.id,
+          cant: pro.amount,
+        }
+        this.carritoService.postCarritosAPI(bodyCarrito, cliente.cliId.toString() as string)
+      })
+
+      localStorage.removeItem('carrito');
+    }
+  }
 }

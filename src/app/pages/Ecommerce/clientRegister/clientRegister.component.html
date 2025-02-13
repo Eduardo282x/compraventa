@@ -1,0 +1,72 @@
+<div class="flex items-center justify-start gap-8 border-b-2">
+    <button mat-flat-button><span class="material-icons">arrow_back</span>
+        Volver</button>
+    <h2 class="font-bold text-xl text-center p-5 ">Registro</h2>
+</div>
+
+<form [formGroup]="clientRegisterForm" class="p-5 border-b-2">
+    <div class="flex items-center justify-between gap-2 w-full">
+        <div class="w-1/2">
+            <label>Nombre</label>
+            <input
+                class="w-full outline-none py-2 px-6 rounded-2xl my-2 focus:border-blue-500 focus:border"
+                type="text"
+                formControlName="cliNombre" />
+        </div>
+
+        <div class="w-1/2">
+            <label>Apellido</label>
+            <input
+                class="w-full outline-none py-2 px-6 rounded-2xl my-2 focus:border-blue-500 focus:border"
+                type="text"
+                formControlName="cliApellido" />
+        </div>
+    </div>
+    <div class="flex items-center justify-between gap-2 w-full">
+        <div class="w-1/2">
+            <label>Cédula</label>
+            <input
+                class="w-full outline-none py-2 px-6 rounded-2xl my-2 focus:border-blue-500 focus:border"
+                type="text"
+                formControlName="cliRif" />
+        </div>
+
+        <div class="w-1/2">
+            <label>Teléfono</label>
+            <input
+                class="w-full outline-none py-2 px-6 rounded-2xl my-2 focus:border-blue-500 focus:border"
+                type="text"
+                formControlName="cliTelefono" />
+        </div>
+    </div>
+
+    <div>
+        <label>Correo Electrónico</label>
+        <input
+            class="w-full outline-none py-2 px-6 rounded-2xl my-2 focus:border-blue-500 focus:border"
+            type="text"
+            placeholder="correo@correo.com"
+            formControlName="cliCorreo" />
+    </div>
+
+    <div>
+        <label>Dirección</label>
+        <input
+            class="w-full outline-none py-2 px-6 rounded-2xl my-2 focus:border-blue-500 focus:border"
+            type="text"
+            formControlName="cliDireccion" />
+    </div>
+
+    <div>
+        <label for>Contraseña</label>
+        <input
+            class="w-full outline-none py-2 px-6 rounded-2xl my-2 focus:border-blue-500 focus:border"
+            type="password"
+            placeholder="*********"
+            formControlName="cliPassword" />
+    </div>
+
+    <button mat-flat-button class="mt-5 w-full !text-base"
+        (click)="onSubmit()">Registrarse</button>
+
+</form>

@@ -4,6 +4,11 @@ import { IInventario } from '../../../interfaces/producto.interface';
 import { CurrencyPipe } from '@angular/common';
 import { CarritoService } from '../../../services/carrito.service';
 
+export interface ICarrito {
+  id: number;
+  amount: number;
+}
+
 @Component({
   selector: 'app-card',
   imports: [MatButtonModule, CurrencyPipe],
@@ -15,14 +20,20 @@ export class CardComponent {
   carritoService = inject(CarritoService);
 
   addCarrito(product: IInventario) {
-    const getCarritoLocal: number[] = JSON.parse(localStorage.getItem('carrito') as string);
+    const getCarritoLocal: ICarrito[] = JSON.parse(localStorage.getItem('carrito') as string);
 
     if(!getCarritoLocal){
-      localStorage.setItem('carrito', JSON.stringify([product.prodId]))
+      localStorage.setItem('carrito', JSON.stringify([{id: product.prodId, amount: 1}]))
     }
 
-    const addProductCarrito: number[] = [...getCarritoLocal]
-    addProductCarrito.push(product.prodId);
+    const addProductCarrito: ICarrito[] = [...getCarritoLocal];
+    const findProduc = addProductCarrito.find(pro => pro.id === product.prodId);
+    
+    if(findProduc){
+      findProduc.amount += 1;
+    } else {
+      addProductCarrito.push({id: product.prodId, amount: 1});
+    }
 
     localStorage.setItem('carrito', JSON.stringify(addProductCarrito))
     this.carritoService.setCarrito.set(addProductCarrito);

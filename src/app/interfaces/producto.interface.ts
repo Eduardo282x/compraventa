@@ -7,7 +7,7 @@ export interface IInventario {
     prodNom: string;
     prodDescrip: string;
     prodPcompra: string;
-    prodPventa: string;
+    prodPventa: number;
     prodStock: number;
     prodFechaven: Date;
     prodImg: null;
@@ -52,7 +52,7 @@ export interface BodyInventario {
     UnidadUndId?: number;
 }
 
-export interface BodyUpdateInventory extends BodyInventario{
+export interface BodyUpdateInventory extends BodyInventario {
     prodId: number;
 }
 

@@ -25,30 +25,22 @@ export class ClientLoginComponent {
     event.preventDefault();
   }
 
-  // Client Form
   clientForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
   });
 
-
-
-  // Client Form Submit
   onSubmit() {
-    
     this.authService.httpClient.post<IResponseLogin>(`${this.authService.base_api_url}/auth/cliente`, this.clientForm.value).subscribe((response: IResponseLogin) => {
-      
-      console.log(response);
-      
       if(response.success == true){
         localStorage.setItem('clientToken', JSON.stringify(response.userData));
-
         this.authService.clientInfo.set(response.userData as ICliente);
-
         this._bottomSheetRef.dismiss();
       }
     });
-
   }
 
+  openRegister() {
+    this._bottomSheetRef.dismiss('openClientRegister');
+  }
 }

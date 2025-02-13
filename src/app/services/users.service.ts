@@ -22,8 +22,8 @@ export class UsersService extends BaseService{
     this.httpClient.get<IUser[]>(`${this.base_api_url}/usuarios`).subscribe((response: IUser[]) => {
       this.setUsers.set(response);
     })
-
   }
+  
   getRolesAPI(): void {
     this.httpClient.get<Rol[]>(`${this.base_api_url}/usuarios/roles`).subscribe((response: Rol[]) => {
       this.setRoles.set(response);

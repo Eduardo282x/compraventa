@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, effect, inject, OnInit } from '@angular/core';
-import { CardComponent } from "../card/card.component";
+import { CardComponent, ICarrito } from "../card/card.component";
 import { ICategory } from '../../../interfaces/category.interface';
 import { CategoryService } from '../../../services/category.service';
 import { InventarioService } from '../../../services/inventario.service';
@@ -35,10 +35,10 @@ export class HomeComponentV2 extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.productoService.getInventarioAPI();
 
-    const getCarritoLocal: number[] = JSON.parse(localStorage.getItem('carrito') as string);
+    const getCarritoLocal: ICarrito[] = JSON.parse(localStorage.getItem('carrito') as string);
     if (getCarritoLocal) {
       this.carritoService.setCarrito.set(getCarritoLocal);
-    }
+    } 
 
     this.routerActive.queryParams 
       .subscribe(params => {
