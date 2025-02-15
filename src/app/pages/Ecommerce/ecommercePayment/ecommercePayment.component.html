@@ -1,0 +1,125 @@
+<div>
+
+  <h2 class="text-xl font-bold mb-10">Información del Pago</h2>
+
+  <div class="flex justify-between border-b-2 my-5 pb-5">
+
+    <div class="ml-20 flex flex-col justify-center">
+      <select
+        name=""
+        id=""
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-blue-500 focus:border block w-full p-2.5"
+      >
+        <option value="0">--- Seleccione el Banco ---</option>
+        <option value="1">Banesco</option>
+        <option value="2">Banco Nacional de Crédito</option>
+      </select>
+    </div>
+
+    <div class="grid grid-cols-2 gap-3 mr-20">
+      <div>
+        <label for="">Nombre</label>
+        <input
+          disabled
+          class="border border-gray-400 rounded-full m-3 outline-none px-6"
+          type="text"
+        />
+      </div>
+
+      <div>
+        <label for="">Cédula</label>
+        <input
+          disabled
+          class="border border-gray-400 rounded-full m-3 outline-none px-6"
+          type="number"
+        />
+      </div>
+
+      <div>
+        <label for="">Teléfono</label>
+        <input
+          disabled
+          class="border border-gray-400 rounded-full m-3 outline-none px-6"
+          type="number"
+        />
+      </div>
+
+      <div>
+        <label for="">Correo</label>
+        <input
+          disabled
+          class="border border-gray-400 rounded-full m-3 outline-none px-6"
+          type="email"
+        />
+      </div>
+    </div>
+  </div>
+
+  <form class="pt-3">
+
+    <h2 class="text-xl font-bold mb-10">Datos de la compra</h2>
+
+    <select name="" id="" class="mx-60 w-1/2 text-center mb-8 border-2 rounded-full p-1 border-black focus:border-blue-500">
+      <option value="">-- Seleccione Tipo de Pago --</option>
+    </select>
+
+    <div class="flex justify-between mx-40 my-5">
+
+        <div class="space-y-5">
+            <div>
+                <label for="">Referencia</label>
+                <input 
+                    type="text"
+                    class="border border-gray-400 rounded-full m-3 outline-none px-6 focus:border focus:border-blue-500" 
+                />
+            </div>
+      
+            <div>
+                <label for="">Cédula</label>
+                <input 
+                    type="text"
+                    class="border border-gray-400 rounded-full m-3 outline-none px-6 focus:border focus:border-blue-500" 
+                />
+            </div>
+
+            <div>
+                <label for="">Correo</label>
+                <input 
+                    type="email"
+                    class="border border-gray-400 rounded-full m-3 outline-none px-6 focus:border focus:border-blue-500" 
+                />
+            </div>
+        </div>
+
+        <div class="space-y-5">
+      
+            <div>
+                <label for="">Nombres</label>
+                <input 
+                    type="text"
+                    class="border border-gray-400 rounded-full m-3 outline-none px-6 focus:border focus:border-blue-500" 
+                />
+            </div>
+        
+            <div>
+                <label for="">Apellidos</label>
+                <input 
+                    type="text"
+                    class="border border-gray-400 rounded-full m-3 outline-none px-6 focus:border focus:border-blue-500" 
+                />
+            </div>
+        
+            <div>
+                <label for="">Teléfono</label>
+                <input 
+                    type="number"
+                    class="border border-gray-400 rounded-full m-3 outline-none px-6 focus:border focus:border-blue-500" 
+                />
+            </div>
+        
+        </div>
+    
+    </div>
+
+  </form>
+</div>

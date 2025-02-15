@@ -1,4 +1,4 @@
-<div class="p-8 w-full">
+<div class="pr-14 py-8 w-full">
     <div class="flex justify-between">
         <h2 class="font-bold text-2xl">Carrito de Compra</h2>
     </div>
@@ -7,8 +7,9 @@
         <mat-step>
             <div>
                 <ng-template matStepLabel>Productos</ng-template>
-
-                <app-ecommerce-cart></app-ecommerce-cart>
+                <div class="h-80 overflow-y-auto">
+                    <app-ecommerce-cart></app-ecommerce-cart>
+                </div>
 
                 <div class="mt-10 flex justify-end">
                     <button mat-button matStepperNext>Siguiente</button>
@@ -21,7 +22,11 @@
             <div>
                 <ng-template matStepLabel>Ingresa los datos del pago</ng-template>
 
-                <div>
+                <div class="mb-10 h-80 overflow-y-auto">
+                    <app-ecommerce-payment></app-ecommerce-payment>
+                </div>
+
+                <div class="flex justify-between">
                     <button mat-button matStepperPrevious>Volver</button>
                     <button mat-button matStepperNext>Siguiente</button>
                 </div>
