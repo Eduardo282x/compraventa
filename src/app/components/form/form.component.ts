@@ -42,9 +42,10 @@ export class FormComponent extends BaseComponent implements OnInit {
     this.formData.dataForm.map((form) => {
       const validators = form.required ? [Validators.required] : [];
       this.globalForm.addControl(form.formControl, new FormControl(form.value, validators));
+      if(form.formControl2){
+        this.globalForm.addControl(form.formControl2, new FormControl(form.value2, validators));
+      }
     });
-
-    console.log(this.globalForm.value);
   }
 
   onSubmit(): void {

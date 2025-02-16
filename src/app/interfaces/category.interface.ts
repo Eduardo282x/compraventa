@@ -1,17 +1,12 @@
-import { ISucursales } from "./sucursales.interface";
-
 export interface ICategory {
-    catId:    number;
-    sucId:    number;
-    nombre:   string;
-    sucursal: ISucursales;
+    id:    number;
+    category:   string;
 }
 
 export interface BodyCategory {
-    sucId: number;
-    nombre: string;
+    category: string;
 }
 
 export interface BodyUpdateCategories extends BodyCategory {
-    catId: number;
+    id: number;
 }

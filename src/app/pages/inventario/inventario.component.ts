@@ -35,32 +35,22 @@ export class InventarioComponent extends BaseComponent implements OnInit {
 
       const copyDataForm = [...dataFormInventario];
 
-      const findFormCategoria = copyDataForm.find(form => form.formControl === 'catId');
-      if (findFormCategoria) {
-        findFormCategoria.option = this.categoryService.getCategory().map(cat => {
+      const findFormStore = copyDataForm.find(form => form.formControl === 'storeId');
+      if (findFormStore) {
+        findFormStore.option = this.inventarioService.getAlmacen().map(alm => {
           return {
-            label: cat.nombre,
-            value: cat.catId
+            label: alm.name,
+            value: alm.id
           }
         })
       }
 
-      const findFormUnidad = copyDataForm.find(form => form.formControl === 'MonedaMonId');
-      if (findFormUnidad) {
-        findFormUnidad.option = this.inventarioService.getMoneda().map(mon => {
+      const findFormSucursal = copyDataForm.find(form => form.formControl === 'sucursalId');
+      if (findFormSucursal) {
+        findFormSucursal.option = this.sucursalService.getSucursales().map(suc => {
           return {
-            label: mon.monNom,
-            value: mon.monId
-          }
-        })
-      }
-
-      const findFormMoneda = copyDataForm.find(form => form.formControl === 'UnidadUndId');
-      if (findFormMoneda) {
-        findFormMoneda.option = this.inventarioService.getUnidad().map(uni => {
-          return {
-            label: uni.undNom,
-            value: uni.undId
+            label: suc.nombre,
+            value: suc.sucId
           }
         })
       }
@@ -71,10 +61,8 @@ export class InventarioComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.inventarioService.getInventarioAPI();
-    this.inventarioService.getMonedaAPI();
-    this.inventarioService.getUnidadAPI();
-    this.categoryService.getCategoryAPI();
+    this.inventarioService.getInventarioAPI(1);
+    this.inventarioService.getAlmacenAPI();
     this.sucursalService.getSucursalesAPI();
   }
 
@@ -82,37 +70,12 @@ export class InventarioComponent extends BaseComponent implements OnInit {
     if (dataComponent.action == 'add') {
       this.openDialog();
     }
-    if (dataComponent.action == 'edit') {
-      this.editDataDialog(dataComponent.data);
-    }
     if (dataComponent.action == 'delete') {
       this.deleteData(dataComponent.data);
     }
   }
 
   openDialog(): void {
-    const setValues = [...dataFormInventario];
-    setValues.map(form => {
-      switch (form.typeInput) {
-        case 'text':
-          form.value = '';
-          break;
-        case 'number':
-          form.value = 0;
-          break;
-        case 'date':
-          form.value = new Date();
-          break;
-        case 'checkbox':
-          form.value = false;
-          break;
-        default:
-          form.value = '';
-      }
-    });
-
-    formDataInventario.dataForm = setValues;
-
     const dialogRef = this.dialog.open(FormComponent, {
       data: formDataInventario,
       enterAnimationDuration: '500ms',
@@ -120,50 +83,11 @@ export class InventarioComponent extends BaseComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.inventarioService.postInventarioAPI(result);
-    })
-  }
-
-  editDataDialog(data: any): void {
-    const setValues = [...dataFormInventario];
-
-    setValues.map(form => {
-      switch (form.typeInput) {
-        case 'text':
-          form.value = data[form.formControl]
-          break;
-        case 'number':
-          form.value = Number(data[form.formControl])
-          break;
-        case 'select':
-          form.value = Number(data[form.formControl])
-          break;
-        case 'date':
-          form.value = new Date(data[form.formControl]);
-          break;
-        case 'checkbox':
-          form.value = data[form.formControl] ? true : false;
-          break;
-        default:
-          form.value = '';
-      }
-    });
-
-    formDataInventario.dataForm = setValues;
-
-    const dialogRef = this.dialog.open(FormComponent, {
-      data: formDataInventario,
-      enterAnimationDuration: '500ms',
-      exitAnimationDuration: '500ms',
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      result.prodId = data.prodId;
-      this.inventarioService.putInventarioAPI(result);
+      this.inventarioService.putInventarioSaveAPI(result);
     })
   }
 
   deleteData(data: IInventario): void {
-    this.inventarioService.deleteInventarioAPI(data.prodId.toString());
+    this.inventarioService.deleteInventarioAPI(data.id.toString());
   }
 }

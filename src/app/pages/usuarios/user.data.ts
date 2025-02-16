@@ -5,29 +5,29 @@ import { IUser } from "../../interfaces/users.interface";
 export const columns: IColumns<IUser>[] = [
     {
         title: 'Nombre',
-        name: (element) => element.usuNombre,
-        nameColumn: 'usuNombre',
+        name: (element) => element.name,
+        nameColumn: 'name',
         type: 'string',
         width: 'w-[30%]'
     },
     {
         title: 'Apellido',
-        name: (element) => element.usuApellido,
-        nameColumn: 'usuApellido',
+        name: (element) => element.lastName,
+        nameColumn: 'lastName',
         type: 'string',
         width: 'w-[30%]'
     },
     {
         title: 'Usuario',
-        name: (element) => element.usuCorreo,
-        nameColumn: 'usuCorreo',
+        name: (element) => element.email,
+        nameColumn: 'email',
         type: 'string',
         width: 'w-[30%]'
     },
     {
         title: 'Rol',
-        name: (element) => element.Rol.rol,
-        nameColumn: 'roles_nombre',
+        name: (element) => element.rol.rol,
+        nameColumn: 'rol',
         type: 'string',
         width: 'w-[30%]'
     },
@@ -76,28 +76,28 @@ export const dataFormUsuarios: IDataForm[] = [
     {
         typeInput: 'text',
         label: 'Nombre de Usuario',
-        formControl: 'usuNombre',
+        formControl: 'name',
         required: true,
         value: '',
     },
     {
         typeInput: 'text',
         label: 'Apellido de Usuario',
-        formControl: 'usuApellido',
+        formControl: 'lastName',
         required: true,
         value: '',
     },
     {
         typeInput: 'text',
         label: 'Correo Electrónico',
-        formControl: 'usuCorreo',
+        formControl: 'email',
         required: true,
         value: '',
     },
     {
         typeInput: 'text',
         label: 'Contraseña',
-        formControl: 'usuPassword',
+        formControl: 'password',
         required: true,
         value: '',
     },

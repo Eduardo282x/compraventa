@@ -16,6 +16,8 @@ import { ICliente } from '../../../interfaces/cliente.interface';
 import { ClientRegisterComponent } from '../clientRegister/clientRegister.component';
 import { InventarioService } from '../../../services/inventario.service';
 import { Moneda } from '../../../interfaces/producto.interface';
+import { SucursalesService } from '../../../services/sucursales.service';
+import { ISucursales } from '../../../interfaces/sucursales.interface';
 
 @Component({
   selector: 'app-ecommerce-header',
@@ -28,8 +30,13 @@ export class EcommerceHeaderComponent extends BaseComponent implements OnInit {
 
   clientInfo: ICliente | null = null;
   moneda: Moneda[] = [];
+  sucursal: ISucursales[] = [];
+  sucursalSelected: number = 1;
+  category: string = '';
+  product: string = '';
   authService = inject(AuthService);
   inventarioService = inject(InventarioService);
+  sucursalService = inject(SucursalesService);
 
   private _bottomSheet = inject(MatBottomSheet);
   carritoService = inject(CarritoService);
@@ -41,11 +48,12 @@ export class EcommerceHeaderComponent extends BaseComponent implements OnInit {
     super();
     effect(() => {
       this.articlesCarrito = this.carritoService.getCarrito().length;
-      if(this.carritoService.getCarrito().length === 0){
+      if (this.carritoService.getCarrito().length === 0) {
         this.articlesCarrito = this.carritoService.getCarritoApi().length;
       }
       this.clientInfo = this.authService.setClientInfo();
       this.moneda = this.inventarioService.getMoneda();
+      this.sucursal = this.sucursalService.getSucursales();
       this.ref.detectChanges();
     })
   }
@@ -55,16 +63,36 @@ export class EcommerceHeaderComponent extends BaseComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    const sucursalLocal = localStorage.getItem('sucursalId');
+    if (sucursalLocal) {
+      this.sucursalSelected = Number(sucursalLocal);
+    }
+    this.routerActive.queryParams
+      .subscribe(params => {
+        this.category = params['categoria'] ? params['categoria'] : '';
+        this.product = params['producto'] ? params['producto'] : '';
+      }
+      )
+
+
     const clientLocal: ICliente | null = JSON.parse(localStorage.getItem('clientToken') as string);
     if (clientLocal) {
       this.authService.clientInfo.set(clientLocal);
-      this.carritoService.getCarritoAPI(clientLocal.cliId.toString())
+      this.carritoService.getCarritoAPI(clientLocal.id.toString())
     }
     this.inventarioService.getMonedaAPI();
+    this.sucursalService.getSucursalesAPI();
+    this.ref.detectChanges();
+  }
+
+  changeSucursal(event: Event) {
+    const selected = (event.target as HTMLSelectElement).value;
+    localStorage.setItem('sucursalId', selected);
+    this.inventarioService.getInventarioFiltradoAPI(this.category, this.product, selected);
   }
 
   goToCar() {
-    if(this.clientInfo){
+    if (this.clientInfo) {
       this.router.navigate(['/comercio/carrito']);
     } else {
       this.openBottomSheet()
@@ -73,7 +101,7 @@ export class EcommerceHeaderComponent extends BaseComponent implements OnInit {
 
   openBottomSheet(): void {
     this._bottomSheet.open(ClientLoginComponent).afterDismissed().subscribe(response => {
-      if(response === 'openClientRegister'){
+      if (response === 'openClientRegister') {
         this._bottomSheet.open(ClientRegisterComponent)
       }
     })

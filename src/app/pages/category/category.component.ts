@@ -20,7 +20,6 @@ export class CategoryComponent extends BaseComponent implements OnInit {
   dataTable: any[] = [];
   title: string = 'Categoría';
 
-  sucursalService = inject(SucursalesService);
   categoryService = inject(CategoryService);
   ref = inject(ChangeDetectorRef)
 
@@ -28,26 +27,12 @@ export class CategoryComponent extends BaseComponent implements OnInit {
     super();
     effect(() => {
       this.dataTable = this.categoryService.getCategory();
-
-      const copyDataForm = [...dataFormCategorias];
-      const findFormSucursal = copyDataForm.find(form => form.formControl === 'sucId');
-      if (findFormSucursal) {
-        findFormSucursal.option = this.sucursalService.getSucursales().map(suc => {
-          return {
-            label: suc.sucNom,
-            value: suc.sucId
-          }
-        })
-      }
-
-      formDataCategorias.dataForm = copyDataForm;
       this.ref.detectChanges();
     })
   }
 
   ngOnInit(): void {
     this.categoryService.getCategoryAPI();
-    this.sucursalService.getSucursalesAPI();
   }
 
   defectColumnAction(dataComponent: ISendDataTable): void {
@@ -96,12 +81,12 @@ export class CategoryComponent extends BaseComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      result.catId  = data.catId ;
+      result.id  = data.id ;
       this.categoryService.putCategoryAPI(result);
     })
   }
 
   deleteData(data: ICategory): void {
-    this.categoryService.deleteCategoryAPI(data.catId .toString());
+    this.categoryService.deleteCategoryAPI(data.id.toString());
   }
 }

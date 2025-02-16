@@ -8,6 +8,7 @@ import { TableComponent } from '../../components/table/table.component';
 import { FormComponent } from '../../components/form/form.component';
 import { SucursalesService } from '../../services/sucursales.service';
 import { IUser } from '../../interfaces/users.interface';
+import { ISucursales } from '../../interfaces/sucursales.interface';
 
 @Component({
   selector: 'app-usuarios',
@@ -45,9 +46,9 @@ export class UsuariosComponent extends BaseComponent implements OnInit {
       }
       const findFormSucursal = copyDataForm.find(form => form.formControl === 'sucId');
       if (findFormSucursal) {
-        findFormSucursal.option = this.sucursalService.getSucursales().map(suc => {
+        findFormSucursal.option = this.sucursalService.getSucursales().map((suc: ISucursales) => {
           return {
-            label: suc.sucNom,
+            label: suc.nombre,
             value: suc.sucId
           }
         })

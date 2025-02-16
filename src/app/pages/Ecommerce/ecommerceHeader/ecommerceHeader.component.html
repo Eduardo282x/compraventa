@@ -6,8 +6,9 @@
             <div class="flex items-center justify-center gap-8">
                 <a [routerLink]="['/comercio']"
                     class="text-xl font-bold text-gray-800 flex items-center">
-                    <img src="favicon.ico" alt="Logo" class="w-10 h-10 mr-2">
-                    <span class="text-white">Servimar</span>
+                    <!-- <img src="favicon.ico" alt="Logo" class="w-10 h-10 mr-2">
+                    <span class="text-white">Servimar</span> -->
+                    <img src="logo-removebg-preview.png" alt class="h-5">
                 </a>
 
                 <form [formGroup]="ecommerceHeaderForm"
@@ -27,12 +28,24 @@
 
             <div class="flex items-center space-x-8 ml-10">
 
+                <div class="flex items-center justify-start gap-2 ">
+                    <label class="text-white">Sucursal:</label>
+                    <select
+                        [value]="sucursalSelected"
+                        (change)="changeSucursal($event)"
+                        class=" bg-transparent rounded-md border-2 px-4 py-2 outline-none">
+                        @for (item of sucursal; track $index) {
+                        <option [value]="item.sucId">{{item.nombre}}</option>
+                        }
+                    </select>
+                </div>
+
                 <div class="flex items-center justify-start gap-2 text-white">
                     <label>Moneda:</label>
                     <select
                         class=" bg-transparent rounded-md border-2 px-4 py-2 outline-none">
                         @for (item of moneda; track $index) {
-                        <option [value]="item.monId">{{item.monNom}}</option>
+                        <option [value]="item.id">{{item.currency}}</option>
                         }
                     </select>
                 </div>
@@ -48,8 +61,8 @@
                 @if (clientInfo) {
                 <div class="flex text-white items-center gap-2">
                     <span class="material-icons">account_circle</span>
-                    <span>{{clientInfo.cliNombre}}</span>
-                    <span>{{clientInfo.cliApellido}}</span>
+                    <span>{{clientInfo.clientName}}</span>
+                    <span>{{clientInfo.clientLastName}}</span>
                 </div>
                 } @else {
                 <button

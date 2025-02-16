@@ -26,11 +26,30 @@
             </mat-select>
         </mat-form-field>
         }
+        @if (item.typeInput === 'selectText' && item.formControl2) {
+        <div class="w-full flex items-center justify-between gap-5 ">
+            <mat-form-field appearance="outline" class="w-full">
+                <mat-label>{{item.label}}</mat-label>
+                <input matInput type="number" [formControlName]="item.formControl">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-1/3">
+                <mat-label>{{item.label2}}</mat-label>
+                <mat-select [formControlName]="item.formControl2">
+                    @for (opt of item.option; track $index) {
+                    <mat-option [value]="opt.value">{{opt.label}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
+        }
         @if (item.typeInput === 'date') {
         <mat-form-field appearance="outline" class="w-full">
             <mat-label>{{item.label}}</mat-label>
-            <input matInput [formControlName]="item.formControl" class="!w-full" [matDatepicker]="picker">
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <input matInput [formControlName]="item.formControl" class="!w-full"
+                [matDatepicker]="picker">
+            <mat-datepicker-toggle matIconSuffix
+                [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
         }

@@ -1,10 +1,10 @@
 export interface ICliente {
-    cliId:        number;
-    cliNombre:    string;
-    cliApellido:  string;
-    cliPassword:  string;
-    cliRif:       string;
-    cliTelefono:  string;
-    cliDireccion: string;
-    cliCorreo:    string;
+    id: number;
+    clientName: string;
+    clientLastName: string;
+    clientRif: string;
+    clientPhone: string;
+    clientAddress: string;
+    clientEmail: string;
+    clientPassword: string;
 }

@@ -6,9 +6,12 @@ export interface IFormulario {
 export interface IDataForm {
     typeInput: InputsTypes;
     label: string;
+    label2?: string;
     formControl: string;
+    formControl2?: string;
     required: boolean;
     value: string | number | boolean | Date;
+    value2?: string | number | boolean | Date;
     option?: IOptions[],
 }
 
@@ -18,4 +21,4 @@ export interface IOptions {
 }
 
 
-export type InputsTypes = 'text' | 'number' | 'date' | 'select' | 'checkbox' | '';
+export type InputsTypes = 'text' | 'number' | 'date' | 'select' | 'checkbox' | 'selectText' | '';

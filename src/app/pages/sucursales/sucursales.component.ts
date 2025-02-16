@@ -8,6 +8,7 @@ import { SucursalesService } from '../../services/sucursales.service';
 import { FormComponent } from '../../components/form/form.component';
 import { ISucursales } from '../../interfaces/sucursales.interface';
 import { EmpresasService } from '../../services/empresas.service';
+import { IEmpresas } from '../../interfaces/empresa.interface';
 
 @Component({
   selector: 'app-sucursales',
@@ -34,12 +35,12 @@ export class SucursalesComponent extends BaseComponent implements OnInit {
       this.dataTable = this.sucursalesService.getSucursales();
 
       const copyDataForm = [...dataFormSucursales];
-      const findFormEmp = copyDataForm.find(form => form.formControl === 'empId');
+      const findFormEmp = copyDataForm.find(form => form.formControl === 'companyId');
       if (findFormEmp) {
-        findFormEmp.option = this.empresaServices.getEmpresas().map(emp => {
+        findFormEmp.option = this.empresaServices.getEmpresas().map((emp: IEmpresas) => {
           return {
-            label: emp.empNom,
-            value: emp.empId
+            label: emp.companyName,
+            value: emp.id
           }
         })
       }

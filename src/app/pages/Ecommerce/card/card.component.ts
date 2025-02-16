@@ -23,16 +23,16 @@ export class CardComponent {
     const getCarritoLocal: ICarrito[] = JSON.parse(localStorage.getItem('carrito') as string);
 
     if(!getCarritoLocal){
-      localStorage.setItem('carrito', JSON.stringify([{id: product.prodId, amount: 1}]))
+      localStorage.setItem('carrito', JSON.stringify([{id: product.id, amount: 1}]))
     }
 
     const addProductCarrito: ICarrito[] = [...getCarritoLocal];
-    const findProduc = addProductCarrito.find(pro => pro.id === product.prodId);
+    const findProduc = addProductCarrito.find(pro => pro.id === product.id);
     
     if(findProduc){
       findProduc.amount += 1;
     } else {
-      addProductCarrito.push({id: product.prodId, amount: 1});
+      addProductCarrito.push({id: product.id, amount: 1});
     }
 
     localStorage.setItem('carrito', JSON.stringify(addProductCarrito))

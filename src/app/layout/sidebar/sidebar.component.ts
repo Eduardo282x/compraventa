@@ -19,6 +19,11 @@ export class SidebarComponent extends BaseComponent {
       redirectTo: '/home'
     },
     {
+      label: 'Almacen',
+      icon: 'factory',
+      redirectTo: '/almacen'
+    },
+    {
       label: 'Productos',
       icon: 'inventory',
       redirectTo: '/inventario'
@@ -42,11 +47,6 @@ export class SidebarComponent extends BaseComponent {
       label: 'Proveedores',
       icon: 'manage_accounts',
       redirectTo: '/proveedores'
-    },
-    {
-      label: 'Reportes',
-      icon: 'assessment',
-      redirectTo: '/reportes'
     },
     {
       label: 'Empresas',

@@ -4,60 +4,46 @@ import { IColumns } from "../../interfaces/table.interface";
 
 
 export const columns: IColumns<IProveedor>[] = [
-    // {
-    //     title: 'Empresa ID',
-    //     name: (element: IProveedor) => element.empId,
-    //     nameColumn: 'empId',
-    //     type: 'string',
-    //     width: '100px',
-    // },
     {
         title: 'Nombre',
-        name: (element: IProveedor) => element.provNom,
-        nameColumn: 'provNom',
+        name: (element: IProveedor) => element.name,
+        nameColumn: 'name',
         type: 'string',
         width: 'w-[30%]',
     },
     {
         title: 'RUC',
-        name: (element: IProveedor) => element.provRuc,
-        nameColumn: 'provRuc',
+        name: (element: IProveedor) => element.ruc,
+        nameColumn: 'ruc',
         type: 'string',
         width: 'w-[30%]',
     },
     {
         title: 'Teléfono',
-        name: (element: IProveedor) => element.provTelf,
-        nameColumn: 'provTelf',
+        name: (element: IProveedor) => element.phone,
+        nameColumn: 'phone',
         type: 'string',
         width: 'w-[30%]',
     },
     {
         title: 'Dirección',
-        name: (element: IProveedor) => element.provDirecc,
-        nameColumn: 'provDirecc',
+        name: (element: IProveedor) => element.address,
+        nameColumn: 'address',
         type: 'string',
         width: 'w-[30%]',
     },
     {
         title: 'Correo Electrónico',
-        name: (element: IProveedor) => element.provCorreo,
-        nameColumn: 'provCorreo',
+        name: (element: IProveedor) => element.email,
+        nameColumn: 'email',
         type: 'string',
         width: 'w-[30%]',
     },
     {
         title: 'Fecha',
-        name: (element: IProveedor) => element.fechCrea,
-        nameColumn: 'fechCrea',
+        name: (element: IProveedor) => element.createDate,
+        nameColumn: 'createDate',
         type: 'date',
-        width: 'w-[30%]',
-    },
-    {
-        title: 'Estado',
-        name: (element: IProveedor) =>  element.status ? 'check' : 'close',
-        nameColumn: 'status',
-        type: 'iconData',
         width: 'w-[30%]',
     },
     {
@@ -79,13 +65,11 @@ export const columns: IColumns<IProveedor>[] = [
 ];
 
 export const proveedoresDataForm: IDataForm[] = [
-    { typeInput: 'number', label: 'ID Empresa', formControl: 'empId', required: true, value: 0 },
-    { typeInput: 'text', label: 'Nombre Proveedor', formControl: 'provNom', required: true, value: '' },
-    { typeInput: 'text', label: 'RUC', formControl: 'provRuc', required: true, value: '' },
-    { typeInput: 'text', label: 'Teléfono', formControl: 'provTelf', required: true, value: '' },
-    { typeInput: 'text', label: 'Dirección', formControl: 'provDirecc', required: true, value: '' },
-    { typeInput: 'text', label: 'Correo Electrónico', formControl: 'provCorreo', required: true, value: '' },
-    { typeInput: 'checkbox', label: 'Estado', formControl: 'status', required: false, value: true },
+    { typeInput: 'text', label: 'Nombre Proveedor', formControl: 'name', required: true, value: '' },
+    { typeInput: 'text', label: 'RUC', formControl: 'ruc', required: true, value: '' },
+    { typeInput: 'text', label: 'Teléfono', formControl: 'phone', required: true, value: '' },
+    { typeInput: 'text', label: 'Dirección', formControl: 'address', required: true, value: '' },
+    { typeInput: 'text', label: 'Correo Electrónico', formControl: 'email', required: true, value: '' },
 ];
 
 export const formDataProovedor: IFormulario = {

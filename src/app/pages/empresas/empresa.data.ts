@@ -5,44 +5,37 @@ import { IColumns } from "../../interfaces/table.interface";
 export const columns: IColumns<IEmpresas>[] = [
     {
         title: 'Nombre',
-        name: (element) => element.empNom,
-        nameColumn: 'empNom',
+        name: (element) => element.companyName,
+        nameColumn: 'companyName',
         type: 'string',
         width: 'w-[30%]'
     },
     {
         title: 'Rif',
-        name: (element) => element.empRuc,
-        nameColumn: 'empRuc',
+        name: (element) => element.companyRuc,
+        nameColumn: 'companyRuc',
         type: 'string',
         width: 'w-[30%]'
     },
     {
         title: 'Correo',
-        name: (element) => element.empCorreo,
-        nameColumn: 'empCorreo',
+        name: (element) => element.companyEmail,
+        nameColumn: 'companyEmail',
         type: 'string',
         width: 'w-[30%]'
     },
     {
-        title: 'Telefono',
-        name: (element) => element.empTelf,
-        nameColumn: 'empTelf',
+        title: 'Teléfono',
+        name: (element) => element.companyPhone,
+        nameColumn: 'companyPhone',
         type: 'string',
         width: 'w-[30%]'
     },
     {
-        title: 'Direccion',
-        name: (element) => element.empDirecc,
-        nameColumn: 'empDirecc',
+        title: 'Dirección',
+        name: (element) => element.companyAddress,
+        nameColumn: 'companyAddress',
         type: 'string',
-        width: 'w-[30%]'
-    },
-    {
-        title: 'Estado',
-        name: (element) => element.status ? 'check' : 'close',
-        nameColumn: 'status',
-        type: 'iconData',
         width: 'w-[30%]'
     },
     {
@@ -67,44 +60,37 @@ export const dataFormEmpresa: IDataForm[] = [
     {
         typeInput: 'text',
         label: 'Nombre',
-        formControl: 'empNom',
+        formControl: 'companyName',
         required: true,
         value: '',
     },
     {
         typeInput: 'text',
         label: 'Ruc',
-        formControl: 'empRuc',
+        formControl: 'companyRuc',
         required: true,
         value: '',
     },
     {
         typeInput: 'text',
         label: 'Correo',
-        formControl: 'empCorreo',
+        formControl: 'companyEmail',
         required: true,
         value: '',
     },
     {
         typeInput: 'text',
-        label: 'Telefono',
-        formControl: 'empTelf',
+        label: 'Teléfono',
+        formControl: 'companyPhone',
         required: true,
         value: '',
     },
     {
         typeInput: 'text',
         label: 'Dirección',
-        formControl: 'empDirecc',
+        formControl: 'companyAddress',
         required: true,
         value: '',
-    },
-    {
-        typeInput: 'checkbox',
-        label: 'Estado',
-        formControl: 'status',
-        required: true,
-        value: false,
     }
 ];
 

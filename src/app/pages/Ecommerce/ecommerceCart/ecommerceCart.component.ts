@@ -45,9 +45,8 @@ export class EcommerceCartComponent implements OnInit {
 
   ngOnInit(): void {
     const cliente: ICliente = JSON.parse(localStorage.getItem('clientToken') as string);
-    this.carritoService.getCarritoAPI(cliente.cliId.toString());
+    this.carritoService.getCarritoAPI(cliente.id.toString());
   }
-
 
   changeAmountProduct(product: ICarritoAPI, action: ActionButton) {
     const findProduct = this.products.find(pro => pro.id === product.id);

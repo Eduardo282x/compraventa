@@ -6,14 +6,14 @@
     <div class="flex items-center justify-center gap-4">
       <div class="w-16 h-16 rounded-full bg-blue-700"></div>
       <div>
-        <p>{{item.producto.prodNom}}</p>
-        <p>{{item.producto.Categoria.nombre}}</p>
+        <p>{{item.producto.store.name}}</p>
+        <p>{{item.producto.store.category.category}}</p>
       </div>
     </div>
 
     <div class=" text-right">
-      <p>Precio unitario: {{item.producto.prodPventa | currency:'USD' }}</p>
-      <p>Precio total: {{item.producto.prodPventa * item.cant| currency:'USD' }}</p>
+      <p>Precio unitario: {{item.producto.store.price | currency:'USD' }}</p>
+      <p>Precio total: {{item.producto.store.price * item.cant | currency:'USD' }}</p>
       <div class="flex items-center justify-center gap-2">
         <button (click)="changeAmountProduct(item, 'remove')" class=" rounded-full w-8 h-8 text-white bg-red-600">-</button>
         <span class="border py-2 px-4">{{item.cant}}</span>

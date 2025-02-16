@@ -21,7 +21,7 @@ export class HomeComponentV2 extends BaseComponent implements OnInit {
   categoriesMenu: ICategory[] = [];
   productos: IInventario[] = [];
   carritoService = inject(CarritoService);
-
+  sucursalId: string = '1';
 
   constructor() {
     super();
@@ -33,19 +33,25 @@ export class HomeComponentV2 extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.productoService.getInventarioAPI();
+    this.productoService.getInventarioAPI(1);
+    const sucursalLocal = localStorage.getItem('sucursalId');
 
     const getCarritoLocal: ICarrito[] = JSON.parse(localStorage.getItem('carrito') as string);
     if (getCarritoLocal) {
       this.carritoService.setCarrito.set(getCarritoLocal);
-    } 
+    }
+    if (sucursalLocal) {
+      this.sucursalId = sucursalLocal
+    } else {
+      localStorage.setItem('sucursalId', '1')
+    }
 
-    this.routerActive.queryParams 
+    this.routerActive.queryParams
       .subscribe(params => {
         const category = params['categoria'] ? params['categoria'] : '';
         const product = params['producto'] ? params['producto'] : '';
-        this.productoService.getInventarioFiltradoAPI(category, product);
+        this.productoService.getInventarioFiltradoAPI(category, product, '1');
       }
-    )
+      )
   }
 }

@@ -1,11 +1,9 @@
 export interface IProveedor {
-    provId: number;
-    empId: number;
-    provNom: string;
-    provRuc: string;
-    provTelf: string;
-    provDirecc: string;
-    provCorreo: string;
-    fechCrea: Date;
-    status: boolean;
+    id:         number;
+    name:       string;
+    ruc:        string;
+    phone:      string;
+    address:    string;
+    email:      string;
+    createDate: Date;
 }

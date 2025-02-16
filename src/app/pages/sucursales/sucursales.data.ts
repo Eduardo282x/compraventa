@@ -5,23 +5,16 @@ import { IColumns } from "../../interfaces/table.interface";
 export const columns: IColumns<ISucursales>[] = [
     {
         title: 'Sucursal',
-        name: (element) => element.sucNom,
-        nameColumn: 'sucNom',
+        name: (element) => element.nombre,
+        nameColumn: 'nombre',
         type: 'string',
         width: 'w-[30%]'
     },
     {
         title: 'Empresa',
-        name: (element) => element.Empresa.empNom,
-        nameColumn: 'empNom',
+        name: (element) => element.empresa.companyName,
+        nameColumn: 'companyName',
         type: 'string',
-        width: 'w-[30%]'
-    },
-    {
-        title: 'Estado',
-        name: (element) => element.status ? 'check' : 'close',
-        nameColumn: 'status',
-        type: 'iconData',
         width: 'w-[30%]'
     },
     {
@@ -46,7 +39,7 @@ export const dataFormSucursales: IDataForm[] = [
     {
         typeInput: 'select',
         label: 'Empresa',
-        formControl: 'empId',
+        formControl: 'companyId',
         required: true,
         value: '',
         option: [],
@@ -54,16 +47,9 @@ export const dataFormSucursales: IDataForm[] = [
     {
         typeInput: 'text',
         label: 'Nombre',
-        formControl: 'sucNom',
+        formControl: 'nombre',
         required: true,
         value: '',
-    },
-    {
-        typeInput: 'checkbox',
-        label: 'Estado',
-        formControl: 'status',
-        required: true,
-        value: false,
     }
 ];
 
