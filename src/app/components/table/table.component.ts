@@ -28,11 +28,12 @@ import { IColumns, ISendDataTable, TypeActions } from '../../interfaces/table.in
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
 })
-export class TableComponent extends BaseComponent implements OnInit, AfterViewInit, OnChanges{
+export class TableComponent extends BaseComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input() columns: IColumns<any>[] = [];
   @Input() dataTable: any[] = [];
   @Input() includeBtnAdd: boolean = true;
+  @Input() secondBtn: string | null = null;
   @Input() title: string = '';
   @Input() iconTitle: string = '';
 
@@ -55,7 +56,7 @@ export class TableComponent extends BaseComponent implements OnInit, AfterViewIn
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes['dataTable']){
+    if (changes['dataTable']) {
       this.dataSource = new MatTableDataSource(this.dataTable);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -82,10 +83,14 @@ export class TableComponent extends BaseComponent implements OnInit, AfterViewIn
   }
 
   openDialog(): void {
-    this.sendData.emit({data: null,action: 'add'})
+    this.sendData.emit({ data: null, action: 'add' })
+  }
+
+  secondBtnAction(action: TypeActions): void {
+    this.sendData.emit({ data: null, action: action })
   }
 
   editDataDialog(data: any, actionColumn: string): void {
-    this.sendData.emit({data: data, action: actionColumn as TypeActions})
+    this.sendData.emit({ data: data, action: actionColumn as TypeActions })
   }
 }

@@ -16,12 +16,12 @@ export interface IUser {
   id: number;
   sucId: number;
   rolId: number;
-  usuNombre: string;
-  usuApellido: string;
-  usuCorreo: string;
-  usuPassword: string;
+  name: string;
+  lastName: string;
+  email: string;
+  password: string;
   status: boolean;
-  Rol: Rol;
+  rol: Rol;
 }
 
 export interface Rol {

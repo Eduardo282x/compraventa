@@ -3,11 +3,11 @@
     <aside class="w-full">
         @for (item of categoriesMenu; track $index) {
         <a [routerLink]="['/comercio']"
-            [queryParams]="{ categoria: item.nombre }"
+            [queryParams]="{ categoria: item.category }"
             class="flex items-center justify-start gap-5 group-hover:gap-2 my-2 w-full cursor-pointer rounded-full hover:bg-blue-700 transition-all duration-100">
             <span
                 class="material-icons w-10 h-10 flex items-center justify-center text-white text-xl p-1">menu</span>
-            <p class="text-white whitespace-nowrap block">{{item.nombre}}</p>
+            <p class="text-white whitespace-nowrap block">{{item.category}}</p>
         </a>
         }
     </aside>

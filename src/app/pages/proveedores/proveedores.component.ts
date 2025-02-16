@@ -81,12 +81,12 @@ export class ProveedoresComponent extends BaseComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      result.provId = data.provId;
+      result.id = data.id;
       this.proveedorServices.putProveedorAPI(result);
     })
   }
 
   deleteData(data: IProveedor): void {
-    this.proveedorServices.deleteProveedorAPI(data.provId.toString());
+    this.proveedorServices.deleteProveedorAPI(data.id.toString());
   }
 }

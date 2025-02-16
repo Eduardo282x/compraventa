@@ -84,12 +84,12 @@ export class EmpresasComponent extends BaseComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      result.id = data.empId;
+      result.id = data.id;
       this.empresaService.putEmpresasAPI(result);
     })
   }
 
   deleteData(data: IEmpresas): void {
-    this.empresaService.deleteEmpresasAPI(data.empId.toString());
+    this.empresaService.deleteEmpresasAPI(data.id.toString());
   }
 }

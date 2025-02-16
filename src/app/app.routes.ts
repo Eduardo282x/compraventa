@@ -15,6 +15,7 @@ import { ProveedoresComponent } from './pages/proveedores/proveedores.component'
 import { CategoryComponent } from './pages/category/category.component';
 import { LayoutEcommerceComponent } from './pages/Ecommerce/LayoutEcommerce/LayoutEcommerce.component';
 import { EcommerceStepperComponent } from './pages/Ecommerce/ecommerceStepper/ecommerceStepper.component';
+import { AlmacenComponent } from './pages/almacen/almacen.component';
 
 export const routes: Routes = [
     {
@@ -56,6 +57,10 @@ export const routes: Routes = [
             {
                 path: 'inventario',
                 component: InventarioComponent
+            },
+            {
+                path: 'almacen',
+                component: AlmacenComponent
             },
             {
                 path: 'categorias',

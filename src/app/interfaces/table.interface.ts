@@ -17,4 +17,4 @@ export interface ISendDataTable {
     action: TypeActions;
 }
 
-export type TypeActions = 'add' | 'edit' | 'delete' | 'show' | 'states';
+export type TypeActions = 'add' | 'edit' | 'delete' | 'show' | 'states' | 'second';

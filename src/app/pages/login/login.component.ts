@@ -70,7 +70,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
     this.sucursalService.getSucursalesAPI();
 
     this.loginForm.controls.empresaId.valueChanges.subscribe(emp => {
-      this.sucursalesFilter = this.sucursales.filter(suc => suc.empId === Number(emp))
+      this.sucursalesFilter = this.sucursales.filter(suc => suc.companyId === Number(emp))
     })
   }
 

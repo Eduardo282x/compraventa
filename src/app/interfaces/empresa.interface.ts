@@ -1,22 +1,19 @@
 export interface IEmpresas {
-    empId:     number;
-    empNom:    string;
-    empRuc:    string;
-    empCorreo: string;
-    empTelf:   string;
-    empDirecc: string;
-    fechCrea:  Date;
-    status:    boolean;
+    id: number;
+    companyName: string;
+    companyRuc: string;
+    companyPhone: string;
+    companyEmail: string;
+    companyAddress: string;
+    createDate: Date
 }
 
-
 export interface BodyEmpresa {
-    empNom: string;
-    empRuc: string;
-    empCorreo: string;
-    empTelf: string;
-    empDirecc: string;
-    status: boolean;
+    companyName: string;
+    companyRuc: string;
+    companyPhone: string;
+    companyEmail: string;
+    companyAddress: string;
 }
 
 export interface BodyUpdateEmpresa extends BodyEmpresa {

@@ -1,39 +1,45 @@
 import { ICategory } from "./category.interface";
+import { IProveedor } from "./proveedor.interface";
 import { ISucursales } from "./sucursales.interface";
 
-export interface IInventario {
-    prodId: number;
-    catId: number;
-    prodNom: string;
-    prodDescrip: string;
-    prodPcompra: string;
-    prodPventa: number;
-    prodStock: number;
-    prodFechaven: Date;
-    prodImg: null;
-    fechCrea: Date;
-    status: boolean;
-    MonedaMonId: number;
-    SucursalSucId: number;
-    UnidadUndId: number;
-    Categoria: ICategory;
+export interface IAlmacen {
+    id: number;
+    categoryId: number;
+    name: string;
+    description: string;
+    price: number;
+    amount: number;
+    expirationDate: Date;
+    img: string;
+    createDate: Date;
+    providerId: number;
+    currencyId: number;
+    unitId: number;
+    unit: string;
+    provider: IProveedor;
+    category: ICategory;
     Moneda: Moneda;
-    Sucursal: ISucursales;
-    Unidad: Unidad;
+    unidad: Unidad;
+}
+
+export interface IInventario {
+    amount: number;
+    id: number;
+    storeId: number;
+    sucursalId: number;
+    store: IAlmacen;
 }
 
 export interface Moneda {
-    monId: number;
+    id: number;
+    currency: string;
+    symbol: string;
     monNom: string;
-    fechCrea: Date;
-    status: boolean;
 }
 
 export interface Unidad {
-    undId: number;
-    undNom: string;
-    fechCrea: Date;
-    status: boolean;
+    id: number;
+    unit: string;
 }
 
 
@@ -54,6 +60,17 @@ export interface BodyInventario {
 
 export interface BodyUpdateInventory extends BodyInventario {
     prodId: number;
+}
+
+export interface BodyIncreaseInventory {
+    storeId: number;
+    amount: number;
+}
+
+export interface BodySaveInventoryInSucursal {
+    storeId: number;
+    sucursalId: number;
+    amount: number;
 }
 
 export interface IProductoTest {

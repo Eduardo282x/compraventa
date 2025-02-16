@@ -20,7 +20,7 @@
                                 style="display: none;">Seleccionar</option>
                             @for(item of enterprises; track $index){
                             <option
-                                [value]="item.empId">{{item.empNom}}</option>
+                                [value]="item.id">{{item.companyName}}</option>
                             }
                         </select>
                     </div>
@@ -34,7 +34,7 @@
                                 style="display: none;">Seleccionar</option>
                             @for(item of sucursalesFilter; track $index){
                             <option
-                                [value]="item.sucId">{{item.sucNom}}</option>
+                                [value]="item.sucId">{{item.nombre}}</option>
                             }
                         </select>
                     </div>

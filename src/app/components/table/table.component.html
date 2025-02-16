@@ -17,6 +17,11 @@
                     <mat-icon>add_circle</mat-icon>
                 </button>
             }
+            @if (secondBtn) {
+                <button class="flex items-center justify-center bg-[#1C265F] hover:bg-[#2235a0] text-white p-2 rounded-full"  (click)="secondBtnAction('second')">
+                    <mat-icon>sync_alt</mat-icon>
+                </button>
+            }
         </div>
     </div>
 

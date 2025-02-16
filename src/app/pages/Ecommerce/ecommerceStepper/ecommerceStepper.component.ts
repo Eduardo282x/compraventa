@@ -38,14 +38,14 @@ export class EcommerceStepperComponent implements OnInit {
     const getCarritoLocal: ICarrito[] = JSON.parse(localStorage.getItem('carrito') as string);
     const cliente: ICliente = JSON.parse(localStorage.getItem('clientToken') as string);
 
-    if (getCarritoLocal && getCarritoLocal.length > 0 && cliente.cliId !== null) {
+    if (getCarritoLocal && getCarritoLocal.length > 0 && cliente.id !== null) {
       getCarritoLocal.map(pro => {
         const bodyCarrito = {
-          cliId: cliente.cliId,
-          prodId: pro.id,
-          cant: pro.amount,
+          clientId: cliente.id,
+          productId: pro.id,
+          amount: pro.amount,
         }
-        this.carritoService.postCarritosAPI(bodyCarrito, cliente.cliId.toString() as string)
+        this.carritoService.postCarritosAPI(bodyCarrito, cliente.id.toString() as string)
       })
 
       localStorage.removeItem('carrito');

@@ -5,17 +5,10 @@ import { IColumns } from "../../interfaces/table.interface";
 export const columns: IColumns<ICategory>[] = [
     {
         title: 'Categoría',
-        name: (element) => element.nombre,
-        nameColumn: 'nombre',
+        name: (element) => element.category,
+        nameColumn: 'category',
         type: 'string',
-        width: 'w-[30%]'
-    },
-    {
-        title: 'Sucursal',
-        name: (element) => element.sucursal.sucNom,
-        nameColumn: 'sucNom',
-        type: 'string',
-        width: 'w-[30%]'
+        width: 'w-[80%]'
     },
     {
         title: 'Editar',
@@ -37,17 +30,9 @@ export const columns: IColumns<ICategory>[] = [
 
 export const dataFormCategorias: IDataForm[] = [
     {
-        typeInput: 'select',
-        label: 'Sucursal',
-        formControl: 'sucId',
-        required: true,
-        value: '',
-        option: [],
-    },
-    {
         typeInput: 'text',
-        label: 'Nombre',
-        formControl: 'nombre',
+        label: 'Categoría',
+        formControl: 'category',
         required: true,
         value: '',
     }
