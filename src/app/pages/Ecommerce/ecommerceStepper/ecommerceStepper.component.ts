@@ -10,6 +10,7 @@ import { CarritoService } from '../../../services/carrito.service';
 import { ClienteService } from '../../../services/clients.service';
 import { AuthService } from '../../../services/auth.service';
 import { ICliente } from '../../../interfaces/cliente.interface';
+import { EcommercePaymentComponent } from "../ecommercePayment/ecommercePayment.component";
 
 @Component({
   selector: 'app-ecommerce-stepper',
@@ -20,8 +21,9 @@ import { ICliente } from '../../../interfaces/cliente.interface';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    EcommerceCartComponent
-  ],
+    EcommerceCartComponent,
+    EcommercePaymentComponent
+],
   templateUrl: './ecommerceStepper.component.html',
   styleUrl: './ecommerceStepper.component.css',
 })
