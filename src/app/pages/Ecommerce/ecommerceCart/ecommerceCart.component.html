@@ -11,14 +11,21 @@
       </div>
     </div>
 
-    <div class=" text-right">
-      <p>Precio unitario: {{item.producto.store.price | currency:'USD' }}</p>
-      <p>Precio total: {{item.producto.store.price * item.cant | currency:'USD' }}</p>
-      <div class="flex items-center justify-center gap-2">
-        <button (click)="changeAmountProduct(item, 'remove')" class=" rounded-full w-8 h-8 text-white bg-red-600">-</button>
-        <span class="border py-2 px-4">{{item.cant}}</span>
-        <button (click)="changeAmountProduct(item, 'plus')" class=" rounded-full w-8 h-8 text-white bg-blue-600">+</button>
+    <div class="flex items-center justify-end gap-5">
+      <div class=" text-right">
+        <p>Precio unitario: {{item.producto.store.price | currency:'USD' }}</p>
+        <p>Precio total: {{item.producto.store.price * item.amount|
+          currency:'USD' }}</p>
+        <div class="flex items-center justify-center gap-2">
+          <button [disabled]="item.amount === 1" (click)="changeAmountProduct(item, 'remove')" class="disabled:bg-gray-500 rounded-full w-8 h-8 text-white bg-red-600">-</button>
+          <span class="border py-2 px-4">{{item.amount}}</span>
+          <button (click)="changeAmountProduct(item, 'plus')" class=" rounded-full w-8 h-8 text-white bg-blue-600">+</button>
+        </div>
       </div>
+
+      <button class=" rounded-full w-8 h-8 text-white bg-red-600 flex items-center justify-center">
+        <span class="material-icons">close</span>
+      </button>
     </div>
   </div>
   }

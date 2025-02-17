@@ -49,6 +49,11 @@ export class SidebarComponent extends BaseComponent {
       redirectTo: '/proveedores'
     },
     {
+      label: 'Metodos de pago',
+      icon: 'payments',
+      redirectTo: '/metodos-de-pago'
+    },
+    {
       label: 'Empresas',
       icon: 'apartment',
       redirectTo: '/empresas'

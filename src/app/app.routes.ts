@@ -16,6 +16,7 @@ import { CategoryComponent } from './pages/category/category.component';
 import { LayoutEcommerceComponent } from './pages/Ecommerce/LayoutEcommerce/LayoutEcommerce.component';
 import { EcommerceStepperComponent } from './pages/Ecommerce/ecommerceStepper/ecommerceStepper.component';
 import { AlmacenComponent } from './pages/almacen/almacen.component';
+import { MetodosPagosComponent } from './pages/metodosPagos/metodosPagos.component';
 
 export const routes: Routes = [
     {
@@ -57,6 +58,10 @@ export const routes: Routes = [
             {
                 path: 'inventario',
                 component: InventarioComponent
+            },
+            {
+                path: 'metodos-de-pago',
+                component: MetodosPagosComponent
             },
             {
                 path: 'almacen',

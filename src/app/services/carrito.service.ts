@@ -2,7 +2,7 @@ import { computed, Injectable, signal } from '@angular/core';
 import { ICarrito } from '../pages/Ecommerce/card/card.component';
 import { BaseService } from './base.service';
 import { BaseResponse } from '../interfaces/base.interface';
-import { ICarritoAPI } from '../interfaces/carrito.interface';
+import { BodyCarrito, BodyUpdateCarrito, ICarritoAPI } from '../interfaces/carrito.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -21,13 +21,13 @@ export class CarritoService extends BaseService {
     })
   }
 
-  postCarritosAPI(carrito: any, cliId: string): void {
+  postCarritosAPI(carrito: BodyCarrito, cliId: string): void {
     this.httpClient.post<BaseResponse>(`${this.base_api_url}/carrito`, carrito).subscribe((response: BaseResponse) => {
       this.getCarritoAPI(cliId);
     })
   }
 
-  putCarritosAPI(carrito: any, cliId: string): void {
+  putCarritosAPI(carrito: BodyUpdateCarrito, cliId: string): void {
     this.httpClient.put<BaseResponse>(`${this.base_api_url}/carrito`, carrito).subscribe((response: BaseResponse) => {
       this.getCarritoAPI(cliId);
     })

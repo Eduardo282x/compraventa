@@ -30,7 +30,6 @@ type ActionButton = 'plus' | 'remove';
 
 
 export class EcommerceCartComponent implements OnInit {
-
   carritoService = inject(CarritoService);
   ref = inject(ChangeDetectorRef);
 
@@ -53,11 +52,21 @@ export class EcommerceCartComponent implements OnInit {
 
     if (findProduct) {
       if (action === 'plus') {
-        findProduct.cant += 1
+        findProduct.amount += 1;
       }
-      if (action === 'remove' && findProduct.cant !== 1) {
-        findProduct.cant -= 1
+      if (action === 'remove' && findProduct.amount !== 1) {
+        findProduct.amount -= 1;
       }
+
+
+      const cliente: ICliente = JSON.parse(localStorage.getItem('clientToken') as string);
+
+      const bodyCarrito = {
+        id: findProduct.id,
+        amount: findProduct.amount,
+      }
+  
+      this.carritoService.putCarritosAPI(bodyCarrito, cliente.id.toString())
     }
 
   }
