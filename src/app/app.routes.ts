@@ -17,6 +17,7 @@ import { LayoutEcommerceComponent } from './pages/Ecommerce/LayoutEcommerce/Layo
 import { EcommerceStepperComponent } from './pages/Ecommerce/ecommerceStepper/ecommerceStepper.component';
 import { AlmacenComponent } from './pages/almacen/almacen.component';
 import { MetodosPagosComponent } from './pages/metodosPagos/metodosPagos.component';
+import { PaymentsComponent } from './pages/payments/payments.component';
 
 export const routes: Routes = [
     {
@@ -50,6 +51,10 @@ export const routes: Routes = [
             {
                 path: 'pedidos',
                 component: PedidosComponent
+            },
+            {
+                path: 'pagos',
+                component: PaymentsComponent
             },
             {
                 path: 'reportes',
