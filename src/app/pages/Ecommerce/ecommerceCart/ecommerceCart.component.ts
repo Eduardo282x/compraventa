@@ -49,6 +49,7 @@ export class EcommerceCartComponent implements OnInit {
 
   changeAmountProduct(product: ICarritoAPI, action: ActionButton) {
     const findProduct = this.products.find(pro => pro.id === product.id);
+    const cliente: ICliente = JSON.parse(localStorage.getItem('clientToken') as string);
 
     if (findProduct) {
       if (action === 'plus') {
@@ -58,17 +59,18 @@ export class EcommerceCartComponent implements OnInit {
         findProduct.amount -= 1;
       }
 
-
-      const cliente: ICliente = JSON.parse(localStorage.getItem('clientToken') as string);
-
       const bodyCarrito = {
         id: findProduct.id,
         amount: findProduct.amount,
       }
-  
+
       this.carritoService.putCarritosAPI(bodyCarrito, cliente.id.toString())
     }
+  }
 
+  deleteCarrito(product: ICarritoAPI) {
+    const cliente: ICliente = JSON.parse(localStorage.getItem('clientToken') as string);
+    this.carritoService.deleteCarritosAPI(product.id, cliente.id.toString());
   }
 }
 
