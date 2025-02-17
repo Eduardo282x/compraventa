@@ -39,6 +39,11 @@ export class SidebarComponent extends BaseComponent {
       redirectTo: '/pedidos'
     },
     {
+      label: 'Pagos',
+      icon: 'payments',
+      redirectTo: '/pagos'
+    },
+    {
       label: 'Clientes',
       icon: 'people',
       redirectTo: '/clientes'
