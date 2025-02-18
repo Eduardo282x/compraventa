@@ -16,14 +16,14 @@ export const columns: IColumns<IProveedor>[] = [
         name: (element: IProveedor) => element.ruc,
         nameColumn: 'ruc',
         type: 'string',
-        width: 'w-[30%]',
+        width: 'w-[10%]',
     },
     {
         title: 'Teléfono',
         name: (element: IProveedor) => element.phone,
         nameColumn: 'phone',
         type: 'string',
-        width: 'w-[30%]',
+        width: 'w-[10%]',
     },
     {
         title: 'Dirección',

@@ -1,4 +1,5 @@
 import { ICliente } from './cliente.interface';
+import { Roles } from './menu.interface';
 
 export interface ILogin {
   email: string;
@@ -26,7 +27,7 @@ export interface IUser {
 
 export interface Rol {
   id: number;
-  rol: string;
+  rol: Roles;
 }
 
 export interface BodyUsuario {

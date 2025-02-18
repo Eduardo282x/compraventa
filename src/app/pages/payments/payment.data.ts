@@ -8,48 +8,48 @@ export const columns: IColumns<IPayments>[] = [
         name: (element) => `${element.namePayer} ${element.lastNamePayer}`,
         nameColumn: 'namePayer',
         type: 'string',
-        width: 'w-[30%]'
+        width: 'w-[20%]'
     },
     {
         title: 'Razón Social',
         name: (element) => formatNumberWithDots(element.identifyPayer,'V-',''),
         nameColumn: 'clientRif',
         type: 'string',
-        width: 'w-[30%]'
+        width: 'w-[15%]'
     },
     {
         title: 'Teléfono',
         name: (element) => element.phonePayer,
         nameColumn: 'phonePayer',
         type: 'string',
-        width: 'w-[30%]'
+        width: 'w-[10%]'
     },
     {
         title: 'Correo',
         name: (element) => element.emailPayer,
         nameColumn: 'emailPayer',
         type: 'string',
-        width: 'w-[30%]'
+        width: 'w-[10%]'
     },
     {
         title: 'Banco',
         name: (element) => element.bankPayer,
         nameColumn: 'bankPayer',
         type: 'string',
-        width: 'w-[30%]'
+        width: 'w-[20%]'
     },
     {
         title: 'Referencia',
         name: (element) => element.reference,
         nameColumn: 'reference',
         type: 'string',
-        width: 'w-[30%]'
+        width: 'w-[10%]'
     },
     {
         title: 'Método de Pago',
         name: (element) => `${element.methodPayment.bank} \n ${element.methodPayment.owner}`,
         nameColumn: 'paymentMethod',
         type: 'string',
-        width: 'w-[30%]'
+        width: 'w-[40%]'
     },
 ]
