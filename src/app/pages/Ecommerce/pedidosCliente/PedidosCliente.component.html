@@ -1,8 +1,8 @@
-<div class="w-full flex flex-col items-start justify-start gap-5 ">
+<div class="w-full flex flex-col items-start justify-start gap-5 px-8 py-4">
 
     <div class="flex items-center justify-start gap-2 my-2 w-full">
         <span class="material-icons text-3xl">list_alt</span>
-        <p class=" text-3xl !m-0">Pedidos</p>
+        <p class=" text-3xl !m-0">Mis Pedidos</p>
     </div>
 
     <mat-accordion class="w-full ">
@@ -12,17 +12,12 @@
                 <div class="w-full flex items-center justify-between  px-8 py-5">
                     <div>
                         <p class="font-semibold">Pedido: {{(item.id).toString().padStart(7, '0')}}</p>
-                        <p>Cliente: {{item.cliente.clientName}} {{item.cliente.clientLastName}}</p>
                         <p>Total: {{item.total | currency: 'USD'}}</p>
                         <p [className]="setClassName(item.status)">Estado: {{item.status}}</p>
                     </div>
 
                     @if (item.status === 'Creado') {
                         <div class="flex gap-2">
-                            <button (click)="updatePedido(item, 'Aprobado')" mat-flat-button type="button" class=" flex gap-2 !bg-green-600">
-                                <span class="material-icons">check_circle</span>
-                                Aprobar
-                            </button>
                             <button (click)="updatePedido(item, 'Denegado')" mat-flat-button type="button" class=" flex gap-2 !bg-red-600">
                                 <span class="material-icons">close</span>
                                 Denegar
@@ -50,8 +45,7 @@
                             <p class="text-sm text-gray-400">{{detpe.producto.store.category.category}}</p>
                             <p class="text-sm ">Cantidad: {{detpe.amount}}</p>
                             <p class="text-md">Precio unitario:
-                                {{detpe.producto.store.price | currency:'USD'
-                                }}</p>
+                                {{detpe.producto.store.price | currency:'USD' }}</p>
                         </div>
                     </div>
 

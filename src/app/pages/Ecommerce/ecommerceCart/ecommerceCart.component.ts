@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, effect, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, effect, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -33,11 +33,21 @@ export class EcommerceCartComponent implements OnInit {
   carritoService = inject(CarritoService);
   ref = inject(ChangeDetectorRef);
 
+
+  @Output() returnTotal = new EventEmitter<number>();
+
   products: ICarritoAPI[] = [];
 
   constructor() {
     effect(() => {
       this.products = this.carritoService.getCarritoApi();
+      const total = this.products.map(pro =>
+        pro.amount * pro.producto.store.price
+      ).reduce((valorAnterior, valorActual) => {
+        return valorAnterior + valorActual;
+      }, 0)
+
+      this.returnTotal.emit(total);
       this.ref.detectChanges();
     })
   }
@@ -49,6 +59,7 @@ export class EcommerceCartComponent implements OnInit {
 
   changeAmountProduct(product: ICarritoAPI, action: ActionButton) {
     const findProduct = this.products.find(pro => pro.id === product.id);
+    const cliente: ICliente = JSON.parse(localStorage.getItem('clientToken') as string);
 
     if (findProduct) {
       if (action === 'plus') {
@@ -58,17 +69,26 @@ export class EcommerceCartComponent implements OnInit {
         findProduct.amount -= 1;
       }
 
-
-      const cliente: ICliente = JSON.parse(localStorage.getItem('clientToken') as string);
-
       const bodyCarrito = {
         id: findProduct.id,
         amount: findProduct.amount,
       }
-  
-      this.carritoService.putCarritosAPI(bodyCarrito, cliente.id.toString())
-    }
 
+      this.carritoService.putCarritosAPI(bodyCarrito, cliente.id.toString())
+
+      const total = this.products.map(pro =>
+        pro.amount * pro.producto.store.price
+      ).reduce((valorAnterior, valorActual) => {
+        return valorAnterior + valorActual;
+      }, 0)
+
+      this.returnTotal.emit(total);
+    }
+  }
+
+  deleteCarrito(product: ICarritoAPI) {
+    const cliente: ICliente = JSON.parse(localStorage.getItem('clientToken') as string);
+    this.carritoService.deleteCarritosAPI(product.id, cliente.id.toString());
   }
 }
 

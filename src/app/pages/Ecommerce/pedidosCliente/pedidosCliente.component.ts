@@ -1,21 +1,21 @@
-import { ChangeDetectorRef, Component, effect, inject, OnInit } from '@angular/core';
-import { BaseComponent } from '../base/base.component';
-import { PedidosService } from '../../services/pedidos.service';
-import { IPedidos } from '../../interfaces/pedidos.interface';
-import { CurrencyPipe } from '@angular/common';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, effect, inject } from '@angular/core';
+import { IPedidos } from '../../../interfaces/pedidos.interface';
+import { PedidosService } from '../../../services/pedidos.service';
+import { statusOrders } from '../../pedidos/pedidos.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
-
-export type statusOrders = 'Creado' | 'Aprobado' | 'Denegado' | 'Eliminado';
+import { CurrencyPipe } from '@angular/common';
+import { ICliente } from '../../../interfaces/cliente.interface';
 
 @Component({
-  selector: 'app-pedidos',
+  selector: 'app-pedidos-cliente',
   standalone: true,
   imports: [CurrencyPipe, MatButtonModule, MatExpansionModule],
-  templateUrl: './pedidos.component.html',
-  styleUrl: './pedidos.component.css'
+  templateUrl: './PedidosCliente.component.html',
+  styleUrl: './pedidosCliente.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PedidosComponent implements OnInit {
+export class PedidosClienteComponent {
 
   pedidos: IPedidos[] = [];
   title: string = 'Pedidos';
@@ -32,7 +32,10 @@ export class PedidosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.pedidosServices.getPedidosAPI();
+    const cliente: ICliente = JSON.parse(localStorage.getItem('clientToken') as string);
+    if(cliente){
+      this.pedidosServices.getPedidosByClientAPI(cliente.id);
+    }
   }
 
   setClassName(status: statusOrders): string {
@@ -49,4 +52,5 @@ export class PedidosComponent implements OnInit {
     }
     this.pedidosServices.putPedidosAPI(putPedido);
   }
+
 }

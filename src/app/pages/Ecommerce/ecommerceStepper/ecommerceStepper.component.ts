@@ -11,6 +11,8 @@ import { ClienteService } from '../../../services/clients.service';
 import { AuthService } from '../../../services/auth.service';
 import { ICliente } from '../../../interfaces/cliente.interface';
 import { EcommercePaymentComponent } from "../ecommercePayment/ecommercePayment.component";
+import { Pay } from '../../../interfaces/pagos.interface';
+import { PedidosService } from '../../../services/pedidos.service';
 
 @Component({
   selector: 'app-ecommerce-stepper',
@@ -23,14 +25,16 @@ import { EcommercePaymentComponent } from "../ecommercePayment/ecommercePayment.
     MatButtonModule,
     EcommerceCartComponent,
     EcommercePaymentComponent
-],
+  ],
   templateUrl: './ecommerceStepper.component.html',
   styleUrl: './ecommerceStepper.component.css',
 })
 
 export class EcommerceStepperComponent implements OnInit {
   carritoService = inject(CarritoService);
+  pedidosService = inject(PedidosService);
   ref = inject(ChangeDetectorRef);
+  total: number = 0;
 
   constructor() {
 
@@ -52,5 +56,21 @@ export class EcommerceStepperComponent implements OnInit {
 
       localStorage.removeItem('carrito');
     }
+  }
+
+  getTotalOrders(total: number) {
+    this.total = total;
+  }
+
+  completeOrder(pay: Pay) {
+    const cliente: ICliente = JSON.parse(localStorage.getItem('clientToken') as string);
+
+    const paymentForm = {
+      clientId: cliente.id,
+      total: this.total,
+      payment: pay,
+    }
+
+    this.pedidosService.postPedidosAPI(paymentForm);
   }
 }

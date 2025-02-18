@@ -1,5 +1,5 @@
 <div
-    class=" absolute p-2  top-18 left-0 bg-blue-900 h-[90vh] w-14 hover:w-72 flex flex-col items-start justify-between group transition-all duration-[.20s] ease-in  overflow-hidden">
+    class=" absolute p-2 z-50  top-18 left-0 bg-blue-900 h-[90vh] w-14 hover:w-72 flex flex-col items-start justify-between group transition-all duration-[.20s] ease-in  overflow-hidden">
     <aside class="w-full">
         @for (item of categoriesMenu; track $index) {
         <a [routerLink]="['/comercio']"
@@ -13,6 +13,20 @@
     </aside>
 
     @if (clientInfo !== null) {
+    <button
+    (click)="goPedidos()"
+        class="flex items-center justify-start gap-5 group-hover:gap-2 my-2 w-full cursor-pointer rounded-full hover:bg-blue-700 transition-all duration-100">
+        <span
+            class="material-icons w-10 h-10 flex items-center justify-center text-white text-xl p-1">list_alt</span>
+        <p class="text-white whitespace-nowrap block">Mis pedidos</p>
+    </button>
+    <button
+    (click)="goPedidos()"
+        class="flex items-center justify-start gap-5 group-hover:gap-2 my-2 w-full cursor-pointer rounded-full hover:bg-blue-700 transition-all duration-100">
+        <span
+            class="material-icons w-10 h-10 flex items-center justify-center text-white text-xl p-1">user</span>
+        <p class="text-white whitespace-nowrap block">Mi perfil</p>
+    </button>
     <button
         (click)="logoutClient()"
         class="flex items-center justify-start gap-5 group-hover:gap-2 my-2 w-full cursor-pointer rounded-full hover:bg-blue-700 transition-all duration-100">
