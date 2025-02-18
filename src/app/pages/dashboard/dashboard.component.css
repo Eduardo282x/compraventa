@@ -1,0 +1,45 @@
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.highlight {
+    /* background: #f1c40f; */
+    color: black;
+}
+
+.alert {
+    background: #e74c3c;
+    color: white;
+}
+
+.pedidos-lista ul {
+    list-style: none;
+    padding: 0;
+}
+
+.pedidos-lista li {
+    padding: 5px;
+}
+
+.entregado {
+    color: green;
+}
+
+.proceso {
+    color: orange;
+}
+
+.pendiente {
+    color: red;
+}

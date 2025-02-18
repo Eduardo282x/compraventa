@@ -18,6 +18,8 @@ import { EcommerceStepperComponent } from './pages/Ecommerce/ecommerceStepper/ec
 import { AlmacenComponent } from './pages/almacen/almacen.component';
 import { MetodosPagosComponent } from './pages/metodosPagos/metodosPagos.component';
 import { PaymentsComponent } from './pages/payments/payments.component';
+import { PedidosClienteComponent } from './pages/Ecommerce/pedidosCliente/PedidosCliente.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 export const routes: Routes = [
     {
@@ -34,7 +36,7 @@ export const routes: Routes = [
         children: [
             {
                 path: 'home',
-                component: HomeComponent
+                component: DashboardComponent
             },
             {
                 path: 'usuarios',
@@ -97,6 +99,10 @@ export const routes: Routes = [
             {
                 path: 'carrito',
                 component: EcommerceStepperComponent
+            },
+            {
+                path: 'pedidos',
+                component: PedidosClienteComponent
             }
         ]
     }

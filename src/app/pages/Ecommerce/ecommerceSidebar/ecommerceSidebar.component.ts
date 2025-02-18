@@ -34,6 +34,10 @@ export class EcommerceSidebarComponent extends BaseComponent implements OnInit {
     this.categoryService.getCategoryAPI()
   }
 
+  goPedidos(){
+    this.router.navigate(['/comercio/pedidos'])
+  }
+
   logoutClient() {
     this.authService.clientInfo.set(null);
     localStorage.removeItem('clientToken')

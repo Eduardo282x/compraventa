@@ -1,1 +1,95 @@
-<p>dashboard works!</p>
+
+<h1 class="font-semibold text-2xl  ml-5 mb-5">Dashboard </h1>
+<div class="dashboard">
+
+    <div class="card highlight">
+        <h2 class="text-xl">📊 Ventas Totales</h2>
+        <canvas baseChart
+            [data]="ventasData"
+            [options]="chartOptions"
+            chartType="bar">
+        </canvas>
+    </div>
+
+    <div class="card highlight">
+        <h2 class="text-xl">🛒 Cantidad de Pedidos</h2>
+        <canvas baseChart
+            [data]="pedidosData"
+            [options]="chartOptions"
+            chartType="doughnut">
+        </canvas>
+    </div>
+
+    <div class="card highlight">
+        <h2 class="text-xl">💊 Top Productos Más Vendidos</h2>
+        <canvas baseChart
+            [data]="productosMasVendidosData"
+            [options]="chartOptions"
+            [type]="'pie'">
+        </canvas>
+    </div>
+
+    <div class="card highlight">
+        <h2 class="text-xl">💳 Métodos de pago Utilizados</h2>
+        <canvas baseChart
+            [data]="metodosDePagoData"
+            [options]="chartOptions"
+            [type]="'pie'">
+        </canvas>
+    </div>
+
+    <div class="card highlight mb-10">
+        <h2 class="text-xl">📦 Últimos Pedidos Realizados</h2>
+
+        <div class="flex flex-col items-start justify-start gap-4 mt-4">
+            @for (item of pedidos; track $index) {
+            <div class="w-full flex items-center justify-between px-4 font-medium">
+                <span>#{{(item.id).toString().padStart(7, '0')}}</span>
+                <span>-</span>
+                <span [className]="setClassName(item.status)">{{item.status}}</span>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- 
+<div class="dashboard">
+    <div class="card highlight">
+        <h2>📊 Ventas Totales</h2>
+        <canvas id="ventasChart"></canvas>
+    </div>
+
+    <div class="card highlight">
+        <h2>🛒 Cantidad de Pedidos</h2>
+        <canvas id="pedidosChart"></canvas>
+    </div>
+
+    <div class="card">
+        <h2>💊 Top Productos Más Vendidos</h2>
+        <canvas id="productosChart"></canvas>
+    </div>
+
+    <div class="card">
+        <h2>📦 Estado del Inventario</h2>
+        <canvas id="inventarioChart"></canvas>
+    </div>
+
+
+    <div class="card alert">
+        <h2>🚨 Alertas y Notificaciones</h2>
+        <p>🛑 Productos agotados: 3<br>⚠ Pedidos atrasados: 2</p>
+    </div>
+
+    <div class="card pedidos-lista">
+        <h2>📦 Últimos Pedidos Realizados</h2>
+        <ul>
+            <li><strong>#12345</strong> - <span
+                    class="entregado">Entregado</span></li>
+            <li><strong>#12346</strong> - <span class="proceso">En
+                    proceso</span></li>
+            <li><strong>#12347</strong> - <span
+                    class="pendiente">Pendiente</span></li>
+        </ul>
+    </div>
+</div> -->

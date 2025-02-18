@@ -1,6 +1,5 @@
 import { ICategory } from "./category.interface";
 import { IProveedor } from "./proveedor.interface";
-import { ISucursales } from "./sucursales.interface";
 
 export interface IAlmacen {
     id: number;

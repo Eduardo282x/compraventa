@@ -15,10 +15,11 @@
       </mat-form-field>
     </div>
 
-    <div class=" w-full">
+    <form [formGroup]="formMethod"
+      class="w-full flex flex-wrap items-start justify-end gap-5">
       <mat-form-field appearance="outline">
         <mat-label>Banco</mat-label>
-        <input matInput>
+        <input matInput formControlName="bank">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Nombre</mat-label>
@@ -36,68 +37,49 @@
         <mat-label>Correo</mat-label>
         <input matInput formControlName="email">
       </mat-form-field>
+    </form>
   </div>
 
-  <form class="pt-3 w-full">
+  <div>
+    <h2 class="text-xl font-bold mb-10">Datos del Pago</h2>
 
-    <h2 class="text-xl font-bold mb-10">Datos de la compra</h2>
+    <form [formGroup]="formPayment"
+      class="w-full flex flex-wrap items-start justify-start gap-5">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="namePayer">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Apellido</mat-label>
+        <input matInput formControlName="lastNamePayer">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Cédula</mat-label>
+        <input matInput formControlName="identifyPayer">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Teléfono</mat-label>
+        <input matInput formControlName="phonePayer">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Correo</mat-label>
+        <input matInput formControlName="emailPayer">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Banco</mat-label>
+        <input matInput formControlName="bankPayer">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Referencia</mat-label>
+        <input matInput formControlName="reference">
+      </mat-form-field>
 
-    <select name id
-      class="mx-60 w-1/2 text-center mb-8 border-2 rounded-full p-1 border-black focus:border-blue-500">
-      <option value>-- Seleccione Tipo de Pago --</option>
-    </select>
-
-    <div class="flex justify-between mx-40 my-5">
-
-      <div class="space-y-5">
-        <div>
-          <label for>Referencia</label>
-          <input
-            type="text"
-            class="border border-gray-400 rounded-full m-3 outline-none px-6 focus:border focus:border-blue-500" />
-        </div>
-
-        <div>
-          <label for>Cédula</label>
-          <input
-            type="text"
-            class="border border-gray-400 rounded-full m-3 outline-none px-6 focus:border focus:border-blue-500" />
-        </div>
-
-        <div>
-          <label for>Correo</label>
-          <input
-            type="email"
-            class="border border-gray-400 rounded-full m-3 outline-none px-6 focus:border focus:border-blue-500" />
-        </div>
+      <div class="flex items-center justify-center py-4 text-xl">
+        <span class=" font-bold mr-2">Total:</span>
+        <span>{{total}},00$</span>
       </div>
 
-      <div class="space-y-5">
-
-        <div>
-          <label for>Nombres</label>
-          <input
-            type="text"
-            class="border border-gray-400 rounded-full m-3 outline-none px-6 focus:border focus:border-blue-500" />
-        </div>
-
-        <div>
-          <label for>Apellidos</label>
-          <input
-            type="text"
-            class="border border-gray-400 rounded-full m-3 outline-none px-6 focus:border focus:border-blue-500" />
-        </div>
-
-        <div>
-          <label for>Teléfono</label>
-          <input
-            type="number"
-            class="border border-gray-400 rounded-full m-3 outline-none px-6 focus:border focus:border-blue-500" />
-        </div>
-
-      </div>
-
-    </div>
-
-  </form>
+      <button mat-flat-button type="submit" (click)="completePayment()">Pagar</button>
+    </form>
+  </div>
 </div>
