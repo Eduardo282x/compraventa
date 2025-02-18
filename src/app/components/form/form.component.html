@@ -1,7 +1,6 @@
-<div
-    class="p-4 w-[40vw] h-[80vh] overflow-y-auto flex flex-col items-center justify-start gap-5">
+<div class="p-4 w-full px-16 h-[80vh] overflow-y-auto flex flex-col items-center justify-start gap-5 overflow-x-hidden">
     <p class="text-center text-2xl font-semibold">{{formData.title}}</p>
-    <form [formGroup]="globalForm" (submit)="onSubmit()" class=" w-[80%]">
+    <form [formGroup]="globalForm" (submit)="onSubmit()" class="w-full">
         @for (item of formData.dataForm; track $index) {
 
         @if (item.typeInput === 'text') {

@@ -18,7 +18,7 @@ import { EcommerceStepperComponent } from './pages/Ecommerce/ecommerceStepper/ec
 import { AlmacenComponent } from './pages/almacen/almacen.component';
 import { MetodosPagosComponent } from './pages/metodosPagos/metodosPagos.component';
 import { PaymentsComponent } from './pages/payments/payments.component';
-import { PedidosClienteComponent } from './pages/Ecommerce/pedidosCliente/PedidosCliente.component';
+import { PedidosClienteComponent } from './pages/Ecommerce/pedidosCliente/pedidosCliente.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 export const routes: Routes = [

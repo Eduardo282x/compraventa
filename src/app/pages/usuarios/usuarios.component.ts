@@ -87,6 +87,7 @@ export class UsuariosComponent extends BaseComponent implements OnInit {
 
     const dialogRef = this.dialog.open(FormComponent, {
       data: formDataUsuarios,
+      panelClass: 'w-[40vw]',
       enterAnimationDuration: '500ms',
       exitAnimationDuration: '500ms',
     });
