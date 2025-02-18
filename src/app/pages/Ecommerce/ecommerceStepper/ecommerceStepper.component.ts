@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, effect, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, effect, inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -7,8 +7,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { EcommerceCartComponent } from "../ecommerceCart/ecommerceCart.component";
 import { ICarrito } from '../card/card.component';
 import { CarritoService } from '../../../services/carrito.service';
-import { ClienteService } from '../../../services/clients.service';
-import { AuthService } from '../../../services/auth.service';
+import { MatStepper } from '@angular/material/stepper';
 import { ICliente } from '../../../interfaces/cliente.interface';
 import { EcommercePaymentComponent } from "../ecommercePayment/ecommercePayment.component";
 import { Pay } from '../../../interfaces/pagos.interface';
@@ -36,6 +35,8 @@ export class EcommerceStepperComponent implements OnInit {
   ref = inject(ChangeDetectorRef);
   total: number = 0;
 
+  @ViewChild('stepper') private stepper!: MatStepper;
+  
   constructor() {
 
   }
@@ -72,5 +73,7 @@ export class EcommerceStepperComponent implements OnInit {
     }
 
     this.pedidosService.postPedidosAPI(paymentForm);
+    this.stepper.next();
+    this.carritoService.setCarrito.set([]);
   }
 }

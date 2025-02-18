@@ -49,4 +49,9 @@ export class PedidosComponent implements OnInit {
     }
     this.pedidosServices.putPedidosAPI(putPedido);
   }
+
+  generateBill() {
+    console.log('Imprimir');
+    
+  }
 }

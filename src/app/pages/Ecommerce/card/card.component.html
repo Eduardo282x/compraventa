@@ -7,7 +7,7 @@
     <div class="info bg-white pt-2">
         <h2 class="font-semibold text-gray-800">{{product.store.name}}</h2>
         <p class="text-gray-400 text-sm my-1">{{product.store.category.category}}</p>
-        <p class="font-semibold text-blue-600">{{ product.store.price | currency:'USD' }}</p>
+        <p class="font-semibold text-blue-600">{{ product.store.price | currency:currencyLocal }}</p>
         <button mat-flat-button class="w-full mt-6" (click)="saveCarrito(product)">
             <span>Agregar al Carrito</span>
             <span class="material-icons text-white">shopping_cart</span>

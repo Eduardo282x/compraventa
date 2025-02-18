@@ -17,6 +17,9 @@ export class InventarioService extends BaseService{
   private setMoneda = signal<Moneda[]>([]);
   public getMoneda = computed<Moneda[]>(() => this.setMoneda());
 
+  public setCurrency = signal<number>(1);
+  public getCurrency = computed<number>(() => this.setCurrency());
+
   private setUnidad = signal<Unidad[]>([]);
   public getUnidad = computed<Unidad[]>(() => this.setUnidad());
 

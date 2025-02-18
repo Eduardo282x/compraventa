@@ -13,9 +13,11 @@ import { BaseComponent } from '../../base/base.component';
     <app-ecommerce-header></app-ecommerce-header>
     <div class="flex items-start justify-start w-full h-screen overflow-hidden">
       @if (router.url !== '/comercio/carrito') {
-        <app-ecommerce-sidebar></app-ecommerce-sidebar>
+        <div class='hidden lg:block'>
+          <app-ecommerce-sidebar></app-ecommerce-sidebar>
+        </div>
       }
-      <div class="pl-14 h-full w-full overflow-y-auto overflow-x-hidden">
+      <div class="lg:pl-14 h-full w-full overflow-y-auto overflow-x-hidden">
         <router-outlet></router-outlet>
       </div>
     </div>

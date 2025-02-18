@@ -1,9 +1,10 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, effect, inject, Input, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { IInventario } from '../../../interfaces/producto.interface';
+import { IInventario, Moneda } from '../../../interfaces/producto.interface';
 import { CurrencyPipe } from '@angular/common';
 import { CarritoService } from '../../../services/carrito.service';
 import { ICliente } from '../../../interfaces/cliente.interface';
+import { InventarioService } from '../../../services/inventario.service';
 
 export interface ICarrito {
   id: number;
@@ -16,9 +17,32 @@ export interface ICarrito {
   templateUrl: './card.component.html',
   styleUrl: './card.component.css',
 })
-export class CardComponent {
+export class CardComponent implements OnInit {
   @Input() product: IInventario = {} as IInventario;
   carritoService = inject(CarritoService);
+  inventarioService = inject(InventarioService);
+  currencyLocal: string = 'USD';
+
+  constructor() {
+    effect(() => {
+      const currencyId = localStorage.getItem('currencyId');
+      const changeCurrency = currencyId ? currencyId : this.inventarioService.getCurrency();
+      const currencySelected = this.inventarioService.getMoneda().find(cu => cu.id === Number(changeCurrency));
+      if (currencySelected) {
+        this.currencyLocal = currencySelected.symbol;
+      }
+    })
+  }
+
+  ngOnInit(): void {
+    const currencyId = localStorage.getItem('currencyId');
+
+    const currencySelected = this.inventarioService.getMoneda().find(cu => cu.id === Number(currencyId));
+    if (currencySelected) {
+      this.currencyLocal = currencySelected.symbol;
+    }
+
+  }
 
   saveCarrito(product: IInventario) {
     const clientLoged = localStorage.getItem('clientToken');

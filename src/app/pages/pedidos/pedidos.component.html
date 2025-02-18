@@ -28,6 +28,11 @@
                                 Denegar
                             </button>
                         </div>
+                    } @else {
+                        <button (click)="generateBill()" mat-flat-button type="button" class=" flex gap-2 !bg-green-600">
+                            <span class="material-icons">receipt_long</span>
+                            Imprimir factura
+                        </button>
                     }
                 </div>
             </mat-expansion-panel-header>

@@ -18,10 +18,19 @@ import { InventarioService } from '../../../services/inventario.service';
 import { Moneda } from '../../../interfaces/producto.interface';
 import { SucursalesService } from '../../../services/sucursales.service';
 import { ISucursales } from '../../../interfaces/sucursales.interface';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-ecommerce-header',
-  imports: [MatIconModule, MatButtonModule, ReactiveFormsModule, MatBadgeModule, RouterModule, MatButtonModule, MatBottomSheetModule],
+  imports: [MatIconModule, 
+    MatButtonModule, 
+    ReactiveFormsModule, 
+    MatBadgeModule, 
+    RouterModule, 
+    MatButtonModule, 
+    MatBottomSheetModule,
+    MatSelectModule
+  ],
   templateUrl: './ecommerceHeader.component.html',
   styleUrl: './ecommerceHeader.component.css',
 })
@@ -32,6 +41,7 @@ export class EcommerceHeaderComponent extends BaseComponent implements OnInit {
   moneda: Moneda[] = [];
   sucursal: ISucursales[] = [];
   sucursalSelected: number = 1;
+  currencySelected: number = 1;
   category: string = '';
   product: string = '';
   authService = inject(AuthService);
@@ -64,8 +74,12 @@ export class EcommerceHeaderComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     const sucursalLocal = localStorage.getItem('sucursalId');
+    const currencyLocal = localStorage.getItem('currencyId');
     if (sucursalLocal) {
       this.sucursalSelected = Number(sucursalLocal);
+    }
+    if (currencyLocal) {
+      this.currencySelected = Number(currencyLocal);
     }
     this.routerActive.queryParams
       .subscribe(params => {
@@ -85,10 +99,16 @@ export class EcommerceHeaderComponent extends BaseComponent implements OnInit {
     this.ref.detectChanges();
   }
 
-  changeSucursal(event: Event) {
-    const selected = (event.target as HTMLSelectElement).value;
-    localStorage.setItem('sucursalId', selected);
-    this.inventarioService.getInventarioFiltradoAPI(this.category, this.product, selected);
+  changeSucursal(sucId: number) {
+    localStorage.setItem('sucursalId', sucId.toString());
+    this.inventarioService.getInventarioFiltradoAPI(this.category, this.product, sucId.toString());
+  }
+
+  changeCurrency(currencyId: number) {
+    console.log(currencyId);
+    localStorage.setItem('currencyId', currencyId.toString());
+    this.inventarioService.setCurrency.set(currencyId)
+    // this.inventarioService.getInventarioFiltradoAPI(this.category, this.product, currencyId.toString());
   }
 
   goToCar() {

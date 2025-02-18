@@ -6,8 +6,6 @@
             <div class="flex items-center justify-center gap-8">
                 <a [routerLink]="['/comercio']"
                     class="text-xl font-bold text-gray-800 flex items-center">
-                    <!-- <img src="favicon.ico" alt="Logo" class="w-10 h-10 mr-2">
-                    <span class="text-white">Servimar</span> -->
                     <img src="logo-removebg-preview.png" alt class="h-5">
                 </a>
 
@@ -28,27 +26,25 @@
 
             <div class="flex items-center space-x-8 ml-10">
 
-                <div class="flex items-center justify-start gap-2 ">
-                    <label class="text-white">Sucursal:</label>
-                    <select
-                        [value]="sucursalSelected"
-                        (change)="changeSucursal($event)"
-                        class=" bg-transparent rounded-md border-2 px-4 py-2 outline-none">
+                <mat-form-field appearance="outline" class="mt-5">
+                    <mat-label class="text-white">Sucursal</mat-label>
+                    <mat-select [value]="sucursalSelected" (valueChange)="changeSucursal($event)" class="!text-white">
                         @for (item of sucursal; track $index) {
-                        <option [value]="item.sucId">{{item.nombre}}</option>
+                        <mat-option
+                            [value]="item.sucId">{{item.nombre}}</mat-option>
                         }
-                    </select>
-                </div>
+                    </mat-select>
+                </mat-form-field>
 
-                <div class="flex items-center justify-start gap-2 text-white">
-                    <label>Moneda:</label>
-                    <select
-                        class=" bg-transparent rounded-md border-2 px-4 py-2 outline-none">
+                <mat-form-field appearance="outline" class="mt-5">
+                    <mat-label class="text-white">Moneda</mat-label>
+                    <mat-select [value]="currencySelected"  (valueChange)="changeCurrency($event)" class="!text-white">
                         @for (item of moneda; track $index) {
-                        <option [value]="item.id">{{item.currency}}</option>
+                        <mat-option
+                            [value]="item.id">{{item.currency}}</mat-option>
                         }
-                    </select>
-                </div>
+                    </mat-select>
+                </mat-form-field>
 
                 <button
                     (click)="goToCar()"
