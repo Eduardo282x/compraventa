@@ -26,7 +26,9 @@ export class CardComponent implements OnInit {
   constructor() {
     effect(() => {
       const currencyId = localStorage.getItem('currencyId');
-      const changeCurrency = currencyId ? currencyId : this.inventarioService.getCurrency();
+      const changeCurrency = this.inventarioService.getCurrency();
+      console.log(changeCurrency);
+      
       const currencySelected = this.inventarioService.getMoneda().find(cu => cu.id === Number(changeCurrency));
       if (currencySelected) {
         this.currencyLocal = currencySelected.symbol;

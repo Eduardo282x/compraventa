@@ -1,60 +1,62 @@
-<div class="pr-14 py-8 w-full">
+<div class="lg:pr-14 lg:py-8 p-4 w-full">
     <div class="flex justify-between">
         <h2 class="font-bold text-2xl">Carrito de Compra</h2>
     </div>
 
-    @if (carritoService.getCarrito().length > 0) {
-        <mat-stepper labelPosition="bottom" #stepper
-            class="mt-10 !bg-white border-2 rounded-xl px-16 w-full">
-            <mat-step>
-                <div>
-                    <ng-template matStepLabel>Productos</ng-template>
-                    <div class="h-80 overflow-y-auto">
-                        <app-ecommerce-cart
-                            (returnTotal)="getTotalOrders($event)"></app-ecommerce-cart>
-                    </div>
-    
-                    <div class="mt-10 flex justify-end">
-                        <button mat-button matStepperNext>Siguiente</button>
-                    </div>
-                </div>
-    
-            </mat-step>
-    
-            <mat-step>
-                <div>
-                    <ng-template matStepLabel>Ingresa los datos del
-                        pago</ng-template>
-    
-                    <div class="mb-10 h-80 overflow-y-auto">
-                        <app-ecommerce-payment [total]="total"
-                            (paymentForm)="completeOrder($event)"></app-ecommerce-payment>
-                    </div>
-                </div>
-            </mat-step>
-    
-            <mat-step>
-                <div>
-                    <ng-template matStepLabel>Completado</ng-template>
-    
-                    <div class="flex flex-col items-center justify-center w-full text-green-500 gap-2 h-80">
-                        <div class="flex flex-col items-center justify-center p-4 rounded-full border-2 border-green-500">
-                            <span class="material-icons text-5xl ">done</span>
+    <div class="h-screen overflow-auto">
+        @if (carritoService.getCarrito().length == 0) {
+            <mat-stepper labelPosition="bottom" #stepper [orientation]="orientationStepper"
+                class="mt-10 !bg-white border-2 rounded-xl lg:px-16 w-full">
+                <mat-step>
+                    <div>
+                        <ng-template matStepLabel>Productos</ng-template>
+                        <div class="h-80 overflow-y-auto">
+                            <app-ecommerce-cart
+                                (returnTotal)="getTotalOrders($event)"></app-ecommerce-cart>
                         </div>
-                        <p class="font-semibold text-xl">Pedido realizado exitosamente.</p>
+        
+                        <div class="mt-10 flex justify-end">
+                            <button mat-button matStepperNext>Siguiente</button>
+                        </div>
                     </div>
+        
+                </mat-step>
+        
+                <mat-step>
+                    <div>
+                        <ng-template matStepLabel>Ingresa los datos del
+                            pago</ng-template>
+        
+                        <div class="mb-10 h-80 overflow-y-auto">
+                            <app-ecommerce-payment [total]="total"
+                                (paymentForm)="completeOrder($event)"></app-ecommerce-payment>
+                        </div>
+                    </div>
+                </mat-step>
+        
+                <mat-step>
+                    <div>
+                        <ng-template matStepLabel>Completado</ng-template>
+        
+                        <div class="flex flex-col items-center justify-center w-full text-green-500 gap-2 h-80">
+                            <div class="flex flex-col items-center justify-center p-4 rounded-full border-2 border-green-500">
+                                <span class="material-icons text-5xl ">done</span>
+                            </div>
+                            <p class="font-semibold text-xl">Pedido realizado exitosamente.</p>
+                        </div>
+                    </div>
+        
+                </mat-step>
+        
+            </mat-stepper>
+        } @else {
+            <div class="flex flex-col items-center justify-center w-full text-gray-500 gap-2 h-80">
+                <div class="flex flex-col items-center justify-center p-4">
+                    <span class="material-icons text-5xl">info</span>
                 </div>
-    
-            </mat-step>
-    
-        </mat-stepper>
-    } @else {
-        <div class="flex flex-col items-center justify-center w-full text-gray-500 gap-2 h-80">
-            <div class="flex flex-col items-center justify-center p-4">
-                <span class="material-icons text-5xl">info</span>
+                <p class="font-medium text-xl">Debes agregar productos al carrito</p>
             </div>
-            <p class="font-medium text-xl">Debes agregar productos al carrito</p>
-        </div>
-    }
+        }
+    </div>
 
 </div>

@@ -1,16 +1,41 @@
 <header>
+    <div class="bg-blue-900 shadow-md px-4 w-full">
+        <div
+            class="w-full lg:px-4 flex flex-col lg:flex-row items-center justify-between">
 
-    <div class="bg-blue-900 shadow-md p-4">
-        <div class="container mx-auto flex items-center justify-between">
+            <div
+                class="flex flex-col lg:flex-row items-center justify-start gap-8 w-full">
+                <div class="flex items-center justify-between w-full lg:w-auto mt-5 lg:mt-0">
+                    <div class="lg:hidden block">
+                        <button
+                            (click)="openBottomSheet()"
+                            mat-icon-button
+                            class=" p-2">
+                            <span
+                                class="material-icons text-white">person</span>
+                        </button>
+                    </div>
 
-            <div class="flex items-center justify-center gap-8">
-                <a [routerLink]="['/comercio']"
-                    class="text-xl font-bold text-gray-800 flex items-center">
-                    <img src="logo-removebg-preview.png" alt class="h-5">
-                </a>
+                    <a [routerLink]="['/comercio']"
+                        class="text-xl font-bold text-gray-800 flex items-center">
+                        <img src="logo-removebg-preview.png" alt class="h-5">
+                    </a>
+
+                    <div class="lg:hidden block">
+                        <button
+                            (click)="goToCar()"
+                            mat-icon-button
+                            class=" p-2"
+                            [matBadge]="articlesCarrito">
+                            <span
+                                class="material-icons text-white">shopping_cart</span>
+                        </button>
+                    </div>
+
+                </div>
 
                 <form [formGroup]="ecommerceHeaderForm"
-                    class="flex items-center justify-between rounded-full py-1 px-2 overflow-hidden bg-white w-[30rem]">
+                    class="flex items-center justify-between rounded-full py-1 px-2 overflow-hidden bg-white w-full lg:w-[30rem]">
                     <input
                         type="text" placeholder="Buscar productos..."
                         class="w-full border-none outline-none ml-2 "
@@ -24,11 +49,12 @@
                 </form>
             </div>
 
-            <div class="flex items-center space-x-8 ml-10">
-
-                <mat-form-field appearance="outline" class="mt-5">
+            <div class="flex items-center justify-end space-x-8 ml-10 w-full">
+                <mat-form-field appearance="outline" class="mt-5 w-1/2 lg:w-auto">
                     <mat-label class="text-white">Sucursal</mat-label>
-                    <mat-select [value]="sucursalSelected" (valueChange)="changeSucursal($event)" class="!text-white">
+                    <mat-select [value]="sucursalSelected"
+                        (valueChange)="changeSucursal($event)"
+                        class="!text-white">
                         @for (item of sucursal; track $index) {
                         <mat-option
                             [value]="item.sucId">{{item.nombre}}</mat-option>
@@ -36,9 +62,11 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field appearance="outline" class="mt-5">
+                <mat-form-field appearance="outline" class="mt-5 w-1/2 lg:w-auto">
                     <mat-label class="text-white">Moneda</mat-label>
-                    <mat-select [value]="currencySelected"  (valueChange)="changeCurrency($event)" class="!text-white">
+                    <mat-select [value]="currencySelected"
+                        (valueChange)="changeCurrency($event)"
+                        class="!text-white">
                         @for (item of moneda; track $index) {
                         <mat-option
                             [value]="item.id">{{item.currency}}</mat-option>
@@ -46,30 +74,33 @@
                     </mat-select>
                 </mat-form-field>
 
-                <button
-                    (click)="goToCar()"
-                    mat-icon-button
-                    class="p-2"
-                    [matBadge]="articlesCarrito">
-                    <span class="material-icons text-white">shopping_cart</span>
-                </button>
-
-                @if (clientInfo) {
-                <div class="flex text-white items-center gap-2">
-                    <span class="material-icons">account_circle</span>
-                    <span>{{clientInfo.clientName}}</span>
-                    <span>{{clientInfo.clientLastName}}</span>
+                <div class="hidden lg:block ">
+                    <button
+                        (click)="goToCar()"
+                        mat-icon-button
+                        class="p-2"
+                        [matBadge]="articlesCarrito">
+                        <span
+                            class="material-icons text-white">shopping_cart</span>
+                    </button>
                 </div>
-                } @else {
-                <button
-                    (click)="openBottomSheet()"
-                    class="px-4 py-2 bg-white font-bold text-blue-600 rounded-lg hover:bg-blue-100">
-                    Iniciar Sesión
-                </button>
-                }
 
+                <div class="hidden lg:block">
+                    @if (clientInfo) {
+                    <div class="flex text-white items-center gap-2">
+                        <span class="material-icons">account_circle</span>
+                        <span>{{clientInfo.clientName}}</span>
+                        <span>{{clientInfo.clientLastName}}</span>
+                    </div>
+                    } @else {
+                    <button
+                        (click)="openBottomSheet()"
+                        class="px-4 py-2 bg-white font-bold text-blue-600 rounded-lg hover:bg-blue-100">
+                        Iniciar Sesión
+                    </button>
+                    }
+                </div>
             </div>
         </div>
     </div>
-
 </header>

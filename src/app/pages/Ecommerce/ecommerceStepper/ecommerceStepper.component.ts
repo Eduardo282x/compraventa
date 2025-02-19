@@ -3,7 +3,7 @@ import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angu
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatStepperModule } from '@angular/material/stepper';
+import { MatStepperModule, StepperOrientation } from '@angular/material/stepper';
 import { EcommerceCartComponent } from "../ecommerceCart/ecommerceCart.component";
 import { ICarrito } from '../card/card.component';
 import { CarritoService } from '../../../services/carrito.service';
@@ -12,6 +12,8 @@ import { ICliente } from '../../../interfaces/cliente.interface';
 import { EcommercePaymentComponent } from "../ecommercePayment/ecommercePayment.component";
 import { Pay } from '../../../interfaces/pagos.interface';
 import { PedidosService } from '../../../services/pedidos.service';
+import { BreakpointObserver, Breakpoints, LayoutModule } from '@angular/cdk/layout';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-ecommerce-stepper',
@@ -23,7 +25,8 @@ import { PedidosService } from '../../../services/pedidos.service';
     MatInputModule,
     MatButtonModule,
     EcommerceCartComponent,
-    EcommercePaymentComponent
+    EcommercePaymentComponent,
+    LayoutModule
   ],
   templateUrl: './ecommerceStepper.component.html',
   styleUrl: './ecommerceStepper.component.css',
@@ -34,11 +37,20 @@ export class EcommerceStepperComponent implements OnInit {
   pedidosService = inject(PedidosService);
   ref = inject(ChangeDetectorRef);
   total: number = 0;
+  destroyed = new Subject<void>();
+  orientationStepper: StepperOrientation = 'horizontal'
 
   @ViewChild('stepper') private stepper!: MatStepper;
-  
-  constructor() {
 
+  constructor() {
+    inject(BreakpointObserver)
+      .observe([Breakpoints.Large])
+      .pipe(takeUntil(this.destroyed))
+      .subscribe(result => {
+        if (!result.matches) {
+          this.orientationStepper = 'vertical';
+        }
+      });
   }
 
   ngOnInit(): void {

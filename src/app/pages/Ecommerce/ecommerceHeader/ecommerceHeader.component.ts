@@ -80,6 +80,7 @@ export class EcommerceHeaderComponent extends BaseComponent implements OnInit {
     }
     if (currencyLocal) {
       this.currencySelected = Number(currencyLocal);
+      this.inventarioService.setCurrency.set(Number(currencyLocal))
     }
     this.routerActive.queryParams
       .subscribe(params => {
@@ -105,7 +106,6 @@ export class EcommerceHeaderComponent extends BaseComponent implements OnInit {
   }
 
   changeCurrency(currencyId: number) {
-    console.log(currencyId);
     localStorage.setItem('currencyId', currencyId.toString());
     this.inventarioService.setCurrency.set(currencyId)
     // this.inventarioService.getInventarioFiltradoAPI(this.category, this.product, currencyId.toString());

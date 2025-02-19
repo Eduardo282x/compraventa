@@ -33,7 +33,6 @@ export class EcommerceCartComponent implements OnInit {
   carritoService = inject(CarritoService);
   ref = inject(ChangeDetectorRef);
 
-
   @Output() returnTotal = new EventEmitter<number>();
 
   products: ICarritoAPI[] = [];
