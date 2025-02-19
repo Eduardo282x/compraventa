@@ -26,7 +26,7 @@ export const columns: IColumns<IAlmacen>[] = [
     },
     {
         title: "Precio",
-        name: (element: IAlmacen) => `${element.price},00 ${element.Moneda.symbol === 'USD' ? '$' : ''}`,
+        name: (element: IAlmacen) => `${element.price},00 ${element.Moneda.symbol}`,
         nameColumn: "price",
         type: "string",
         width: "100px",

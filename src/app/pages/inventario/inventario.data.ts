@@ -1,6 +1,7 @@
 import { IDataForm, IFormulario } from "../../interfaces/form.interface";
 import { IInventario } from "../../interfaces/producto.interface";
 import { IColumns } from "../../interfaces/table.interface";
+import { formatNumberWithDots } from "../../utils/formaters";
 
 export const columns: IColumns<IInventario>[] = [
     {
@@ -26,8 +27,8 @@ export const columns: IColumns<IInventario>[] = [
     },
     {
         title: 'Precio',
-        name: (element) => element.store.price,
-        nameColumn: 'prodPcompra',
+        name: (element) => formatNumberWithDots(element.store.price, '', `,00 ${element.store.Moneda.symbol}`),
+        nameColumn: 'price',
         type: 'string',
         width: 'w-20',
     },
