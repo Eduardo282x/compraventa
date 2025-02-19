@@ -21,4 +21,4 @@ export interface IOptions {
 }
 
 
-export type InputsTypes = 'text' | 'number' | 'date' | 'select' | 'checkbox' | 'selectText' | '';
+export type InputsTypes = 'text' | 'number' | 'date' | 'select' | 'checkbox' | 'selectText' | 'image' | '';

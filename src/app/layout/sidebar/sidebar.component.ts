@@ -1,18 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit } from '@angular/core';
 import { IMenu } from '../../interfaces/menu.interface';
 import { BaseComponent } from '../../pages/base/base.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { IUser } from '../../interfaces/users.interface';
+import { MatBadgeModule } from '@angular/material/badge';
+import { CarritoService } from '../../services/carrito.service';
+import { PedidosService } from '../../services/pedidos.service';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [MatIconModule, MatButtonModule],
+  imports: [MatIconModule, MatButtonModule, MatBadgeModule],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent extends BaseComponent implements OnInit {
+
+  countPedidos: number = 0;
+  pedidosService = inject(PedidosService);
+
   menu: IMenu[] = [
     {
       label: 'Dashboard',
@@ -42,6 +49,7 @@ export class SidebarComponent extends BaseComponent implements OnInit {
       label: 'Pedidos',
       icon: 'shopping_cart',
       redirectTo: '/pedidos',
+      includeBagde: true,
       permission: ['Administrador', 'Gerente', 'Vendedor']
     },
     {
@@ -88,7 +96,15 @@ export class SidebarComponent extends BaseComponent implements OnInit {
     },
   ];
 
+  constructor() {
+    super();
+    effect(() => {
+      this.countPedidos = this.pedidosService.getPedidos().filter(sta => sta.status === 'Creado').length;
+    })
+  }
+
   ngOnInit(): void {
+    this.pedidosService.getPedidosAPI();
     const getUserInfo: IUser = JSON.parse(localStorage.getItem('userToken') as string);
     if (getUserInfo) {
       this.menu = this.menu.filter(me => me.permission.includes(getUserInfo.rol.rol));

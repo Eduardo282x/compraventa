@@ -5,6 +5,7 @@ import { IPedidos } from '../../interfaces/pedidos.interface';
 import { CurrencyPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { getImageUrl } from '../Ecommerce/card/card.component';
 
 export type statusOrders = 'Creado' | 'Aprobado' | 'Denegado' | 'Eliminado';
 
@@ -36,10 +37,14 @@ export class PedidosComponent implements OnInit {
   }
 
   setClassName(status: statusOrders): string {
-    if(status === 'Aprobado') return 'text-green-600';
-    if(status === 'Denegado') return 'text-red-600';
-    if(status === 'Creado') return 'text-blue-600';
+    if (status === 'Aprobado') return 'text-green-600';
+    if (status === 'Denegado') return 'text-red-600';
+    if (status === 'Creado') return 'text-blue-600';
     return 'text-black';
+  }
+
+  getImageUrl2(image: string) {
+    return getImageUrl(image)
   }
 
   updatePedido(pedido: IPedidos, status: statusOrders) {
@@ -52,6 +57,6 @@ export class PedidosComponent implements OnInit {
 
   generateBill() {
     console.log('Imprimir');
-    
+
   }
 }

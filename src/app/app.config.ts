@@ -6,12 +6,14 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { baseInterceptor } from './interceptors/Base.interceptor';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
+import { provideNativeDateAdapter } from '@angular/material/core';
 // import { BarController, Colors, Legend } from 'chart.js';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes), 
+    provideNativeDateAdapter(),
     provideCharts(withDefaultRegisterables()),
     provideAnimationsAsync(),
     provideHttpClient(

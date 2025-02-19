@@ -9,7 +9,7 @@ export interface IColumns<T> {
     color?: string;
 }
 
-export type typesColumns = 'string' | 'icon' | 'date' | 'boolean' | 'iconData';
+export type typesColumns = 'string' | 'icon' | 'date' | 'boolean' | 'iconData' | 'expired';
 
 
 export interface ISendDataTable {

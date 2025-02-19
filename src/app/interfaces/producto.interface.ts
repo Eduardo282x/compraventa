@@ -9,6 +9,7 @@ export interface IAlmacen {
     price: number;
     amount: number;
     expirationDate: Date;
+    expirationDate2: string;
     img: string;
     createDate: Date;
     providerId: number;
@@ -41,23 +42,26 @@ export interface Unidad {
     unit: string;
 }
 
-
 export interface BodyInventario {
-    catId: number;
-    prodNom: string;
-    prodDescrip?: string;
-    prodPcompra: number;
-    prodPventa: number;
-    prodStock?: number;
-    prodFechaven: Date;
-    prodImg?: string;
-    status?: boolean;
-    MonedaMonId?: number;
-    SucursalSucId?: number;
-    UnidadUndId?: number;
+    categoryId: number;
+    name: string;
+    description: string;
+    price: number;
+    currencyId: number;
+    amount: number;
+    providerId: number;
+    image: null;
+    unit: number;
+    unitId: number;
+    expirationDate: Date;
+    file: string;
+    id: number;
 }
 
-export interface BodyUpdateInventory extends BodyInventario {
+export type BodyInventarioType = 'categoryId' | 'name' | 'description' | 'price' | 'currencyId' | 'amount' | 'providerId' | 'image' | 'unit' | 'unitId' | 'expirationDate' | 'file' | 'id';
+
+
+    export interface BodyUpdateInventory extends BodyInventario {
     prodId: number;
 }
 

@@ -1,0 +1,61 @@
+<div class="profile-container">
+    <h1>👤 Perfil del Cliente</h1>
+    <form [formGroup]="clientRegisterForm" class="p-5 border-b-2">
+        <div class="flex lg:flex-row flex-col items-center justify-between gap-2 w-full">
+            <div class="w-full lg:w-1/2">
+                <label>Nombre</label>
+                <input
+                    class="w-full outline-none py-2 px-6 rounded-2xl my-2 focus:border-blue-500 focus:border"
+                    type="text"
+                    formControlName="clientName" />
+            </div>
+    
+            <div class="w-full lg:w-1/2">
+                <label>Apellido</label>
+                <input
+                    class="w-full outline-none py-2 px-6 rounded-2xl my-2 focus:border-blue-500 focus:border"
+                    type="text"
+                    formControlName="clientLastName" />
+            </div>
+        </div>
+        <div class="flex lg:flex-row flex-col items-center justify-between gap-2 w-full">
+            <div class="w-full lg:w-1/2">
+                <label>Cédula</label>
+                <input
+                    class="w-full outline-none py-2 px-6 rounded-2xl my-2 focus:border-blue-500 focus:border"
+                    type="text"
+                    formControlName="clientRif" />
+            </div>
+    
+            <div class="w-full lg:w-1/2">
+                <label>Teléfono</label>
+                <input
+                    class="w-full outline-none py-2 px-6 rounded-2xl my-2 focus:border-blue-500 focus:border"
+                    type="text"
+                    formControlName="clientPhone" />
+            </div>
+        </div>
+    
+        <div>
+            <label>Correo Electrónico</label>
+            <input
+                class="w-full outline-none py-2 px-6 rounded-2xl my-2 focus:border-blue-500 focus:border"
+                type="text"
+                placeholder="correo@correo.com"
+                formControlName="clientAddress" />
+        </div>
+    
+        <div>
+            <label>Dirección</label>
+            <input
+                class="w-full outline-none py-2 px-6 rounded-2xl my-2 focus:border-blue-500 focus:border"
+                type="text"
+                formControlName="clientEmail" />
+        </div>
+    
+        <button mat-flat-button class="mt-5 w-full !text-base"
+            (click)="onSubmit()">Actualizar</button>
+    
+    </form>
+    
+</div>

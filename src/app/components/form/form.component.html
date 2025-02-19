@@ -1,4 +1,5 @@
-<div class="p-4 w-full px-16 h-[80vh] overflow-y-auto flex flex-col items-center justify-start gap-5 overflow-x-hidden">
+<div
+    class="p-4 w-full px-16 h-[80vh] overflow-y-auto flex flex-col items-center justify-start gap-5 overflow-x-hidden">
     <p class="text-center text-2xl font-semibold">{{formData.title}}</p>
     <form [formGroup]="globalForm" (submit)="onSubmit()" class="w-full">
         @for (item of formData.dataForm; track $index) {
@@ -25,11 +26,31 @@
             </mat-select>
         </mat-form-field>
         }
+        @if (item.typeInput === 'image') {
+        <div cdkDropList class="drag-drop-container"
+            (drop)="onDrop($event)"
+            (dragover)="onDragOver($event)"
+            (dragleave)="onDragLeave($event)">
+
+            @if(!imagePreview){
+                <p>Arrastra una imagen aquí o haz clic para subir</p>
+            }
+            
+            @if (imagePreview) {
+                <img [src]="imagePreview"
+                class="preview-img" />
+            }
+
+            <input type="file" (change)="onFileSelected($event)"
+                accept="image/*" class="hidden-file-input">
+        </div>
+        }
         @if (item.typeInput === 'selectText' && item.formControl2) {
         <div class="w-full flex items-center justify-between gap-5 ">
             <mat-form-field appearance="outline" class="w-full">
                 <mat-label>{{item.label}}</mat-label>
-                <input matInput type="number" [formControlName]="item.formControl">
+                <input matInput type="number"
+                    [formControlName]="item.formControl">
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="w-1/3">

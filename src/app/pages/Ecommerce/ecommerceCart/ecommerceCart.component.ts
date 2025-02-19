@@ -9,6 +9,7 @@ import { CurrencyPipe } from '@angular/common';
 import { CarritoService } from '../../../services/carrito.service';
 import { ICliente } from '../../../interfaces/cliente.interface';
 import { ICarritoAPI } from '../../../interfaces/carrito.interface';
+import { getImageUrl } from '../card/card.component';
 
 type ActionButton = 'plus' | 'remove';
 
@@ -54,6 +55,10 @@ export class EcommerceCartComponent implements OnInit {
   ngOnInit(): void {
     const cliente: ICliente = JSON.parse(localStorage.getItem('clientToken') as string);
     this.carritoService.getCarritoAPI(cliente.id.toString());
+  }
+
+  getImageUrl2(image: string) {
+    return getImageUrl(image)
   }
 
   changeAmountProduct(product: ICarritoAPI, action: ActionButton) {

@@ -37,6 +37,9 @@ export class EcommerceSidebarComponent extends BaseComponent implements OnInit {
   goPedidos(){
     this.router.navigate(['/comercio/pedidos'])
   }
+  goMyProfile(){
+    this.router.navigate(['/comercio/perfil'])
+  }
 
   logoutClient() {
     this.authService.clientInfo.set(null);

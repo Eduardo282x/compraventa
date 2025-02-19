@@ -60,6 +60,18 @@
                     </td>
                 </ng-container>
                 }
+                @if (item.type == 'expired') {
+                <ng-container matColumnDef="{{ item.nameColumn }}">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header [class]="styleHead(item.width)">
+                        {{ item.title }}
+                    </th>
+                    <td mat-cell *matCellDef="let row" [class]="item.width"  (click)="editDataDialog(row, item.nameColumn)">
+                        <div [className]="setClassName(item.name(row).toString())">
+                            <span>{{item.name(row)}} meses</span>
+                        </div>
+                    </td>
+                </ng-container>
+                }
                 @if (item.type == 'date') {
                 <ng-container matColumnDef="{{ item.nameColumn }}">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header [class]="styleHead(item.width)">

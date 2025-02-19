@@ -71,11 +71,48 @@ export class TableComponent extends BaseComponent implements OnInit, AfterViewIn
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataTable && this.dataTable.length > 0) {
+      const filterColumn = this.columns.filter((col: IColumns<any>) => col.type == 'string');
+      const filtersKey = filterColumn.map((col: IColumns<any>) => col.nameColumn);
+
+      const filterSearch = filtersKey.map((col: string) => {
+        return (
+          this.dataTable.filter((fil) => {
+            const splitWord = col.split('.');
+            if (splitWord.length == 1) {
+              return (fil[splitWord[0]].toString().toLowerCase().includes(filterValue.toLowerCase()))
+            }
+            if (splitWord.length == 2) {
+              return (fil[splitWord[0]][splitWord[1]].toString().toLowerCase().includes(filterValue.toLowerCase()))
+            }
+            if (splitWord.length == 3) {
+              return (fil[splitWord[0]][splitWord[1]][splitWord[2]].toString().toLowerCase().includes(filterValue.toLowerCase()))
+            }
+            return (fil[col].toString().toLowerCase().includes(filterValue.toLowerCase()))
+          }
+          )
+        )
+      }).flat();
+
+      const reduceFilter = new Set(filterSearch);
+      const result = [...reduceFilter];
+      console.log(result);
+      
+      this.dataSource.data = result;
+    }
+    // this.dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  setClassName(numberExpired: string): string {
+    if (Number(numberExpired) <= 1) return 'text-center px-4 py-2 rounded-full bg-red-600';
+    if (Number(numberExpired) <= 3) return 'text-center px-4 py-2 rounded-full bg-orange-600';
+    if (Number(numberExpired) <= 6) return 'text-center px-4 py-2 rounded-full bg-yellow-600';
+    return 'text-black';
   }
 
   redirectLink(rowLink: any): void {

@@ -6,7 +6,7 @@ import { BodyInventario, BodyUpdateInventory, IInventario, Moneda, Unidad, IAlma
 @Injectable({
   providedIn: 'root'
 })
-export class InventarioService extends BaseService{
+export class InventarioService extends BaseService {
 
   private setAlmacen = signal<IAlmacen[]>([]);
   public getAlmacen = computed<IAlmacen[]>(() => this.setAlmacen());
@@ -53,13 +53,55 @@ export class InventarioService extends BaseService{
     })
   }
 
-  postInventarioAPI(Inventario: BodyInventario): void {
-    this.httpClient.post<BaseResponse>(`${this.base_api_url}/producto`, Inventario).subscribe((response: BaseResponse) => {
+  postInventarioAPI(Inventario: BodyInventario, base64String: string, fileName: string): void {
+    const formData = new FormData();
+    const file = this.base64ToFile(base64String, fileName);
+
+    if (file) {
+      formData.append('file', file);
+    }
+
+    // Agregar los demás valores como parte del formulario
+    Object.entries(Inventario).forEach(([key, value]) => {
+      if (key !== 'file' && value !== null && value !== undefined) {
+        formData.append(key, value.toString());
+      }
+    });
+
+    this.httpClient.post<BaseResponse>(`${this.base_api_url}/producto`, formData).subscribe((response: BaseResponse) => {
       this.getAlmacenAPI();
-    })
+    });
+
   }
-  putInventarioAPI(Inventario: BodyUpdateInventory): void {
-    this.httpClient.put<BaseResponse>(`${this.base_api_url}/producto`, Inventario).subscribe((response: BaseResponse) => {
+
+  base64ToFile(base64String: string, fileName: string): File {
+    const byteCharacters = atob(base64String.split(',')[1]);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    const fileType = base64String.split(';')[0].split(':')[1]; // Obtener el tipo MIME
+    return new File([byteArray], fileName, { type: fileType });
+  }
+
+  putInventarioAPI(Inventario: BodyUpdateInventory, base64String: string, fileName: string): void {
+
+    const formData = new FormData();
+    const file = this.base64ToFile(base64String, fileName);
+
+    if (file) {
+      formData.append('file', file);
+    }
+
+    // Agregar los demás valores como parte del formulario
+    Object.entries(Inventario).forEach(([key, value]) => {
+      if (key !== 'file' && value !== null && value !== undefined) {
+        formData.append(key, value.toString());
+      }
+    });
+
+    this.httpClient.put<BaseResponse>(`${this.base_api_url}/producto`, formData).subscribe((response: BaseResponse) => {
       this.getAlmacenAPI();
     })
   }

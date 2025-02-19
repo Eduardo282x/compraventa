@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { CurrencyPipe } from '@angular/common';
 import { ICliente } from '../../../interfaces/cliente.interface';
+import { getImageUrl } from '../card/card.component';
 
 @Component({
   selector: 'app-pedidos-cliente',
@@ -33,15 +34,19 @@ export class PedidosClienteComponent {
 
   ngOnInit(): void {
     const cliente: ICliente = JSON.parse(localStorage.getItem('clientToken') as string);
-    if(cliente){
+    if (cliente) {
       this.pedidosServices.getPedidosByClientAPI(cliente.id);
     }
   }
 
+  getImageUrl2(image: string) {
+    return getImageUrl(image)
+  }
+
   setClassName(status: statusOrders): string {
-    if(status === 'Aprobado') return 'text-green-600';
-    if(status === 'Denegado') return 'text-red-600';
-    if(status === 'Creado') return 'text-blue-600';
+    if (status === 'Aprobado') return 'text-green-600';
+    if (status === 'Denegado') return 'text-red-600';
+    if (status === 'Creado') return 'text-blue-600';
     return 'text-black';
   }
 

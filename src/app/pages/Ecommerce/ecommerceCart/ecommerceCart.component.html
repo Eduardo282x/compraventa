@@ -4,9 +4,16 @@
   <div class="flex flex-col lg:flex-row items-center justify-between rounded-md border-2 px-4 py-4 w-full">
     <div class="flex items-center justify-center gap-4">
       <div class="w-16 h-16 rounded-full overflow-hidden border-blue-700 border-2">
-        <img
-        src="https://imgs.search.brave.com/1DQO1zG_1--CWFG3pa4JDNv7SxB9yUpnjOnFxwDnUAQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZmFybWFjaWFzZGly/ZWN0LmVzL2Nkbi9z/aG9wL2ZpbGVzL2Zp/dG9jb25jZW50cmFk/by1lcXVpbmFjZWEt/YWJvY2EtNTAwLW1n/LTUwLWNhcHN1Lndl/YnA_dj0xNzI1MDUx/ODkxJndpZHRoPTUz/Mw"
-        alt="Producto" class="w-full h-full object-cover">
+        @if(item.producto.store.img){
+          <img
+          [src]="getImageUrl2(item.producto.store.img)"
+          alt="Producto"
+          class="w-full h-48 object-cover">
+      } @else {
+          <img
+              src="https://imgs.search.brave.com/1DQO1zG_1--CWFG3pa4JDNv7SxB9yUpnjOnFxwDnUAQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZmFybWFjaWFzZGly/ZWN0LmVzL2Nkbi9z/aG9wL2ZpbGVzL2Zp/dG9jb25jZW50cmFk/by1lcXVpbmFjZWEt/YWJvY2EtNTAwLW1n/LTUwLWNhcHN1Lndl/YnA_dj0xNzI1MDUx/ODkxJndpZHRoPTUz/Mw"
+              alt="Producto" class="w-full h-48 object-cover">
+      }
       </div>
       
       <div>
@@ -16,7 +23,7 @@
         <div class="flex items-center justify-start gap-2">
           <button [disabled]="item.amount === 1" (click)="changeAmountProduct(item, 'remove')" class="disabled:bg-gray-500 rounded-full w-8 h-8 text-white bg-red-600">-</button>
           <span class="border py-2 px-4">{{item.amount}}</span>
-          <button [disabled]="item.amount === item.producto.amount" (click)="changeAmountProduct(item, 'plus')" class=" rounded-full w-8 h-8 text-white bg-blue-600">+</button>
+          <button [disabled]="item.amount === item.producto.amount" (click)="changeAmountProduct(item, 'plus')" class="disabled:bg-gray-500 rounded-full w-8 h-8 text-white bg-blue-600">+</button>
         </div>
       </div>
     </div>

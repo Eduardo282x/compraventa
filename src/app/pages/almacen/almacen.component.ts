@@ -5,7 +5,7 @@ import { TableComponent } from '../../components/table/table.component';
 import { IEmpresas } from '../../interfaces/empresa.interface';
 import { IColumns, ISendDataTable } from '../../interfaces/table.interface';
 import { BaseComponent } from '../base/base.component';
-import { columns, dataFormAlmacen, dataFormAlmacenIncrease, formDataAlmacen, formDataAlmacenIncrease } from './almacen.data';
+import { calcularDiferenciaMeses, columns, dataFormAlmacen, dataFormAlmacenIncrease, formDataAlmacen, formDataAlmacenIncrease } from './almacen.data';
 import { InventarioService } from '../../services/inventario.service';
 import { ProveedorService } from '../../services/proveedor.service';
 import { CategoryService } from '../../services/category.service';
@@ -31,7 +31,12 @@ export class AlmacenComponent extends BaseComponent implements OnInit {
   constructor() {
     super();
     effect(() => {
-      this.dataTable = this.inventoryService.getAlmacen();
+      this.dataTable = this.inventoryService.getAlmacen().map(pro => {
+        return {
+          ...pro,
+          expirationDate2: calcularDiferenciaMeses(pro.expirationDate.toString())
+        }
+      });
 
       const copyDataFormIncrease = [...dataFormAlmacenIncrease];
 
@@ -131,7 +136,21 @@ export class AlmacenComponent extends BaseComponent implements OnInit {
   openDialog(): void {
     const setValues = [...dataFormAlmacen];
     setValues.map(form => {
-      form.value = form.typeInput === 'text' ? '' : false
+      if (form.typeInput === 'text') {
+        form.value = '';
+      }
+      if (form.typeInput === 'number') {
+        form.value = 0;
+      }
+      if (form.typeInput === 'date') {
+        form.value = new Date();
+      }
+      if (form.typeInput === 'select') {
+        form.value = 0;
+      }
+      if (form.typeInput === 'checkbox') {
+        form.value = false;
+      }
     });
 
     formDataAlmacen.dataForm = setValues;
@@ -143,7 +162,7 @@ export class AlmacenComponent extends BaseComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.inventoryService.postInventarioAPI(result);
+      this.inventoryService.postInventarioAPI(result.form, result.base64Image,result.fileName);
     })
   }
 
@@ -151,7 +170,7 @@ export class AlmacenComponent extends BaseComponent implements OnInit {
     const setValues = [...dataFormAlmacen];
     setValues.map(form => {
       form.value = data[form.formControl]
-      if(form.formControl2){
+      if (form.formControl2) {
         form.value2 = data[form.formControl2]
       }
     });
@@ -165,10 +184,12 @@ export class AlmacenComponent extends BaseComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      result.price = Number(data.price);
-      result.unit = Number(data.unit);
-      result.id = data.id;
-      this.inventoryService.putInventarioAPI(result);
+      // result.price = Number(data.price);
+      // result.unit = Number(data.unit);
+      result.form.id = data.id.toString();
+      // this.inventoryService.putInventarioAPI(result);
+      
+      this.inventoryService.putInventarioAPI(result.form, result.base64Image,result.fileName);
     })
   }
 

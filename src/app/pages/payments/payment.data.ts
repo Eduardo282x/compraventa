@@ -13,7 +13,7 @@ export const columns: IColumns<IPayments>[] = [
     {
         title: 'Razón Social',
         name: (element) => formatNumberWithDots(element.identifyPayer,'V-',''),
-        nameColumn: 'clientRif',
+        nameColumn: 'identifyPayer',
         type: 'string',
         width: 'w-[15%]'
     },

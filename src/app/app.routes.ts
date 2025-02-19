@@ -20,6 +20,7 @@ import { MetodosPagosComponent } from './pages/metodosPagos/metodosPagos.compone
 import { PaymentsComponent } from './pages/payments/payments.component';
 import { PedidosClienteComponent } from './pages/Ecommerce/pedidosCliente/pedidosCliente.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ClientProfileComponent } from './pages/Ecommerce/clientProfile/clientProfile.component';
 
 export const routes: Routes = [
     {
@@ -99,6 +100,10 @@ export const routes: Routes = [
             {
                 path: 'carrito',
                 component: EcommerceStepperComponent
+            },
+            {
+                path: 'perfil',
+                component: ClientProfileComponent
             },
             {
                 path: 'pedidos',

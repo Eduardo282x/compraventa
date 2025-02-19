@@ -1,7 +1,7 @@
 import { Component, effect, inject, Input, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { IInventario, Moneda } from '../../../interfaces/producto.interface';
-import { CurrencyPipe } from '@angular/common';
+import { AsyncPipe, CurrencyPipe } from '@angular/common';
 import { CarritoService } from '../../../services/carrito.service';
 import { ICliente } from '../../../interfaces/cliente.interface';
 import { InventarioService } from '../../../services/inventario.service';
@@ -11,9 +11,12 @@ export interface ICarrito {
   amount: number;
 }
 
+const backendUrl = 'http://localhost:3000/uploads'; // URL base del backend
+
+
 @Component({
   selector: 'app-card',
-  imports: [MatButtonModule, CurrencyPipe],
+  imports: [MatButtonModule, CurrencyPipe, AsyncPipe],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css',
 })
@@ -23,12 +26,10 @@ export class CardComponent implements OnInit {
   inventarioService = inject(InventarioService);
   currencyLocal: string = 'USD';
 
+
   constructor() {
     effect(() => {
-      const currencyId = localStorage.getItem('currencyId');
       const changeCurrency = this.inventarioService.getCurrency();
-      console.log(changeCurrency);
-      
       const currencySelected = this.inventarioService.getMoneda().find(cu => cu.id === Number(changeCurrency));
       if (currencySelected) {
         this.currencyLocal = currencySelected.symbol;
@@ -54,6 +55,10 @@ export class CardComponent implements OnInit {
     } else {
       this.addCarrito(product);
     }
+  }
+
+  getImageUrl2(image: string){
+    return getImageUrl(image)
   }
 
   addCarrito(product: IInventario) {
@@ -87,4 +92,33 @@ export class CardComponent implements OnInit {
 
     this.carritoService.postCarritosAPI(bodyCarrito, cliente.id.toString())
   }
+
+  async returnPriceConvert(product: IInventario): Promise<number> {
+    let precio = parseFloat(product.store.price.toString());
+
+    // if (product.store.Moneda.symbol !== this.currencyLocal) {
+    //   let tasaCambio = await this.obtenerTasaCambio(product.store.Moneda.symbol, this.currencyLocal);
+    //   let precioConvertido = (precio * tasaCambio).toFixed(2);
+    //   return Number(precioConvertido);
+    // } else {
+    //   return product.store.price;
+    // }
+
+    return product.store.price;
+  }
+
+  async obtenerTasaCambio(from: string, to: string) {
+    try {
+      let response = await fetch(`https://api.exchangerate-api.com/v4/latest/${from}`);
+      let data = await response.json();
+      return data.rates[to] || 1;
+    } catch (error) {
+      console.error("Error obteniendo la tasa de cambio:", error);
+      return 1; // Retorna 1 en caso de error para evitar fallos en la conversión
+    }
+  }
+}
+
+export const getImageUrl = (imgPath: string): string => {
+  return imgPath ? `${backendUrl}/${imgPath}` : 'assets/default-image.jpg';
 }

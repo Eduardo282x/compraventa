@@ -13,7 +13,7 @@ export const columns: IColumns<ISucursales>[] = [
     {
         title: 'Empresa',
         name: (element) => element.empresa.companyName,
-        nameColumn: 'companyName',
+        nameColumn: 'empresa.companyName',
         type: 'string',
         width: 'w-[30%]'
     },

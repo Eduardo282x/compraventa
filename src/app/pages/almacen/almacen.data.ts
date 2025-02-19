@@ -20,7 +20,7 @@ export const columns: IColumns<IAlmacen>[] = [
     {
         title: "Categoría",
         name: (element: IAlmacen) => element.category.category,
-        nameColumn: "category",
+        nameColumn: "category.category",
         type: "string",
         width: "150px"
     },
@@ -42,7 +42,7 @@ export const columns: IColumns<IAlmacen>[] = [
     {
         title: "Proveedor",
         name: (element: IAlmacen) => element.provider.name,
-        nameColumn: "provider",
+        nameColumn: "provider.name",
         type: "string",
         width: "200px"
     },
@@ -60,13 +60,13 @@ export const columns: IColumns<IAlmacen>[] = [
         type: "date",
         width: "150px"
     },
-    // {
-    //     title: "Control de caducidad",
-    //     name: (element: IAlmacen) => calcularDiferenciaMeses(element.expirationDate),
-    //     nameColumn: "expirationDate",
-    //     type: "date",
-    //     width: "150px"
-    // },
+    {
+        title: "Control de caducidad",
+        name: (element: IAlmacen) => element.expirationDate2,
+        nameColumn: "expirationDate2",  
+        type: "expired",
+        width: "150px"
+    },
     {
         title: "Fecha de Creación",
         name: (element: IAlmacen) => element.createDate,
@@ -135,6 +135,13 @@ export const dataFormAlmacen: IDataForm[] = [
         typeInput: "select",
         label: "Proveedor",
         formControl: "providerId",
+        required: true,
+        value: 0
+    },
+    {
+        typeInput: "image",
+        label: "Imagen",
+        formControl: "image",
         required: true,
         value: 0
     },

@@ -9,5 +9,4 @@ export class AuthService extends BaseService {
 
   public clientInfo = signal<ICliente | null>(null);
   public setClientInfo = computed<ICliente | null>(() => this.clientInfo()); 
-
 }

@@ -19,6 +19,7 @@ import { Moneda } from '../../../interfaces/producto.interface';
 import { SucursalesService } from '../../../services/sucursales.service';
 import { ISucursales } from '../../../interfaces/sucursales.interface';
 import { MatSelectModule } from '@angular/material/select';
+import { ClienteService } from '../../../services/clients.service';
 
 @Component({
   selector: 'app-ecommerce-header',
@@ -47,6 +48,7 @@ export class EcommerceHeaderComponent extends BaseComponent implements OnInit {
   authService = inject(AuthService);
   inventarioService = inject(InventarioService);
   sucursalService = inject(SucursalesService);
+  clienteService = inject(ClienteService);
 
   private _bottomSheet = inject(MatBottomSheet);
   carritoService = inject(CarritoService);
@@ -61,7 +63,7 @@ export class EcommerceHeaderComponent extends BaseComponent implements OnInit {
       if (this.carritoService.getCarrito().length === 0) {
         this.articlesCarrito = this.carritoService.getCarritoApi().length;
       }
-      this.clientInfo = this.authService.setClientInfo();
+      this.clientInfo = this.clienteService.getClienteById();
       this.moneda = this.inventarioService.getMoneda();
       this.sucursal = this.sucursalService.getSucursales();
       this.ref.detectChanges();
@@ -75,6 +77,12 @@ export class EcommerceHeaderComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     const sucursalLocal = localStorage.getItem('sucursalId');
     const currencyLocal = localStorage.getItem('currencyId');
+
+    const client: ICliente = JSON.parse(localStorage.getItem('clientToken') as string);
+    if (client) {
+      this.clienteService.getClienteByIdAPI(client.id)
+    }
+
     if (sucursalLocal) {
       this.sucursalSelected = Number(sucursalLocal);
     }
