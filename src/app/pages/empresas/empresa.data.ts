@@ -11,7 +11,7 @@ export const columns: IColumns<IEmpresas>[] = [
         width: 'w-[30%]'
     },
     {
-        title: 'Rif',
+        title: 'Rut',
         name: (element) => element.companyRuc,
         nameColumn: 'companyRuc',
         type: 'string',
@@ -66,7 +66,7 @@ export const dataFormEmpresa: IDataForm[] = [
     },
     {
         typeInput: 'text',
-        label: 'Ruc',
+        label: 'Rut',
         formControl: 'companyRuc',
         required: true,
         value: '',

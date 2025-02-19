@@ -7,8 +7,8 @@ import { inject, Injectable } from '@angular/core';
 export class BaseService {
 
   httpClient = inject(HttpClient);
-  base_api_url = 'https://r31q79nx-3000.use2.devtunnels.ms';  
-  // base_api_url = 'http://localhost:3000';  
+  // base_api_url = 'https://r31q79nx-3000.use2.devtunnels.ms';  
+  base_api_url = 'http://localhost:3000';  
 
   constructor() { }
 }
