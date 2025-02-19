@@ -56,7 +56,6 @@ export const columns: IColumns<IInventario>[] = [
     }
 ];
 
-
 export const dataFormInventario: IDataForm[] = [
     {
         typeInput: 'select',

@@ -26,13 +26,13 @@ export class ClientRegisterComponent {
   }
 
   clientRegisterForm = new FormGroup({
-    cliNombre: new FormControl('', [Validators.required]),
-    cliApellido: new FormControl('', [Validators.required]),
-    cliRif: new FormControl('', [Validators.required]),
-    cliTelefono: new FormControl('', [Validators.required]),
-    cliDireccion: new FormControl('', [Validators.required]),
-    cliCorreo: new FormControl('', [Validators.required]),
-    cliPassword: new FormControl('', [Validators.required]),
+    clientName: new FormControl('', [Validators.required]),
+    clientLastName: new FormControl('', [Validators.required]),
+    clientRif: new FormControl('', [Validators.required]),
+    clientPhone: new FormControl('', [Validators.required]),
+    clientAddress: new FormControl('', [Validators.required]),
+    clientEmail: new FormControl('', [Validators.required]),
+    clientPassword: new FormControl('', [Validators.required]),
   });
 
   onSubmit() {

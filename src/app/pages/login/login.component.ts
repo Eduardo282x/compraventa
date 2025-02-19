@@ -81,7 +81,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
       if(response.success == true){
         localStorage.setItem('userToken', JSON.stringify(response.userData));
         setTimeout(() => {
-          this.router.navigate(['/']);
+          this.router.navigate(['/home']);
         }, 3000);
       }
     })

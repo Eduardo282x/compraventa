@@ -12,7 +12,7 @@ export const columns: IColumns<IProveedor>[] = [
         width: 'w-[30%]',
     },
     {
-        title: 'RUC',
+        title: 'RUT',
         name: (element: IProveedor) => element.ruc,
         nameColumn: 'ruc',
         type: 'string',
@@ -66,7 +66,7 @@ export const columns: IColumns<IProveedor>[] = [
 
 export const proveedoresDataForm: IDataForm[] = [
     { typeInput: 'text', label: 'Nombre Proveedor', formControl: 'name', required: true, value: '' },
-    { typeInput: 'text', label: 'RUC', formControl: 'ruc', required: true, value: '' },
+    { typeInput: 'text', label: 'RUT', formControl: 'ruc', required: true, value: '' },
     { typeInput: 'text', label: 'Teléfono', formControl: 'phone', required: true, value: '' },
     { typeInput: 'text', label: 'Dirección', formControl: 'address', required: true, value: '' },
     { typeInput: 'text', label: 'Correo Electrónico', formControl: 'email', required: true, value: '' },

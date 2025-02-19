@@ -60,6 +60,13 @@ export const columns: IColumns<IAlmacen>[] = [
         type: "date",
         width: "150px"
     },
+    // {
+    //     title: "Control de caducidad",
+    //     name: (element: IAlmacen) => calcularDiferenciaMeses(element.expirationDate),
+    //     nameColumn: "expirationDate",
+    //     type: "date",
+    //     width: "150px"
+    // },
     {
         title: "Fecha de Creación",
         name: (element: IAlmacen) => element.createDate,
@@ -155,7 +162,6 @@ export const formDataAlmacen: IFormulario = {
     dataForm: dataFormAlmacen
 }
 
-
 export const dataFormAlmacenIncrease: IDataForm[] = [
     {
         typeInput: "select",
@@ -177,3 +183,12 @@ export const formDataAlmacenIncrease: IFormulario = {
     dataForm: dataFormAlmacenIncrease
 }
 
+export const calcularDiferenciaMeses = (expirationDate: string): number => {
+    const fechaExpiracion = new Date(expirationDate);
+    const fechaActual = new Date();
+
+    const diferenciaAnios = fechaExpiracion.getFullYear() - fechaActual.getFullYear();
+    const diferenciaMeses = fechaExpiracion.getMonth() - fechaActual.getMonth();
+
+    return diferenciaAnios * 12 + diferenciaMeses;
+}
