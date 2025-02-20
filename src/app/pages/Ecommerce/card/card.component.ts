@@ -95,16 +95,15 @@ export class CardComponent implements OnInit {
     this.carritoService.postCarritosAPI(bodyCarrito, cliente.id.toString())
   }
 
-  async returnPriceConvert(product: IInventario): Promise<number> {
-    let precio = parseFloat(product.store.price.toString());
-
-    // if (product.store.Moneda.symbol !== this.currencyLocal) {
-    //   let tasaCambio = await this.obtenerTasaCambio(product.store.Moneda.symbol, this.currencyLocal);
-    //   let precioConvertido = (precio * tasaCambio).toFixed(2);
-    //   return Number(precioConvertido);
-    // } else {
-    //   return product.store.price;
-    // }
+  returnPriceConvert(product: IInventario): number {
+    if(product.store.Moneda.symbol !== this.currencyLocal){
+      if(product.store.Moneda.symbol === 'USD' && this.currencyLocal === 'COP'){
+        return product.store.price * 4074
+      }
+      if(product.store.Moneda.symbol === 'COP' && this.currencyLocal === 'USD'){
+        return product.store.price / 4074
+      }
+    }
 
     return product.store.price;
   }
