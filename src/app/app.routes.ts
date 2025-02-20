@@ -21,6 +21,8 @@ import { PaymentsComponent } from './pages/payments/payments.component';
 import { PedidosClienteComponent } from './pages/Ecommerce/pedidosCliente/pedidosCliente.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ClientProfileComponent } from './pages/Ecommerce/clientProfile/clientProfile.component';
+import { PasswordComponent } from './pages/Ecommerce/password/password.component';
+import { ForgotPasswordComponent } from './pages/Ecommerce/forgotPassword/forgotPassword.component';
 
 export const routes: Routes = [
     {
@@ -30,6 +32,10 @@ export const routes: Routes = [
     {
         path: 'login/adm',
         component: LoginComponent
+    },
+    {
+        path: 'recuperar',
+        component: ForgotPasswordComponent
     },
     {
         path: '',
@@ -87,6 +93,10 @@ export const routes: Routes = [
                 path: 'sucursales',
                 component: SucursalesComponent
             },
+            {
+                path: 'contrasena',
+                component: PasswordComponent
+            }
         ]
     },
     {
@@ -104,6 +114,14 @@ export const routes: Routes = [
             {
                 path: 'perfil',
                 component: ClientProfileComponent
+            },
+            {
+                path: 'contrasena',
+                component: PasswordComponent
+            },
+            {
+                path: 'recuperar',
+                component: ForgotPasswordComponent
             },
             {
                 path: 'pedidos',

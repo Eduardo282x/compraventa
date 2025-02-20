@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -32,7 +32,8 @@ export class FormComponent extends BaseComponent implements OnInit {
   imagePreview: string | ArrayBuffer | null = null;
   base64Image: string = '';
   fileName: string = '';
-
+  @ViewChild('fileInput') fileInput!: ElementRef;
+  
   constructor(
     public dialogRef: MatDialogRef<FormComponent>,
     @Inject(MAT_DIALOG_DATA) public formData: IFormulario,
@@ -51,6 +52,10 @@ export class FormComponent extends BaseComponent implements OnInit {
       }
     });
     console.log(this.globalForm.value);
+  }
+
+  triggerFileInput() {
+    this.fileInput.nativeElement.click();
   }
 
   onSubmit(): void {
@@ -77,8 +82,11 @@ export class FormComponent extends BaseComponent implements OnInit {
   // }
 
   onFileSelected(event: any) {
+    console.log(event);
+    
     const file = event.target.files[0];
     if (file) {
+      this.handleFile(file)
       this.fileName = file.name;
       const reader = new FileReader();
       reader.readAsDataURL(file);

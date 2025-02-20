@@ -76,8 +76,6 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
   onSubmitLogin(): void {
     this.authService.httpClient.post<IResponseLogin>(`${this.authService.base_api_url}/auth`, this.loginForm.value as ILogin).subscribe((response: IResponseLogin) => {
-      console.log(response);
-      
       if(response.success == true){
         localStorage.setItem('userToken', JSON.stringify(response.userData));
         setTimeout(() => {
@@ -85,6 +83,10 @@ export class LoginComponent extends BaseComponent implements OnInit {
         }, 3000);
       }
     })
+  }
+
+  goBackupPassword(){
+    this.router.navigate(['/recuperar'])
   }
 
   show(): void {

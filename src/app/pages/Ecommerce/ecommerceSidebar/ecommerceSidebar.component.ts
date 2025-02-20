@@ -30,18 +30,21 @@ export class EcommerceSidebarComponent extends BaseComponent implements OnInit {
     })
   }
 
+  generateRandomIcon(): string {
+    const icons = ['local_pizza', 'fastfood', 'restaurant', 'local_cafe', 'emoji_food_beverage', 'liquor', 'icecream', 'cake', 'shopping_cart', 'storefront', 'local_mall', 'watch', 'smartphone', 'laptop_mac', 'headphones', 'sports_soccer', 'fitness_center', 'child_friendly', 'style', 'diamond',];
+    return icons[Math.floor(Math.random() * icons.length)];
+  }
+
   ngOnInit(): void {
     this.categoryService.getCategoryAPI()
   }
 
-  goPedidos(){
-    this.router.navigate(['/comercio/pedidos'])
-  }
-  goMyProfile(){
-    this.router.navigate(['/comercio/perfil'])
+  navigateTo(url: string) {
+    this.router.navigate([url])
   }
 
   logoutClient() {
+    this.router.navigate(['/comercio'])
     this.authService.clientInfo.set(null);
     localStorage.removeItem('clientToken')
   }

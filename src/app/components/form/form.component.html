@@ -30,6 +30,7 @@
         <div cdkDropList class="drag-drop-container"
             (drop)="onDrop($event)"
             (dragover)="onDragOver($event)"
+            (click)="triggerFileInput()"
             (dragleave)="onDragLeave($event)">
 
             @if(!imagePreview){
@@ -41,7 +42,7 @@
                 class="preview-img" />
             }
 
-            <input type="file" (change)="onFileSelected($event)"
+            <input type="file" #fileInput (change)="onFileSelected($event)"
                 accept="image/*" class="hidden-file-input">
         </div>
         }

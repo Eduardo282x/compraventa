@@ -1,6 +1,7 @@
 import { IDataForm, IFormulario } from "../../interfaces/form.interface";
 import { IColumns } from "../../interfaces/table.interface";
 import { IUser } from "../../interfaces/users.interface";
+import { formatNumberWithDots } from "../../utils/formaters";
 
 export const columns: IColumns<IUser>[] = [
     {
@@ -18,7 +19,14 @@ export const columns: IColumns<IUser>[] = [
         width: 'w-[30%]'
     },
     {
-        title: 'Usuario',
+        title: 'Cédula',
+        name: (element) => formatNumberWithDots(element.identify,'V-',''),
+        nameColumn: 'identify',
+        type: 'string',
+        width: 'w-[30%]'
+    },
+    {
+        title: 'Correo',
         name: (element) => element.email,
         nameColumn: 'email',
         type: 'string',
@@ -84,6 +92,13 @@ export const dataFormUsuarios: IDataForm[] = [
         typeInput: 'text',
         label: 'Apellido de Usuario',
         formControl: 'lastName',
+        required: true,
+        value: '',
+    },
+    {
+        typeInput: 'text',
+        label: 'Cédula',
+        formControl: 'identify',
         required: true,
         value: '',
     },

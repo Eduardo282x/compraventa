@@ -1,6 +1,6 @@
-<div
+<div [matTooltip]="product.store.description"
     class="w-[15rem] h-[19rem] bg-white rounded-2xl shadow-lg overflow-hidden cursor-pointer p-4 card">
-    @if(product.store.img){
+    @if(product.store.img !== ''){
         <img
         [src]="getImageUrl2(product.store.img)"
         alt="Producto"

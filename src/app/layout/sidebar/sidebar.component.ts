@@ -94,6 +94,12 @@ export class SidebarComponent extends BaseComponent implements OnInit {
       redirectTo: '/usuarios',
       permission: ['Administrador']
     },
+    {
+      label: 'Actualizar contraseña',
+      icon: 'password',
+      redirectTo: '/contrasena',
+      permission: ['Administrador','Gerente', 'Vendedor']
+    },
   ];
 
   constructor() {

@@ -3,11 +3,13 @@
     height: 200px;
     border: 2px dashed #888;
     display: flex;
+    border-radius: 1.5rem;
     align-items: center;
     justify-content: center;
     text-align: center;
     cursor: pointer;
     transition: 0.3s;
+    margin-bottom: 1rem;
 }
 
 .drag-drop-container:hover {

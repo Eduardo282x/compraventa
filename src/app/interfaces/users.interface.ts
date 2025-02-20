@@ -20,6 +20,7 @@ export interface IUser {
   name: string;
   lastName: string;
   email: string;
+  identify: string;
   password: string;
   status: boolean;
   rol: Rol;

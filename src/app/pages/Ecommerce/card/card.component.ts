@@ -6,6 +6,8 @@ import { CarritoService } from '../../../services/carrito.service';
 import { ICliente } from '../../../interfaces/cliente.interface';
 import { InventarioService } from '../../../services/inventario.service';
 
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 export interface ICarrito {
   id: number;
   amount: number;
@@ -16,7 +18,7 @@ const backendUrl = 'http://localhost:3000/uploads'; // URL base del backend
 
 @Component({
   selector: 'app-card',
-  imports: [MatButtonModule, CurrencyPipe],
+  imports: [MatButtonModule, CurrencyPipe,MatTooltipModule],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css',
 })
