@@ -3,5 +3,7 @@
 [title]="title" 
 [columns]="columns" 
 [dataTable]="dataTable" 
+[includeSelectorSucursal]="true"
+(emitSucursal)="getSucursal($event)"
 (sendData)="defectColumnAction($event)"
 ></app-table>

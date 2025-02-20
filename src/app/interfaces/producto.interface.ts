@@ -61,8 +61,8 @@ export interface BodyInventario {
 export type BodyInventarioType = 'categoryId' | 'name' | 'description' | 'price' | 'currencyId' | 'amount' | 'providerId' | 'image' | 'unit' | 'unitId' | 'expirationDate' | 'file' | 'id';
 
 
-    export interface BodyUpdateInventory extends BodyInventario {
-    prodId: number;
+export interface BodyUpdateInventory extends BodyInventario {
+    id: number;
 }
 
 export interface BodyIncreaseInventory {

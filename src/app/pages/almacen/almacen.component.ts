@@ -184,12 +184,13 @@ export class AlmacenComponent extends BaseComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // result.price = Number(data.price);
-      // result.unit = Number(data.unit);
-      result.form.id = data.id.toString();
-      // this.inventoryService.putInventarioAPI(result);
+      if(result.form){
+        result.form.id = data.id.toString();
+      } else {
+        result.id = data.id.toString();
+      }
       
-      this.inventoryService.putInventarioAPI(result.form, result.base64Image,result.fileName);
+      this.inventoryService.putInventarioAPI(result.form ? result.form : result, result.base64Image,result.fileName);
     })
   }
 

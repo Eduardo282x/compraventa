@@ -20,8 +20,9 @@ import { TableComponent } from '../../components/table/table.component';
 })
 export class InventarioComponent extends BaseComponent implements OnInit {
   columns: IColumns<IInventario>[] = columns;
-  dataTable: any[] = [];
+  dataTable: IInventario[] = [];
   title: string = 'Productos';
+  sucursalSelected: number = 1;
 
   sucursalService = inject(SucursalesService);
   categoryService = inject(CategoryService);
@@ -32,7 +33,7 @@ export class InventarioComponent extends BaseComponent implements OnInit {
     super();
     effect(() => {
       this.dataTable = this.inventarioService.getInventario();
-
+      
       const copyDataForm = [...dataFormInventario];
 
       const findFormStore = copyDataForm.find(form => form.formControl === 'storeId');
@@ -64,6 +65,10 @@ export class InventarioComponent extends BaseComponent implements OnInit {
     this.inventarioService.getInventarioAPI(1);
     this.inventarioService.getAlmacenAPI();
     this.sucursalService.getSucursalesAPI();
+  }
+
+  getSucursal(sucId: number) {
+    this.inventarioService.getInventarioAPI(sucId);
   }
 
   defectColumnAction(dataComponent: ISendDataTable): void {

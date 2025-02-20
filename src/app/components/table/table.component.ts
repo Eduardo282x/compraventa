@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild, effect, inject } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -10,6 +10,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { BaseComponent } from '../../pages/base/base.component';
 import { FormatDatePipe } from '../../pipes/FormatDate.pipe';
 import { IColumns, ISendDataTable, TypeActions } from '../../interfaces/table.interface';
+import { MatSelectModule } from '@angular/material/select';
+import { ISucursales } from '../../interfaces/sucursales.interface';
+import { SucursalesService } from '../../services/sucursales.service';
 
 @Component({
   selector: 'app-table',
@@ -23,7 +26,8 @@ import { IColumns, ISendDataTable, TypeActions } from '../../interfaces/table.in
     MatPaginatorModule,
     MatIconModule,
     MatButtonModule,
-    FormatDatePipe
+    FormatDatePipe,
+    MatSelectModule
   ],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
@@ -34,25 +38,43 @@ export class TableComponent extends BaseComponent implements OnInit, AfterViewIn
   @Input() dataTable: any[] = [];
   @Input() includeBtnAdd: boolean = true;
   @Input() secondBtn: string | null = null;
+  @Input() includeSelectorSucursal: boolean = false;
   @Input() title: string = '';
   @Input() iconTitle: string = '';
 
   @Output() sendData = new EventEmitter<ISendDataTable>();
+  @Output() emitSucursal = new EventEmitter<number>();
 
   // ref = inject(ChangeDetectorRef)
   displayedColumns: string[] = [];
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
-
+  sucursal: ISucursales[] = [];
+  sucursalService = inject(SucursalesService);
+  
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
+  constructor() {
+    super();
+    effect(() => {
+      this.sucursal = this.sucursalService.getSucursales();
+    })
+  }
 
   ngOnInit(): void {
     this.displayedColumns = this.columns.map(col => col.nameColumn);
     // this.dataSource = new MatTableDataSource([]);
+    if(this.includeSelectorSucursal){
+      this.sucursalService.getSucursalesAPI();
+    }
   }
 
   styleHead(styles: string | undefined): string {
     return `!bg-gray-300 font-bold text-xl ${styles}`
+  }
+
+  changeSucursal(sucId: number) {
+    this.emitSucursal.emit(sucId)
   }
 
   ngOnChanges(changes: SimpleChanges): void {

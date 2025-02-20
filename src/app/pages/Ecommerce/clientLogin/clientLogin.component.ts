@@ -40,6 +40,9 @@ export class ClientLoginComponent {
     });
   }
 
+  openBackupPassword() {
+    this._bottomSheetRef.dismiss('openBackupPassword');
+  }
   openRegister() {
     this._bottomSheetRef.dismiss('openClientRegister');
   }

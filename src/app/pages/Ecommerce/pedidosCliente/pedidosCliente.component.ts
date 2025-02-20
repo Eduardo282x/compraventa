@@ -58,4 +58,19 @@ export class PedidosClienteComponent {
     this.pedidosServices.putPedidosAPI(putPedido);
   }
 
+  generateBill(pedido: IPedidos) {
+    this.pedidosServices.descargarFactura(pedido.id).subscribe((blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `factura.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    }, error => {
+      console.error('Error al descargar la factura:', error);
+    });
+  }
+
 }

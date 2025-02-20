@@ -35,6 +35,7 @@ export class InventarioService extends BaseService {
     })
   }
 
+
   getInventarioFiltradoAPI(category: string, product: string, sucursalId: string): void {
     const url = `${this.base_api_url}/producto/filter?categoria=${category}&producto=${product}&sucursalId=${sucursalId}`
     this.httpClient.get<IInventario[]>(url).subscribe((response: IInventario[]) => {
@@ -55,9 +56,9 @@ export class InventarioService extends BaseService {
 
   postInventarioAPI(Inventario: BodyInventario, base64String: string, fileName: string): void {
     const formData = new FormData();
-    const file = this.base64ToFile(base64String, fileName);
-
-    if (file) {
+    
+    if (fileName && base64String) {
+      const file = this.base64ToFile(base64String, fileName);
       formData.append('file', file);
     }
 
@@ -88,11 +89,16 @@ export class InventarioService extends BaseService {
   putInventarioAPI(Inventario: BodyUpdateInventory, base64String: string, fileName: string): void {
 
     const formData = new FormData();
-    const file = this.base64ToFile(base64String, fileName);
-
-    if (file) {
+    
+    if (fileName && base64String) {
+      const file = this.base64ToFile(base64String, fileName);
       formData.append('file', file);
     }
+
+    console.log(Inventario);
+    console.log(base64String);
+    console.log(fileName);
+    
 
     // Agregar los demás valores como parte del formulario
     Object.entries(Inventario).forEach(([key, value]) => {
